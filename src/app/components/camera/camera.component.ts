@@ -1,21 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {CameraService} from "../../services/camera.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-camera',
   template: `
-    <video autoplay></video>
+    <video autoplay [srcObject]="mediaStream"></video>
   `,
   styleUrls: ['./camera.component.scss']
 })
-export class CameraComponent implements OnInit {
+export class CameraComponent implements AfterViewInit, OnInit, OnDestroy {
 
-  constructor(private cameraService: CameraService) { }
+  mediaStream: MediaStream | undefined;
+  private subscription?: Subscription;
+
+
+  constructor(
+    private cameraService: CameraService,
+  ) {
+  }
+
+  ngOnDestroy(): void {
+        this.subscription?.unsubscribe();
+        this.cameraService.stop();
+    }
 
   ngOnInit(): void {
-    if(this.cameraService.isUsable()) {
-
+    if (this.cameraService.isUsable()) {
+      this.subscription = this.cameraService.mediaStream$.subscribe({
+        next: (mediaStream) => {
+          this.mediaStream = mediaStream;
+        },
+        error: error => console.log(error)
+      });
     }
+
   }
+
+  ngAfterViewInit(): void {
+    this.cameraService.start();
+  }
+
 
 }
