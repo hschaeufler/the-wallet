@@ -34,6 +34,31 @@ export class CameraService {
     }
   }
 
+  private detectNativeImageCaptureApi(){
+    return 'ImageCapture' in window;
+  }
+
+  private takeNativePicture(PhotoSettings){
+    if(this.mediaStream?.active && this.detectNativeImageCaptureApi()){
+      const imageCaputure = new ImageCapture(this.mediaStream);
+      const photo = imageCaputure.takePhoto()
+
+    }
+  }
+
+  takePicture() {
+    if(this.mediaStream?.active){
+
+      video.autoplay = true;
+      video.srcObject = this.mediaStream;
+
+      const video = document.createElement("video");
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      context.drawImage(video);
+    }
+  }
+
 
   start(constraints?: MediaStreamConstraints) {
     const mediaDevicePromise = navigator.mediaDevices.getUserMedia(
