@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {CameraService} from "../../services/camera.service";
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {CameraService} from "../services/camera.service";
 import {Subscription} from "rxjs";
 
 @Component({
