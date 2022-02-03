@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-camera-control-strip',
+  selector: 'the-wallet-camera-control-strip',
   template: `
     <p>
       camera-control-strip works!

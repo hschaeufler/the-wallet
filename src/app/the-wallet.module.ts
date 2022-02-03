@@ -6,13 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { CameraComponent } from './components/camera/camera.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {CameraModule} from "./camera-module/camera.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    CameraComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +23,8 @@ import {MatToolbarModule} from "@angular/material/toolbar";
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    MatToolbarModule
+    MatToolbarModule,
+    CameraModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,7 +3,7 @@ import {CameraService} from "../services/camera.service";
 import {Subscription} from "rxjs";
 
 @Component({
-  selector: 'app-camera-video',
+  selector: 'the-wallet-camera-video',
   template: `
     <video autoplay [srcObject]="mediaStream"></video>
   `,
