@@ -3,13 +3,13 @@ import {CameraService} from "../services/camera.service";
 import {Subscription} from "rxjs";
 
 @Component({
-  selector: 'app-camera',
+  selector: 'app-camera-video',
   template: `
     <video autoplay [srcObject]="mediaStream"></video>
   `,
-  styleUrls: ['./camera.component.scss']
+  styleUrls: ['./camera-video.component.scss']
 })
-export class CameraComponent implements AfterViewInit, OnInit, OnDestroy {
+export class CameraVideoComponent implements AfterViewInit, OnInit, OnDestroy {
 
   mediaStream: MediaStream | undefined;
   private subscription?: Subscription;

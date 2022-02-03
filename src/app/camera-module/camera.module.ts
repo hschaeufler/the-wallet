@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CameraComponent } from "./camera/camera.component";
 import { CameraControlStripComponent } from './camera-control-strip/camera-control-strip.component';
+import { CameraVideoComponent } from "./camera-video/camera-video.component";
 
 
 @NgModule({
   declarations: [
-    CameraComponent,
+    CameraVideoComponent,
     CameraControlStripComponent,
   ],
   imports: [
     CommonModule,
   ],
   exports: [
-    CameraComponent,
+    CameraVideoComponent,
   ]
 })
 export class CameraModule { }
