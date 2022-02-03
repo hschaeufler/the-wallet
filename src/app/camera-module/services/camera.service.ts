@@ -6,8 +6,7 @@ import {Observable, Subject} from "rxjs";
 })
 export class CameraService {
 
-  constructor() {
-  }
+  static readonly MEDIA_DEVICE_KIND_VIDEOINPUT  = "videoinput";
 
   private videoStreamSource = new Subject<MediaStream>();
   private pictureSource = new Subject<Blob>();
@@ -23,8 +22,37 @@ export class CameraService {
   };
 
 
-  isUsable(): boolean {
+  constructor() {
+  }
+
+
+  isCameraUsable(): boolean {
     return 'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices;
+  }
+
+  supportsEnumerateDevices() {
+    return 'mediaDevices' in navigator && 'enumerateDevices' in navigator.mediaDevices;
+  }
+
+  switchCamera() {
+    this.getAvailableVideoDevices().then((mediaDeviceInfos : MediaDeviceInfo[])=>{
+      if(mediaDeviceInfos.length > 0) {
+        this.start({video: {deviceId : mediaDeviceInfos[0].deviceId}});
+      }
+    })
+  }
+
+  private async getAvailableVideoDevices(): Promise<MediaDeviceInfo[]> {
+    if(!this.isCameraUsable() && !this.supportsEnumerateDevices()){
+      throw new DOMException("Feature Enumarate Devices is not supported!");
+    }
+    const currentDeviceId = this.mediaStream?.active ? this.mediaStream.getTracks()[0].id : null;
+    const mediaDevices: MediaDeviceInfo[] = await navigator.mediaDevices.enumerateDevices();
+    const otherVideoDevices = mediaDevices.filter(
+      mediaDeviceInfo => mediaDeviceInfo.kind === CameraService.MEDIA_DEVICE_KIND_VIDEOINPUT
+        && mediaDeviceInfo.deviceId !== currentDeviceId
+    );
+    return otherVideoDevices;
   }
 
   stop() {
@@ -78,7 +106,7 @@ export class CameraService {
             throw new DOMException("No 2d-Context from Canvas replied!");
           }
           context.drawImage(video, 0, 0, width, height);
-          canvas.toBlob((blob)=>{
+          canvas.toBlob((blob) => {
             if(blob){
               resolve(blob);
             } else{

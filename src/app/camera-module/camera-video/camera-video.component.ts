@@ -26,7 +26,7 @@ export class CameraVideoComponent implements AfterViewInit, OnInit, OnDestroy {
     }
 
   ngOnInit(): void {
-    if (this.cameraService.isUsable()) {
+    if (this.cameraService.isCameraUsable()) {
       this.subscription = this.cameraService.mediaStream$.subscribe({
         next: (mediaStream) => {
           this.mediaStream = mediaStream;
