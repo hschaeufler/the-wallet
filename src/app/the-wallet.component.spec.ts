@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TheWalletComponent } from './the-wallet.component';
 
-describe('AppComponent', () => {
+describe('TheWalletComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
