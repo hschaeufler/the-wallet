@@ -6,7 +6,7 @@ import {Observable, Subject} from "rxjs";
 })
 export class CameraService {
 
-  static readonly MEDIA_DEVICE_KIND_VIDEOINPUT  = "videoinput";
+  static readonly MEDIA_DEVICE_KIND_VIDEOINPUT = "videoinput";
 
   private videoStreamSource = new Subject<MediaStream>();
   private pictureSource = new Subject<Blob>();
@@ -35,15 +35,15 @@ export class CameraService {
   }
 
   switchCamera() {
-    this.getAvailableVideoDevices().then((mediaDeviceInfos : MediaDeviceInfo[])=>{
-      if(mediaDeviceInfos.length > 0) {
-        this.start({video: {deviceId : mediaDeviceInfos[0].deviceId}});
+    this.getAvailableVideoDevices().then((mediaDeviceInfos: MediaDeviceInfo[]) => {
+      if (mediaDeviceInfos.length > 0) {
+        this.start({video: {deviceId: mediaDeviceInfos[0].deviceId}});
       }
     })
   }
 
   private async getAvailableVideoDevices(): Promise<MediaDeviceInfo[]> {
-    if(!this.isCameraUsable() && !this.supportsEnumerateDevices()){
+    if (!this.isCameraUsable() && !this.supportsEnumerateDevices()) {
       throw new DOMException("Feature Enumarate Devices is not supported!");
     }
     const currentDeviceId = this.mediaStream?.active ? this.mediaStream.getTracks()[0].id : null;
@@ -64,15 +64,15 @@ export class CameraService {
     }
   }
 
-  private detectNativeImageCaptureApi(){
+  private detectNativeImageCaptureApi() {
     return 'ImageCapture' in window;
   }
 
   private async takeNativePicture(photoSettings?: PhotoSettings): Promise<Blob> {
-    if(!this.detectNativeImageCaptureApi()){
+    if (!this.detectNativeImageCaptureApi()) {
       throw "Please use ths function only when ImageCapture-Api is supported!";
     }
-    if(this.mediaStream?.active){
+    if (this.mediaStream?.active) {
       const mediaStreamTracks = this.mediaStream.getTracks();
       const imageCapture = new ImageCapture(mediaStreamTracks[0]);
       const photo = await imageCapture.takePhoto(photoSettings);
@@ -82,9 +82,9 @@ export class CameraService {
     }
   }
 
-  private detectCanvasImageApi(){
+  private detectCanvasImageApi() {
     return !!document.createElement('canvas').getContext
-    && !!document.createElement('canvas').toBlob;
+      && !!document.createElement('canvas').toBlob;
   }
 
   isTakingPicturesUsable() {
@@ -92,24 +92,24 @@ export class CameraService {
   }
 
   private async takeCanvasPicture(): Promise<Blob> {
-    const photoPromise = new Promise<Blob>((resolve, reject) =>{
-      if(this.mediaStream?.active) {
+    const photoPromise = new Promise<Blob>((resolve, reject) => {
+      if (this.mediaStream?.active) {
         const video = document.createElement("video");
         const canvas = document.createElement("canvas");
         video.autoplay = true;
         video.srcObject = this.mediaStream;
-        video.addEventListener("canplay", (event)=>{
+        video.addEventListener("canplay", (event) => {
           const height = video.videoHeight;
           const width = video.videoWidth;
           const context = canvas.getContext("2d");
-          if(!context) {
+          if (!context) {
             throw new DOMException("No 2d-Context from Canvas replied!");
           }
           context.drawImage(video, 0, 0, width, height);
           canvas.toBlob((blob) => {
-            if(blob){
+            if (blob) {
               resolve(blob);
-            } else{
+            } else {
               reject(new DOMException("Could not generate Blob!"));
             }
           });
