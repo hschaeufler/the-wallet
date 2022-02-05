@@ -1,0 +1,3 @@
+interface QRCodeModel {
+  value: string;
+}
