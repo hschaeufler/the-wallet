@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from "rxjs";
+import {QrcodeReaderService} from "./qrcode-reader.service";
 
 @Injectable({
   providedIn: 'root'
@@ -22,15 +23,16 @@ export class CameraService {
   };
 
 
-  constructor() {
+  constructor(private qrcodeReaderService: QrcodeReaderService) {
+    console.log(qrcodeReaderService.getImplementation());
   }
 
 
-  isCameraUsable(): boolean {
+  supportsCameraApi(): boolean {
     return 'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices;
   }
 
-  supportsEnumerateDevices() {
+  supportsEnumerateDevicesApi() {
     return 'mediaDevices' in navigator && 'enumerateDevices' in navigator.mediaDevices;
   }
 
@@ -43,7 +45,7 @@ export class CameraService {
   }
 
   private async getAvailableVideoDevices(): Promise<MediaDeviceInfo[]> {
-    if (!this.isCameraUsable() && !this.supportsEnumerateDevices()) {
+    if (!this.supportsCameraApi() && !this.supportsEnumerateDevicesApi()) {
       throw new DOMException("Feature Enumarate Devices is not supported!");
     }
     const currentDeviceId = this.mediaStream?.active ? this.mediaStream.getTracks()[0].id : null;
@@ -64,12 +66,12 @@ export class CameraService {
     }
   }
 
-  private detectNativeImageCaptureApi() {
+  private supportsNativeImageCaptureApi() {
     return 'ImageCapture' in window;
   }
 
   private async takeNativePicture(photoSettings?: PhotoSettings): Promise<Blob> {
-    if (!this.detectNativeImageCaptureApi()) {
+    if (!this.supportsNativeImageCaptureApi()) {
       throw "Please use ths function only when ImageCapture-Api is supported!";
     }
     if (this.mediaStream?.active) {
@@ -82,13 +84,13 @@ export class CameraService {
     }
   }
 
-  private detectCanvasImageApi() {
+  private supportsCanvasImageApi() {
     return !!document.createElement('canvas').getContext
       && !!document.createElement('canvas').toBlob;
   }
 
   isTakingPicturesUsable() {
-    return this.detectCanvasImageApi() || this.detectNativeImageCaptureApi();
+    return this.supportsCanvasImageApi() || this.supportsNativeImageCaptureApi();
   }
 
   private async takeCanvasPicture(): Promise<Blob> {
@@ -122,7 +124,7 @@ export class CameraService {
   }
 
   takePicture(photoSettings?: PhotoSettings) {
-    const photoPromise = this.detectNativeImageCaptureApi()
+    const photoPromise = this.supportsNativeImageCaptureApi()
       ? this.takeNativePicture(photoSettings)
       : this.takeCanvasPicture();
     photoPromise.then((blob) => {

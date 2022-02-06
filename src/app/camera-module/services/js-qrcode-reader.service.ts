@@ -1,10 +1,7 @@
-import { Injectable } from '@angular/core';
 import jsQR from "jsqr";
-import {QrcodeReaderService} from "./qrcode-reader.service";
+import { QrcodeReaderService } from "./qrcode-reader.service";
+import { QRCodeModel } from "./QRCode.model";
 
-@Injectable({
-  providedIn: 'root'
-})
 export class JsQrcodeReaderService implements QrcodeReaderService {
 
   constructor() { }
@@ -18,5 +15,9 @@ export class JsQrcodeReaderService implements QrcodeReaderService {
       };
     }
     return qrCodeModel ? [qrCodeModel] : [];
+  }
+
+  getImplementation(): string {
+    return "JAVASCRIPT";
   }
 }
