@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable, Subject} from "rxjs";
 import {QrcodeReaderService} from "./qrcode-reader.service";
 import {QRCodeModel} from "./QRCode.model";
-import {CameraUtils} from "./camera.utils";
+import {ImageCaptureUtils} from "./image-capture.utils";
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,9 @@ export class CameraService {
   };
 
 
-  constructor(private qrcodeReaderService: QrcodeReaderService) {
+  constructor(
+    private qrcodeReaderService: QrcodeReaderService,
+    ) {
     console.log(qrcodeReaderService.getImplementation());
   }
 
@@ -41,7 +43,10 @@ export class CameraService {
   }
 
   supportsTakingPictures(){
-    return CameraUtils.drawingImagesIsSupported();
+    return (
+      !!document.createElement('canvas').getContext
+      && !!document.createElement('canvas').toBlob
+    ) || 'ImageCapture' in window;
   }
 
   switchCamera() {
@@ -74,9 +79,12 @@ export class CameraService {
     }
   }
 
+
   takePicture(photoSettings?: PhotoSettings) {
     if(this.mediaStream?.active) {
-      const photoPromise = CameraUtils.drawImageOfStream(this.mediaStream, photoSettings);
+        const mediaStreamTracks = this.mediaStream.getTracks();
+        const imageCapture = new ImageCapture(mediaStreamTracks[0]);
+        const photoPromise = imageCapture.takePhoto(photoSettings);
       photoPromise.then((blob) => {
         this.pictureSource.next(blob);
       }).catch((reason: DOMException) => {
