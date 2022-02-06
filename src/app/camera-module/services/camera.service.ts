@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Observable, Subject} from "rxjs";
 import {QrcodeReaderService} from "./qrcode-reader.service";
 import {QRCodeModel} from "./QRCode.model";
-import {ImageCaptureUtils} from "./image-capture.utils";
 
 @Injectable({
   providedIn: 'root'

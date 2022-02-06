@@ -28,7 +28,7 @@ export class ImageCaptureApi implements ImageCapture {
       this._canvasElement = document.createElement("canvas");
       this._videoElement.autoplay = true;
       this._videoElement.srcObject = new MediaStream([this.track]);
-      this._isPlayingPromise = new Promise<boolean>((resolve, reject) => {
+      this._isPlayingPromise = new Promise<boolean>((resolve) => {
         this._videoElement.addEventListener("play", () => resolve(true));
       });
 
