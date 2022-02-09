@@ -1,9 +1,9 @@
 import {QrcodeReaderService} from "./qrcode-reader.service";
 import {NativeQrcodeReaderService} from "./native-qrcode-reader.service";
 import {JsQrcodeReaderService} from "./js-qrcode-reader.service";
-import {FeatureDetectionStartupService} from "./feature-detection-startup.service";
+import {FeatureDetectionService} from "./feature-detection.service";
 
-const qrcodeReaderServiceFactory = (featureDetectionStartupService: FeatureDetectionStartupService) => {
+const qrcodeReaderServiceFactory = (featureDetectionStartupService: FeatureDetectionService) => {
   return featureDetectionStartupService.qrCodeReader
     ? new NativeQrcodeReaderService()
     : new JsQrcodeReaderService();
@@ -12,5 +12,5 @@ const qrcodeReaderServiceFactory = (featureDetectionStartupService: FeatureDetec
 export const qrcodeReaderServiceProvider =
   { provide: QrcodeReaderService,
     useFactory: qrcodeReaderServiceFactory,
-    deps: [FeatureDetectionStartupService]
+    deps: [FeatureDetectionService]
   };

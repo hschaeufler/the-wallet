@@ -4,7 +4,7 @@ import { NativeQrcodeReaderService } from "./native-qrcode-reader.service";
 @Injectable({
   providedIn: 'root'
 })
-export class FeatureDetectionStartupService {
+export class FeatureDetectionService {
 
   private _qrCodeReader: boolean = false;
   private _isInit: boolean = false;
@@ -26,7 +26,7 @@ export class FeatureDetectionStartupService {
     try {
       await this.detectQRCodeReader();
     } catch(e) {
-      console.error("Error during Feature-Detecton", e);
+      console.error("Error during Feature-Detection", e);
     } finally {
       this._isInit = true;
     }

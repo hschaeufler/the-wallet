@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FeatureDetectionStartupService } from './feature-detection-startup.service';
+import { FeatureDetectionService } from './feature-detection.service';
 
 describe('FeatureDetectionServiceService', () => {
-  let service: FeatureDetectionStartupService;
+  let service: FeatureDetectionService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FeatureDetectionStartupService);
+    service = TestBed.inject(FeatureDetectionService);
   });
 
   it('should be created', () => {

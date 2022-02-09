@@ -7,8 +7,8 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
-import {FeatureDetectionStartupService} from "./services/feature-detection-startup.service";
-import {featureDetectionStartupServiceFactory} from "./services/feature-detection-startup.service.factory";
+import {FeatureDetectionService} from "./services/feature-detection.service";
+import {featureDetectionServiceFactory} from "./services/feature-detection.service.factory";
 import {qrcodeReaderServiceProvider} from "./services/qrcode-reader.service.provider";
 
 
@@ -28,8 +28,8 @@ import {qrcodeReaderServiceProvider} from "./services/qrcode-reader.service.prov
   providers: [
     {
       provide: APP_INITIALIZER,
-      useFactory: featureDetectionStartupServiceFactory,
-      deps: [FeatureDetectionStartupService],
+      useFactory: featureDetectionServiceFactory,
+      deps: [FeatureDetectionService],
       multi: true
     },
     qrcodeReaderServiceProvider
