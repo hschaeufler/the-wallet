@@ -29,7 +29,7 @@ export class ImageCaptureApi implements ImageCapture {
       this._videoElement.autoplay = true;
       this._videoElement.srcObject = new MediaStream([this.track]);
       this._isPlayingPromise = new Promise<boolean>((resolve) => {
-        this._videoElement.addEventListener("play", () => resolve(true));
+        this._videoElement.addEventListener("playing", () => resolve(true));
       });
 
     }
@@ -58,7 +58,7 @@ export class ImageCaptureApi implements ImageCapture {
     }
 
     async grabFrame(): Promise<ImageBitmap> {
-      const {canvas, context} = await this.drawImageToCanvas();
+      const {context} = await this.drawImageToCanvas();
       const imageData = context.getImageData(0, 0, this._videoElement.width, this._videoElement.height);
       const imageBitMap = await createImageBitmap(imageData);
       return imageBitMap;

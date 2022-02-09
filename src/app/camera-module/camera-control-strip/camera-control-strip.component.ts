@@ -6,7 +6,7 @@ import {CameraService} from "../services/camera.service";
   template: `
     <mat-toolbar class="the-wallet-camera-control-strip">
       <mat-toolbar-row class="the-wallet-camera-control-strip-row">
-      <button mat-mini-fab aria-label="Light!" color="primary">
+      <button [disabled]="!supportsFlash" mat-mini-fab aria-label="Light!" color="primary">
         <mat-icon>flashlight_on</mat-icon>
       </button>
       <button (click)="takePhoto()" mat-fab aria-label="Photo!" color="primary">
@@ -22,7 +22,13 @@ import {CameraService} from "../services/camera.service";
 })
 export class CameraControlStripComponent implements OnInit {
 
+  supportsFlash = false;
+
   constructor(private cameraService: CameraService) {
+  }
+
+  ngOnInit(): void {
+    this.supportsFlash = this.cameraService.supportsFlashlight();
   }
 
   switchCamera(){
@@ -31,9 +37,6 @@ export class CameraControlStripComponent implements OnInit {
 
   takePhoto(){
     this.cameraService.takePicture();
-  }
-
-  ngOnInit(): void {
   }
 
 }

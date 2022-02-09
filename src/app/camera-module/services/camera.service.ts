@@ -26,8 +26,6 @@ export class CameraService {
   private DEFAULT_CONSTRAINTS: MediaStreamConstraints = {
     video: {
       facingMode: "environment",
-      height: 1000,
-      width: 640,
     },
     audio: false,
   };
@@ -52,6 +50,11 @@ export class CameraService {
   supportsTakingPictures() {
     return this.featureDetectionService.canvas()
       || this.featureDetectionService.imageCapture();
+  }
+
+  supportsFlashlight() {
+    return this.featureDetectionService.getSupportedConstraints()
+      && navigator.mediaDevices.getSupportedConstraints().torch;
   }
 
   switchCamera() {

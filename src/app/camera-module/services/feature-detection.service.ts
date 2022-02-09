@@ -57,6 +57,10 @@ export class FeatureDetectionService {
     return this.mediaDevices() && 'enumerateDevices' in navigator.mediaDevices;
   }
 
+  getSupportedConstraints(){
+    return this.mediaDevices() && 'getSupportedConstraints' in navigator.mediaDevices;
+  }
+
   canvas() {
     return !!(
       document.createElement('canvas').getContext
