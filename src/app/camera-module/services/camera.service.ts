@@ -3,6 +3,8 @@ import {Observable, Subject} from "rxjs";
 import {QrcodeReaderService} from "./qrcode-reader.service";
 import {QRCodeModel} from "./QRCode.model";
 import {ImageCaptureUtils} from "./image-capture.utils";
+import {FeatureDetectionService} from "./feature-detection.service";
+
 
 @Injectable({
   providedIn: 'root'
@@ -33,24 +35,23 @@ export class CameraService {
 
   constructor(
     private qrcodeReaderService: QrcodeReaderService,
+    private featureDetectionService: FeatureDetectionService,
   ) {
     console.log(qrcodeReaderService.getImplementation());
   }
 
 
   supportsCameraApi(): boolean {
-    return 'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices;
+   return this.featureDetectionService.getUserMedia();
   }
 
   supportsEnumerateDevicesApi() {
-    return 'mediaDevices' in navigator && 'enumerateDevices' in navigator.mediaDevices;
+    return this.featureDetectionService.enumerateDevices();
   }
 
   supportsTakingPictures() {
-    return (
-      !!document.createElement('canvas').getContext
-      && !!document.createElement('canvas').toBlob
-    ) || 'ImageCapture' in window;
+    return this.featureDetectionService.canvas()
+      || this.featureDetectionService.imageCapture();
   }
 
   switchCamera() {

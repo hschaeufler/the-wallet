@@ -8,9 +8,6 @@ export class ImageCaptureUtils {
       const imageCaptureApi = new ImageCaptureApi(mediaStreamTracks[0]);
       const {canvas, context} = await imageCaptureApi.drawImageToCanvas();
       const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      console.log(canvas.width);
-      console.log(canvas.height);
-      console.log(canvas.toDataURL("image/png"));
       return imageData;
     } else {
       throw new DOMException("MediaStream not active!");
