@@ -13,9 +13,10 @@ import {Subscription} from "rxjs";
 })
 export class CameraVideoComponent implements AfterViewInit, OnInit, OnDestroy {
 
-  mediaStream: MediaStream | undefined;
-  private subscription?: Subscription;
-
+  //not allowed private, so Template can read value
+  mediaStream?: MediaStream;
+  private mediaStreamSubscription?: Subscription;
+  private qrCodeSubscription?: Subscription;
 
   constructor(
     private cameraService: CameraService,
@@ -23,22 +24,25 @@ export class CameraVideoComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-        this.subscription?.unsubscribe();
+        this.mediaStreamSubscription?.unsubscribe();
         this.cameraService.stop();
     }
 
   ngOnInit(): void {
     if (this.cameraService.supportsCameraApi()) {
-      this.subscription = this.cameraService.mediaStream$.subscribe({
+      this.mediaStreamSubscription = this.cameraService.mediaStream$.subscribe({
         next: (mediaStream) => {
           this.mediaStream = mediaStream;
         },
         error: error => console.log(error)
       });
+      this.qrCodeSubscription = this.cameraService.qrCode$.subscribe((qrCode)=>{
+        console.log(qrCode);
+      })
     }
-
   }
 
+  //Start streaming after Video-Element is ready
   ngAfterViewInit(): void {
     this.cameraService.start();
   }

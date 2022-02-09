@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable, Subject} from "rxjs";
 import {QrcodeReaderService} from "./qrcode-reader.service";
 import {QRCodeModel} from "./QRCode.model";
+import {ImageCaptureUtils} from "./image-capture.utils";
 
 @Injectable({
   providedIn: 'root'
@@ -21,14 +22,18 @@ export class CameraService {
   private mediaStream?: MediaStream;
 
   private DEFAULT_CONSTRAINTS: MediaStreamConstraints = {
-    video: true,
+    video: {
+      facingMode: "environment",
+      height: 1000,
+      width: 640,
+    },
     audio: false,
   };
 
 
   constructor(
     private qrcodeReaderService: QrcodeReaderService,
-    ) {
+  ) {
     console.log(qrcodeReaderService.getImplementation());
   }
 
@@ -41,7 +46,7 @@ export class CameraService {
     return 'mediaDevices' in navigator && 'enumerateDevices' in navigator.mediaDevices;
   }
 
-  supportsTakingPictures(){
+  supportsTakingPictures() {
     return (
       !!document.createElement('canvas').getContext
       && !!document.createElement('canvas').toBlob
@@ -78,15 +83,30 @@ export class CameraService {
     }
   }
 
+  scanStreamForQrCodes() {
+    window.requestAnimationFrame(async () => {
+      if (this.mediaStream && this.mediaStream?.active) {
+        try {
+          const imageData = await ImageCaptureUtils.getImageDataOfMediaStream(this.mediaStream);
+          const qrCode = await this.qrcodeReaderService.detectImage(imageData);
+          if (qrCode && qrCode.length > 0) {
+            this.qrCodeSource.next(qrCode[0]);
+          }
+        } catch (exception) {
+          console.error(exception);
+        }
+        this.scanStreamForQrCodes();
+      }
+    });
+  }
+
 
   takePicture(photoSettings?: PhotoSettings) {
-    if(this.mediaStream?.active) {
-        const mediaStreamTracks = this.mediaStream.getTracks();
-        const imageCapture = new ImageCapture(mediaStreamTracks[0]);
-        const photoPromise = imageCapture.takePhoto(photoSettings);
-      photoPromise.then((blob) => {
-        this.pictureSource.next(blob);
-      }).catch((reason: DOMException) => {
+    if (this.mediaStream?.active) {
+      ImageCaptureUtils.takePictureOfStream(this.mediaStream, photoSettings).then(
+        (blob) => {
+          this.pictureSource.next(blob);
+        }).catch((reason: DOMException) => {
         this.pictureSource.error(reason)
       });
     }
@@ -96,10 +116,14 @@ export class CameraService {
     const mediaDevicePromise = navigator.mediaDevices.getUserMedia(
       constraints ? constraints : this.DEFAULT_CONSTRAINTS
     );
-    mediaDevicePromise.then((mediaStream: MediaStream) => {
-      this.mediaStream = mediaStream;
-      this.videoStreamSource.next(mediaStream);
-    }).catch((reason: DOMException) => {
+    mediaDevicePromise.then(
+      (mediaStream: MediaStream) => {
+        this.mediaStream = mediaStream;
+        this.videoStreamSource.next(mediaStream);
+        if (scanForQRCodes) {
+          this.scanStreamForQrCodes();
+        }
+      }).catch((reason: DOMException) => {
       this.videoStreamSource.error(reason);
     });
   }

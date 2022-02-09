@@ -59,7 +59,7 @@ export class ImageCaptureApi implements ImageCapture {
 
     async grabFrame(): Promise<ImageBitmap> {
       const {canvas, context} = await this.drawImageToCanvas();
-      const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      const imageData = context.getImageData(0, 0, this._videoElement.width, this._videoElement.height);
       const imageBitMap = await createImageBitmap(imageData);
       return imageBitMap;
     }
@@ -71,6 +71,8 @@ export class ImageCaptureApi implements ImageCapture {
         return this._isPlayingPromise.then(() => {
           const height = this._videoElement.videoHeight;
           const width = this._videoElement.videoWidth;
+          this._canvasElement.height = height;
+          this._canvasElement.width = width;
           const context = this._canvasElement.getContext("2d");
           if (!context) {
             throw new DOMException("No 2d-Context from Canvas replied!");
