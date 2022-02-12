@@ -5,8 +5,8 @@ import {Subscription} from "rxjs";
 @Component({
   selector: 'the-wallet-camera-video',
   template: `
-    <div class="the-wallet-camera-video ">
-    <video autoplay [srcObject]="mediaStream"></video>
+    <div class="video-component">
+        <video autoplay [srcObject]="mediaStream"></video>
     </div>
   `,
   styleUrls: ['./camera-video.component.scss']

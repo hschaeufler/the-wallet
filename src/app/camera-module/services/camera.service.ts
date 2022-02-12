@@ -4,6 +4,7 @@ import {QrcodeReaderService} from "./qrcode-reader.service";
 import {QRCodeModel} from "./QRCode.model";
 import {ImageCaptureUtils} from "./image-capture.utils";
 import {FeatureDetectionService} from "./feature-detection.service";
+import {ImageCaptureApi} from "../polyfills/image-capture-api.polyfill";
 
 
 @Injectable({
@@ -22,6 +23,8 @@ export class CameraService {
   qrCode$: Observable<QRCodeModel> = this.qrCodeSource.asObservable();
 
   private mediaStream?: MediaStream;
+
+  private imageCaptureApi?: ImageCaptureApi;
 
   private DEFAULT_CONSTRAINTS: MediaStreamConstraints = {
     video: {
@@ -91,7 +94,11 @@ export class CameraService {
     window.requestAnimationFrame(async () => {
       if (this.mediaStream && this.mediaStream?.active) {
         try {
-          const imageData = await ImageCaptureUtils.getImageDataOfMediaStream(this.mediaStream);
+          if(!this.imageCaptureApi) {
+            this.imageCaptureApi = new ImageCaptureApi(this.mediaStream.getVideoTracks()[0]);
+          }
+          const {canvas, context} = await this.imageCaptureApi.drawImageToCanvas();
+          const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
           const qrCode = await this.qrcodeReaderService.detectImage(imageData);
           if (qrCode && qrCode.length > 0) {
             this.qrCodeSource.next(qrCode[0]);

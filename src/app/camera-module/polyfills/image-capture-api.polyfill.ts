@@ -11,8 +11,8 @@ export class ImageCaptureApi implements ImageCapture {
     readonly track: MediaStreamTrack;
     private readonly _videoElement: HTMLVideoElement;
     private readonly _canvasElement: HTMLCanvasElement;
-
-    private readonly _isPlayingPromise: Promise<boolean>;
+    private readonly _context: CanvasRenderingContext2D;
+    private readonly _isPlayingPromise: Promise<void>;
 
 
     constructor(track: MediaStreamTrack) {
@@ -26,11 +26,11 @@ export class ImageCaptureApi implements ImageCapture {
       this.track = track;
       this._videoElement = document.createElement("video");
       this._canvasElement = document.createElement("canvas");
-      this._videoElement.autoplay = true;
-      this._videoElement.srcObject = new MediaStream([this.track]);
-      this._isPlayingPromise = new Promise<boolean>((resolve) => {
-        this._videoElement.addEventListener("playing", () => resolve(true));
-      });
+      // @ts-ignore
+      this._context = this._canvasElement.getContext("2d");
+      const mediaStream = new MediaStream([this.track]);
+      this._videoElement.srcObject = mediaStream;
+      this._isPlayingPromise = this._videoElement.play();
 
     }
 
@@ -69,16 +69,17 @@ export class ImageCaptureApi implements ImageCapture {
       // IE does not support readyState: https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack/readyState
       if (!this.track.readyState || this.track.readyState === ImageCaptureApi.READY_STATE_LIVE) {
         return this._isPlayingPromise.then(() => {
-          const height = this._videoElement.videoHeight;
           const width = this._videoElement.videoWidth;
-          this._canvasElement.height = height;
+          const height = this._videoElement.videoHeight;
           this._canvasElement.width = width;
-          const context = this._canvasElement.getContext("2d");
-          if (!context) {
+          this._canvasElement.height = height;
+          console.log(width, height);
+          if (!this._context) {
             throw new DOMException("No 2d-Context from Canvas replied!");
           }
-          context.drawImage(this._videoElement, 0, 0, width, height);
-          return {canvas: this._canvasElement, context};
+          console.log(this._videoElement.readyState);
+          this._context.drawImage(this._videoElement, 0, 0);
+          return {canvas: this._canvasElement, context: this._context};
         });
       } else {
         throw new DOMException("VideoStream not active!", "InvalidStateError");

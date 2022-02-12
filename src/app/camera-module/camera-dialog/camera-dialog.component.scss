@@ -1,7 +1,11 @@
-.the-wallet-camera-dialog-title-row {
+.camera-dialog-component {
+  max-height: 90vh;
+
+&-title-row {
   display: flex;
 
   .close-button {
     margin-left: auto;
   }
+}
 }
