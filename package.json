@@ -22,7 +22,7 @@
     "@angular/router": "~13.2.1",
     "@angular/service-worker": "~13.2.1",
     "@types/w3c-image-capture": "^1.0.5",
-    "base45-js": "^1.0.2",
+    "base45-ts": "^1.0.3",
     "jsqr": "^1.4.0",
     "pako": "^2.0.4",
     "rxjs": "~7.4.0",
