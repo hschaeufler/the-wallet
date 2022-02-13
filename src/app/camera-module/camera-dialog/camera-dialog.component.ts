@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'the-wallet-camera-dialog',
   template: `
-    <ng-container class="camera-dialog-component">
       <mat-toolbar>
         <mat-toolbar-row class="camera-dialog-component-title-row">
           <h1 mat-dialog-title>Camera!</h1>
@@ -19,7 +18,6 @@ import { Component, OnInit } from '@angular/core';
       <mat-dialog-actions>
         <the-wallet-camera-control-strip></the-wallet-camera-control-strip>
       </mat-dialog-actions>
-    </ng-container>
   `,
   styleUrls: ['./camera-dialog.component.scss']
 })

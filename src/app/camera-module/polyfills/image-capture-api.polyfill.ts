@@ -73,11 +73,9 @@ export class ImageCaptureApi implements ImageCapture {
           const height = this._videoElement.videoHeight;
           this._canvasElement.width = width;
           this._canvasElement.height = height;
-          console.log(width, height);
           if (!this._context) {
             throw new DOMException("No 2d-Context from Canvas replied!");
           }
-          console.log(this._videoElement.readyState);
           this._context.drawImage(this._videoElement, 0, 0);
           return {canvas: this._canvasElement, context: this._context};
         });

@@ -8,6 +8,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {CameraModule} from "./camera-module/camera.module";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import {CameraModule} from "./camera-module/camera.module";
       registrationStrategy: 'registerWhenStable:30000'
     }),
     MatToolbarModule,
-    CameraModule
+    CameraModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [TheWalletComponent]

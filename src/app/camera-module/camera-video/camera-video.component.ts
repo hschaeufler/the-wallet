@@ -25,6 +25,7 @@ export class CameraVideoComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnDestroy(): void {
         this.mediaStreamSubscription?.unsubscribe();
+        this.qrCodeSubscription?.unsubscribe();
         this.cameraService.stop();
     }
 

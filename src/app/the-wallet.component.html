@@ -1,5 +1,7 @@
 <mat-toolbar color="primary">
   <span>{{title}}</span>
 </mat-toolbar>
-<the-wallet-camera-dialog>
-</the-wallet-camera-dialog>
+<the-wallet-camera-dialog></the-wallet-camera-dialog>
+<button (click)="openDialog()" mat-fab color="primary" aria-label="QR_Code">
+  <mat-icon>qr_code</mat-icon>
+</button>
