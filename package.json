@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~13.2.1",
     "@angular/router": "~13.2.1",
     "@angular/service-worker": "~13.2.1",
+    "@types/base45": "^2.0.0",
     "@types/w3c-image-capture": "^1.0.5",
     "base45": "^2.0.1",
     "jsqr": "^1.4.0",
