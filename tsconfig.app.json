@@ -5,7 +5,7 @@
     "outDir": "./out-tsc/app",
     "types": [
       "w3c-image-capture",
-      "base45"
+      "webpack-env"
     ]
   },
   "files": [
