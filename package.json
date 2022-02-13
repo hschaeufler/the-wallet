@@ -24,6 +24,7 @@
     "@types/pako": "^1.0.3",
     "@types/w3c-image-capture": "^1.0.5",
     "base45-ts": "^1.0.3",
+    "cbor-web": "^8.1.0",
     "jsqr": "^1.4.0",
     "pako": "^2.0.4",
     "rxjs": "~7.4.0",
