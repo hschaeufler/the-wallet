@@ -27,6 +27,7 @@
     "@types/w3c-image-capture": "^1.0.5",
     "assert": "^2.0.0",
     "base45-ts": "^1.0.3",
+    "buffer": "^6.0.3",
     "cbor-web": "^8.1.0",
     "constants-browserify": "^1.0.0",
     "cose-js": "^0.8.4",
