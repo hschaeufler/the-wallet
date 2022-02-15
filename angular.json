@@ -20,6 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["crypto", "constants", "stream", "assert"],
             "outputPath": "dist/the-wallet",
             "index": "src/index.html",
             "main": "src/main.ts",
