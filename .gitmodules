@@ -1,0 +1,3 @@
+[submodule "src/assets/ehn-dcc-schema"]
+	path = src/assets/ehn-dcc-schema
+	url = https://github.com/ehn-dcc-development/ehn-dcc-schema.git
