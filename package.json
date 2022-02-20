@@ -24,6 +24,7 @@
     "@types/w3c-image-capture": "^1.0.5",
     "covid-certificate-checker": "^1.0.2",
     "jsqr": "^1.4.0",
+    "qrcode": "^1.5.0",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
