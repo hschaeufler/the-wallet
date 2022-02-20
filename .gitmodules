@@ -1,0 +1,3 @@
+[submodule "src/assets/ehn-dcc-valuesets"]
+	path = src/assets/ehn-dcc-valuesets
+	url = https://github.com/ehn-dcc-development/ehn-dcc-valuesets.git
