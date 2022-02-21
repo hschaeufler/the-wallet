@@ -11,15 +11,11 @@ import {DocumentSignerCertificateServiceService} from "./document-signer-certifi
 /*
 * See: https://github.com/ehn-dcc-development/ehn-sign-verify-javascript-trivial/blob/main/cose_verify.js
 * */
-export class CovidCertificateService implements OnInit {
+export class CovidCertificateService {
 
   constructor(
     private documentSignerCertificateService: DocumentSignerCertificateServiceService
-  ) { }
-
-  dscList?: TrustListModel;
-
-  ngOnInit() {
+  ) {
     this.documentSignerCertificateService.getDSCList().subscribe(
       {
         next: dscList => this.dscList = dscList,
@@ -27,6 +23,8 @@ export class CovidCertificateService implements OnInit {
       }
     );
   }
+
+  dscList?: TrustListModel;
 
   decodeCertificate(certificate: string) {
     const hcert = ElectronicHealthCertificateChecker.decode(certificate);
@@ -36,7 +34,6 @@ export class CovidCertificateService implements OnInit {
   isVerifiable() {
     return !!this.dscList && ElectronicHealthCertificateChecker.supportsWebCryptoApi();
   }
-
 
   decode(certificate: string): Observable<{
     healthCertificateClaim: HealthCertificateClaim,

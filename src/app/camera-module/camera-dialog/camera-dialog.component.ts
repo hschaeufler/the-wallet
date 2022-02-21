@@ -21,11 +21,7 @@ import { Component, OnInit } from '@angular/core';
   `,
   styleUrls: ['./camera-dialog.component.scss']
 })
-export class CameraDialogComponent implements OnInit {
+export class CameraDialogComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }
