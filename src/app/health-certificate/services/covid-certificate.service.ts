@@ -8,10 +8,9 @@ import {DocumentSignerCertificateServiceService} from "./document-signer-certifi
 @Injectable({
   providedIn: 'root'
 })
-/*
-* See: https://github.com/ehn-dcc-development/ehn-sign-verify-javascript-trivial/blob/main/cose_verify.js
-* */
 export class CovidCertificateService {
+
+  dscList?: TrustListModel;
 
   constructor(
     private documentSignerCertificateService: DocumentSignerCertificateServiceService
@@ -23,8 +22,6 @@ export class CovidCertificateService {
       }
     );
   }
-
-  dscList?: TrustListModel;
 
   decodeCertificate(certificate: string) {
     const hcert = ElectronicHealthCertificateChecker.decode(certificate);
