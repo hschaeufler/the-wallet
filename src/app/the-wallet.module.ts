@@ -10,6 +10,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {CameraModule} from "./camera-module/camera.module";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
+import {HealthCertificateModule} from "./health-certificate/health-certificate.module";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {MatButtonModule} from "@angular/material/button";
     MatToolbarModule,
     CameraModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    HealthCertificateModule
   ],
   providers: [],
   bootstrap: [TheWalletComponent]
