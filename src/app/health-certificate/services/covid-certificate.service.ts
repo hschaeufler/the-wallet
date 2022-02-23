@@ -1,6 +1,6 @@
 import {Injectable, OnInit} from '@angular/core';
 import ElectronicHealthCertificateChecker from "covid-certificate-checker";
-import {from, Observable, of, throwError} from "rxjs";
+import {from, Observable, of} from "rxjs";
 import {HealthCertificateClaim} from "covid-certificate-checker/dist/lib/models/HealthCertificateClaim";
 import {TrustListModel} from "covid-certificate-checker/dist/lib/models/TrustList.model";
 import {DocumentSignerCertificateServiceService} from "./document-signer-certificate-service.service";
