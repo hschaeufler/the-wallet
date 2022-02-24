@@ -17,19 +17,17 @@ import {from} from "rxjs";
 export class QRCodeComponent implements OnInit {
 
   @Input()
-  value?: string;
+  value!: string;
 
   qrCodeDataURL?: string;
 
   constructor() { }
 
   ngOnInit(): void {
-    if(this.value){
       from(QRCode.toDataURL(this.value)).subscribe({
         next: qrCodeDataURL => this.qrCodeDataURL = qrCodeDataURL,
         error: err => console.error(err)
       });
     }
-  }
 
 }

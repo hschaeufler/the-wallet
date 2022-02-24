@@ -4,6 +4,7 @@ import {TestEntry} from "covid-certificate-checker/dist/lib/models/HealthCertifi
 @Component({
   selector: 'the-wallet-test-detail',
   template: `
+    <the-wallet-default-expansion-panel title="Test">
     <mat-list>
       <mat-divider></mat-divider>
       <mat-list-item>
@@ -57,6 +58,7 @@ import {TestEntry} from "covid-certificate-checker/dist/lib/models/HealthCertifi
       </mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>
+    </the-wallet-default-expansion-panel>
   `,
   styleUrls: ['./test-detail.component.scss']
 })

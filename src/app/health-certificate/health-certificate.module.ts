@@ -10,7 +10,7 @@ import { VaccinationDetailComponent } from './vaccination-detail/vaccination-det
 import { TestDetailComponent } from './test-detail/test-detail.component';
 import { RecoveryDetailComponent } from './recovery-detail/recovery-detail.component';
 import { PersonDetailComponent } from './person-detail/person-detail.component';
-import { CertificateTypeNamePipe } from './pipes/certificate-type.pipe';
+import { CertificateTypeNamePipe } from './pipes/certificate-type-name.pipe';
 import {HeatlhCertificateCardComponent} from "./health-certificate-card/heatlh-certificate-card.component";
 import {TestTypePipe} from "./pipes/test-type.pipe";
 import {TargetDiseasePipe} from "./pipes/target-disease.pipe";
@@ -22,6 +22,11 @@ import {ToCountryNamePipe} from "./pipes/to-country-name.pipe";
 import {TestManufacturerPipe} from "./pipes/test-manufacturer.pipe";
 import {ToTestResultPipe} from "./pipes/to-test-result.pipe";
 import {ToDisplayNamePipe} from "./pipes/to-display-name.pipe";
+import { CertificateTypePipe } from './pipes/certificate-type.pipe';
+import {MatExpansionModule} from "@angular/material/expansion";
+import { DefaultExpansionPanelComponent } from './default-expansion-panel/default-expansion-panel.component';
+import {MatChipsModule} from "@angular/material/chips";
+import { CertificateCardChipListComponent } from './certificate-card-chip-list/certificate-card-chip-list.component';
 
 
 
@@ -47,6 +52,9 @@ import {ToDisplayNamePipe} from "./pipes/to-display-name.pipe";
     PersonDetailComponent,
     ToDisplayNamePipe,
     CertificateTypeNamePipe,
+    CertificateTypePipe,
+    DefaultExpansionPanelComponent,
+    CertificateCardChipListComponent,
   ],
   exports: [
     HealthCertificateComponent
@@ -57,6 +65,8 @@ import {ToDisplayNamePipe} from "./pipes/to-display-name.pipe";
     MatCardModule,
     MatProgressSpinnerModule,
     MatListModule,
+    MatExpansionModule,
+    MatChipsModule,
   ]
 })
 export class HealthCertificateModule { }

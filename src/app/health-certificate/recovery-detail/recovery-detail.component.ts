@@ -4,6 +4,7 @@ import {RecoveryEntry} from "covid-certificate-checker/dist/lib/models/HealthCer
 @Component({
   selector: 'the-wallet-recovery-detail',
   template: `
+    <the-wallet-default-expansion-panel title="Recovery">
     <mat-list>
       <mat-divider></mat-divider>
       <mat-list-item>
@@ -42,6 +43,7 @@ import {RecoveryEntry} from "covid-certificate-checker/dist/lib/models/HealthCer
       </mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>
+    </the-wallet-default-expansion-panel>
   `,
   styleUrls: ['./recovery-detail.component.scss']
 })

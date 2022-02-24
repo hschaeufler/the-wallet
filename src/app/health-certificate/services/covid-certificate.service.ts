@@ -1,9 +1,11 @@
 import {Injectable, OnInit} from '@angular/core';
 import ElectronicHealthCertificateChecker from "covid-certificate-checker";
-import {from, Observable, of} from "rxjs";
+import {from, map, Observable, of} from "rxjs";
 import {HealthCertificateClaim} from "covid-certificate-checker/dist/lib/models/HealthCertificateClaim";
 import {TrustListModel} from "covid-certificate-checker/dist/lib/models/TrustList.model";
 import {DocumentSignerCertificateServiceService} from "./document-signer-certificate-service.service";
+import {CertificateModel} from "covid-certificate-checker/dist/lib/models/Certificate.model";
+import {HealthCertificateModel} from "covid-certificate-checker/dist/lib/models/HealthCertificate.model";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +26,7 @@ export class CovidCertificateService {
   }
 
   decodeCertificate(certificate: string) {
-    const hcert = ElectronicHealthCertificateChecker.decode(certificate);
+    const hcert = ElectronicHealthCertificateChecker.decode(certificate).hcert;
     return hcert;
   }
 
@@ -33,15 +35,19 @@ export class CovidCertificateService {
   }
 
   decode(certificate: string): Observable<{
-    healthCertificateClaim: HealthCertificateClaim,
+    healthCertificate: HealthCertificateModel,
     isVerified: boolean
   }> {
     if (this.isVerifiable()) {
-      return from(ElectronicHealthCertificateChecker.verifyWithTrustList(certificate, this.dscList!));
+      return from(ElectronicHealthCertificateChecker.verifyWithTrustList(certificate, this.dscList!))
+        .pipe(map(val => ({
+          healthCertificate: val.healthCertificateClaim.hcert,
+          isVerified: val.isVerified,
+        })));
     } else {
-      const hcert = ElectronicHealthCertificateChecker.decode(certificate);
+      const healthCertificateClaim = ElectronicHealthCertificateChecker.decode(certificate);
       return of({
-        healthCertificateClaim: hcert,
+        healthCertificate: healthCertificateClaim.hcert,
         isVerified: false
       });
     }
