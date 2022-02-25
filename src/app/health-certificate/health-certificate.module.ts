@@ -27,6 +27,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import { DefaultExpansionPanelComponent } from './default-expansion-panel/default-expansion-panel.component';
 import {MatChipsModule} from "@angular/material/chips";
 import { CertificateCardChipListComponent } from './certificate-card-chip-list/certificate-card-chip-list.component';
+import {DEFAULT_CONFIG, Driver, NgForageOptions} from "ngforage";
 
 
 
@@ -67,6 +68,18 @@ import { CertificateCardChipListComponent } from './certificate-card-chip-list/c
     MatListModule,
     MatExpansionModule,
     MatChipsModule,
+  ],
+  providers: [
+    { // Initilaize Local Forage Driver
+      provide: DEFAULT_CONFIG,
+      useValue: {
+        name: 'theWalletCertificateStore',
+        driver: [ // defaults to indexedDB -> webSQL -> localStorage
+          Driver.INDEXED_DB,
+          Driver.LOCAL_STORAGE
+        ]
+      } as NgForageOptions
+    }
   ]
 })
 export class HealthCertificateModule { }
