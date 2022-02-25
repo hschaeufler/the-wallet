@@ -1,0 +1,9 @@
+.camera-dialog-component-title {
+  &-row {
+    display: flex;
+
+    .close-button {
+      margin-left: auto;
+    }
+  }
+}

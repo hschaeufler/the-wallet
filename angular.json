@@ -15,11 +15,12 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "the-wallet",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [],
             "outputPath": "dist/the-wallet",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -109,9 +110,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "the-wallet"
+  "defaultProject": "the-wallet",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

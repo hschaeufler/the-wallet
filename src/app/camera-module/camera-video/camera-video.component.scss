@@ -1,0 +1,12 @@
+.video-component {
+  display:flex;
+  background-color: black;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  video {
+    width: auto;
+    height: auto;
+  }
+}
