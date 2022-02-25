@@ -5,6 +5,8 @@ import {QRCodeModel} from "./QRCode.model";
 import {ImageCaptureUtils} from "./image-capture.utils";
 import {FeatureDetectionService} from "./feature-detection.service";
 import {ImageCaptureApi} from "../polyfills/image-capture-api.polyfill";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {CameraDialogComponent} from "../camera-dialog/camera-dialog.component";
 
 
 @Injectable({
@@ -37,6 +39,7 @@ export class CameraService {
   constructor(
     private qrcodeReaderService: QrcodeReaderService,
     private featureDetectionService: FeatureDetectionService,
+    private matDialog: MatDialog,
   ) {
     console.log(qrcodeReaderService.getImplementation());
   }
@@ -137,5 +140,11 @@ export class CameraService {
       }).catch((reason: DOMException) => {
       this.videoStreamSource.error(reason);
     });
+  }
+
+  openCameraDialog(): MatDialogRef<CameraDialogComponent>{
+    //have a look at: https://stackoverflow.com/questions/48688614/angular-custom-style-to-mat-dialog
+    //style is in style.css
+    return this.matDialog.open(CameraDialogComponent, {panelClass: 'camera-dialog'});
   }
 }

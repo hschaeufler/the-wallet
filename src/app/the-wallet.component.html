@@ -5,7 +5,7 @@
 </mat-toolbar>
 <div class="container">
   <main class="main">
-    <the-wallet-health-certificate [value]="certificate"></the-wallet-health-certificate>
+    <the-wallet-health-certificate *ngIf="(qrCode$ | async)" [value]="(qrCode$ | async)!.value"></the-wallet-health-certificate>
   </main>
 </div>
 <button (click)="openDialog()" mat-fab color="primary" aria-label="QR_Code">
