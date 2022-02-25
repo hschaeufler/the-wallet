@@ -33,17 +33,17 @@ import {VaccinationEntry} from "covid-certificate-checker/dist/lib/models/Health
           <p mat-line>Vaccine Type</p>
           <h1 mat-line>{{value.vp | vaccineType}}</h1>
         </mat-list-item>
-        <mat-divider [inset]="true"></mat-divider>
+        <mat-divider></mat-divider>
         <mat-list-item>
           <p mat-line>Country of Vaccination</p>
           <h1 mat-line>{{value.co | toCountryName}}</h1>
         </mat-list-item>
-        <mat-divider [inset]="true"></mat-divider>
+        <mat-divider></mat-divider>
         <mat-list-item>
           <p mat-line>Certificate Issuer</p>
           <h1 mat-line>{{value.is}}</h1>
         </mat-list-item>
-        <mat-divider [inset]="true"></mat-divider>
+        <mat-divider></mat-divider>
         <mat-list-item>
           <p mat-line>Unique Certificate ID</p>
           <h1 mat-line>{{value.ci}}</h1>

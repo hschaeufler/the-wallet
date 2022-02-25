@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'the-wallet-camera-dialog',
   template: `
-      <mat-toolbar>
+      <mat-toolbar class="camera-dialog-component-title" color="primary">
         <mat-toolbar-row class="camera-dialog-component-title-row">
           <h1 mat-dialog-title>Camera!</h1>
           <button class="close-button" mat-dialog-close>
@@ -15,13 +16,13 @@ import { Component, OnInit } from '@angular/core';
         <the-wallet-camera-video>
         </the-wallet-camera-video>
       </mat-dialog-content>
-      <mat-dialog-actions>
-        <the-wallet-camera-control-strip></the-wallet-camera-control-strip>
-      </mat-dialog-actions>
+      <the-wallet-camera-control-strip></the-wallet-camera-control-strip>
   `,
-  styleUrls: ['./camera-dialog.component.scss']
+  styleUrls: ['./camera-dialog.component.scss'],
 })
 export class CameraDialogComponent {
 
   constructor() { }
+
+
 }

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {CameraDialogComponent} from "./camera-module/camera-dialog/camera-dialog.component";
-import {MatDialog} from "@angular/material/dialog";
 import {CovidCertificateService} from "./health-certificate/services/covid-certificate.service";
+import {CameraDialogService} from "./camera-module/camera-dialog/camera-dialog.service";
 
 
 @Component({
@@ -17,20 +16,21 @@ export class TheWalletComponent implements OnInit {
 
 
   constructor(
-    private matDialog: MatDialog,
     private covidCertificateService: CovidCertificateService,
+    private cameraDialogService: CameraDialogService
   ) {
   }
 
-  openDialog(){
-    const dialogRef = this.matDialog.open(CameraDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
+
 
   ngOnInit(): void {
     const testCertificate1 = "HC1:6BF+70790T9WJWG.FKY*4GO0.O1CV2 O5 N2FBBRW1*70HS8WY04AC*WIFN0AHCD8KD97TK0F90KECTHGWJC0FDC:5AIA%G7X+AQB9746HS80:54IBQF60R6$A80X6S1BTYACG6M+9XG8KIAWNA91AY%67092L4WJCT3EHS8XJC +DXJCCWENF6OF63W5NW6WF6%JC QE/IAYJC5LEW34U3ET7DXC9 QE-ED8%E.JCBECB1A-:8$96646AL60A60S6Q$D.UDRYA 96NF6L/5QW6307KQEPD09WEQDD+Q6TW6FA7C466KCN9E%961A6DL6FA7D46JPCT3E5JDLA7$Q6E464W5TG6..DX%DZJC6/DTZ9 QE5$CB$DA/D JC1/D3Z8WED1ECW.CCWE.Y92OAGY8MY9L+9MPCG/D5 C5IA5N9$PC5$CUZCY$5Y$527BHB6*L8ARHDJL.Q7*2T7:SCNFZN70H6*AS6+T$D9UCAD97R8NIBO+/RJVE$9PAGPTBIZEP MO-Q0:R13IURRQ5MV93M9V3X2U:NDZSF"
     const testCertificate2 ='HC1:NCFOXN%TSMAHN-H9QCGDSB5QPN9OO3TH4O:5+T9DNUOGIB8B/*R:X9LGC0/KK1JZZPQA3DP4OW631AX5QF36FY1OSMNV1L8VNF6O M3PU1H6EB6JFEUF6+XEQ MJS6K1N63FEL62+0+BB4DJ4NJ323L23T+0SZ4ZI00T9 E9PF6846A$QW76SW6B699B5RFUOV13W1.UI2PHUIE+-CZJJQU2X*5YGFC-OPC1LJL4A7K73X*5OX42F1M*KYC3.Z8 X45B9-NT0 2$$0X4PCY0X:CZD5CC9T0H.3TU54JWHUVI/E2$4JY/KS-K1Q2V5T+5L /K9:KDP48X2C4T6ALD-IW G-IFNHF+*4LK0*+73E8U2MWKP/HLIJL8JF8JF172TF1A0LK6MGH1M7LHBHERN34CNYQS TF OF 6TTI4J9ZWC+ERZZJ/N7-G6ZN5:YONZ5 NF*0Q24KWJUVDTK/VIQ99GW4/AAKV45MLNCI00E+702';
+  }
+
+  openDialog() {
+    this.cameraDialogService.openCameraDialog().afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }
