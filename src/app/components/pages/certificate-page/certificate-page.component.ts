@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs";
-import {QRCodeModel} from "../../camera-module/services/QRCode.model";
-import {CovidCertificateService} from "../../health-certificate/services/covid-certificate.service";
-import {CameraService} from "../../camera-module/services/camera.service";
+import {CameraService} from "../../../camera-module/services/camera.service";
+import {CovidCertificateService} from "../../../health-certificate/services/covid-certificate.service";
+import {QRCodeModel} from "../../../camera-module/services/QRCode.model";
+
 
 @Component({
   selector: 'the-wallet-certificate-page',
