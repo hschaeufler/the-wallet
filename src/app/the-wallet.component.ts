@@ -10,26 +10,7 @@ import {QRCodeModel} from "./camera-module/services/QRCode.model";
   templateUrl: './the-wallet.component.html',
   styleUrls: ['./the-wallet.component.scss']
 })
-export class TheWalletComponent implements OnInit {
+export class TheWalletComponent {
   title = 'the wallet';
   value = "";
-  qrCode$?: Observable<QRCodeModel>;
-
-  constructor(
-    private covidCertificateService: CovidCertificateService,
-    private cameraService: CameraService,
-  ) {
-  }
-
-
-
-  ngOnInit(): void {
-     this.qrCode$ = this.cameraService.qrCode$
-  }
-
-  openDialog() {
-    this.cameraService.openCameraDialog().afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
 }

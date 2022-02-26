@@ -68,18 +68,6 @@ import {DEFAULT_CONFIG, Driver, NgForageOptions} from "ngforage";
     MatListModule,
     MatExpansionModule,
     MatChipsModule,
-  ],
-  providers: [
-    { // Initilaize Local Forage Driver
-      provide: DEFAULT_CONFIG,
-      useValue: {
-        name: 'theWalletCertificateStore',
-        driver: [ // defaults to indexedDB -> webSQL -> localStorage
-          Driver.INDEXED_DB,
-          Driver.LOCAL_STORAGE
-        ]
-      } as NgForageOptions
-    }
   ]
 })
 export class HealthCertificateModule { }
