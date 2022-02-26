@@ -13,9 +13,10 @@ import {HealthCertificateModule} from "./health-certificate/health-certificate.m
 import {DEFAULT_CONFIG, Driver, NgForageOptions} from "ngforage";
 // @ts-ignore
 import memoryStorageDriver from "localforage-memoryStorageDriver/dist/localforage-memoryStorageDriver.es6";
-import { CertificatePageComponent } from './components/certificate-page/certificate-page.component';
-import { WalletPageComponent } from './components/wallet-page/wallet-page.component';
-import { RouteNotFoundPageComponent } from './components/route-not-found-page/route-not-found-page.component'
+import {CertificatePageComponent} from "./components/pages/certificate-page/certificate-page.component";
+import {RouteNotFoundPageComponent} from "./components/pages/route-not-found-page/route-not-found-page.component";
+import {PageTemplateComponent} from "./components/templates/page-template/page-template.component";
+import {WalletPageComponent} from "./components/pages/wallet-page/wallet-page.component";
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { RouteNotFoundPageComponent } from './components/route-not-found-page/ro
     CertificatePageComponent,
     WalletPageComponent,
     RouteNotFoundPageComponent,
+    PageTemplateComponent,
   ],
   imports: [
     BrowserModule,

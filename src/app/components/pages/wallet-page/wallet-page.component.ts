@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'the-wallet-wallet-page',
   template: `
-    <p>
+    <the-wallet-page-template>
       wallet-page works!
-    </p>
+      </the-wallet-page-template>
   `,
   styleUrls: ['./wallet-page.component.scss']
 })

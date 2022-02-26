@@ -8,11 +8,9 @@ import {QRCodeModel} from "../../../camera-module/services/QRCode.model";
 @Component({
   selector: 'the-wallet-certificate-page',
   template: `
-    <div class="container">
-      <main class="main">
+    <the-wallet-page-template>
         <the-wallet-health-certificate *ngIf="(qrCode$ | async)" [value]="(qrCode$ | async)!.value"></the-wallet-health-certificate>
-      </main>
-    </div>
+      </the-wallet-page-template>
     <button (click)="openDialog()" mat-fab color="primary" aria-label="QR_Code">
       <mat-icon>qr_code</mat-icon>
     </button>
