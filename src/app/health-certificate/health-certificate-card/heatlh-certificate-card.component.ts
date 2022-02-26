@@ -7,8 +7,11 @@ import {CertificateTypeEnum} from "../CertificateType.enum";
   template: `
     <mat-card class="health-certificate-card">
       <mat-card-header>
-        <mat-card-title>{{value.nam | toDisplayName}}</mat-card-title>
-        <mat-card-subtitle>{{value | certificateTypeName}} Certificate</mat-card-subtitle>
+        <button mat-card-avatar mat-fab disabled>
+          <mat-icon aria-label="Vaccination Image">{{value | toCertificateTypeIcon}}</mat-icon>
+        </button>
+          <mat-card-title>{{value.nam | toDisplayName}}</mat-card-title>
+          <mat-card-subtitle>{{value | certificateTypeName}} Certificate</mat-card-subtitle>
         <the-wallet-certificate-card-chip-list
           [isVerified]="isVerified"
           [type]="value | certificateTypeName"

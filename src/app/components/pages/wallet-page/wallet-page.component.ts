@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'the-wallet-wallet-page',
   template: `
     <the-wallet-page-template>
-      wallet-page works!
+      <the-wallet-document-list></the-wallet-document-list>
       </the-wallet-page-template>
   `,
   styleUrls: ['./wallet-page.component.scss']

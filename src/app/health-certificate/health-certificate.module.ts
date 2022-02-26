@@ -28,6 +28,9 @@ import { DefaultExpansionPanelComponent } from './default-expansion-panel/defaul
 import {MatChipsModule} from "@angular/material/chips";
 import { CertificateCardChipListComponent } from './certificate-card-chip-list/certificate-card-chip-list.component';
 import {DEFAULT_CONFIG, Driver, NgForageOptions} from "ngforage";
+import { HealthCertificatePreviewComponent } from './health-certificate-preview/health-certificate-preview.component';
+import {MatIconModule} from "@angular/material/icon";
+import { ToCertificateTypeIconPipe } from './pipes/to-certificate-type-icon.pipe';
 
 
 
@@ -56,6 +59,8 @@ import {DEFAULT_CONFIG, Driver, NgForageOptions} from "ngforage";
     CertificateTypePipe,
     DefaultExpansionPanelComponent,
     CertificateCardChipListComponent,
+    HealthCertificatePreviewComponent,
+    ToCertificateTypeIconPipe,
   ],
   exports: [
     HealthCertificateComponent
@@ -68,6 +73,7 @@ import {DEFAULT_CONFIG, Driver, NgForageOptions} from "ngforage";
     MatListModule,
     MatExpansionModule,
     MatChipsModule,
+    MatIconModule,
   ]
 })
 export class HealthCertificateModule { }

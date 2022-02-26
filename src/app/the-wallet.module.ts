@@ -13,19 +13,25 @@ import {HealthCertificateModule} from "./health-certificate/health-certificate.m
 import {DEFAULT_CONFIG, Driver, NgForageOptions} from "ngforage";
 // @ts-ignore
 import memoryStorageDriver from "localforage-memoryStorageDriver/dist/localforage-memoryStorageDriver.es6";
-import {CertificatePageComponent} from "./components/pages/certificate-page/certificate-page.component";
+import {DocumentPageComponent} from "./components/pages/document-page/document-page.component";
 import {RouteNotFoundPageComponent} from "./components/pages/route-not-found-page/route-not-found-page.component";
 import {PageTemplateComponent} from "./components/templates/page-template/page-template.component";
 import {WalletPageComponent} from "./components/pages/wallet-page/wallet-page.component";
+import { DocumentListComponent } from './components/organisms/document-list/document-list.component';
+import {MatListModule} from "@angular/material/list";
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import { DocumentListElementComponent } from './components/organisms/document-list-element/document-list-element.component';
 
 
 @NgModule({
   declarations: [
     TheWalletComponent,
-    CertificatePageComponent,
+    DocumentPageComponent,
     WalletPageComponent,
     RouteNotFoundPageComponent,
     PageTemplateComponent,
+    DocumentListComponent,
+    DocumentListElementComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +47,9 @@ import {WalletPageComponent} from "./components/pages/wallet-page/wallet-page.co
     CameraModule,
     MatIconModule,
     MatButtonModule,
-    HealthCertificateModule
+    HealthCertificateModule,
+    MatListModule,
+    DragDropModule
   ],
   providers: [
     { // Initilaize Local Forage Driver
