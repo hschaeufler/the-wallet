@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'the-wallet-route-not-found-page',
   template: `
     <p>
-      route-not-found-page works!
+      Ups! Something went wrong. :(
     </p>
   `,
   styleUrls: ['./route-not-found-page.component.scss']
