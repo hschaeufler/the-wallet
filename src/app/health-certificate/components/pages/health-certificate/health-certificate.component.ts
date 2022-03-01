@@ -2,6 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CovidCertificateService} from "../../../services/covid-certificate.service";
 import {Observable, Subscription} from "rxjs";
 import {HealthCertificateModel} from "covid-certificate-checker/dist/lib/models/HealthCertificate.model";
+import {CertificateWrapperModel} from "../../../CertificateWrapper.model";
 
 
 @Component({
@@ -10,7 +11,7 @@ import {HealthCertificateModel} from "covid-certificate-checker/dist/lib/models/
     <ng-container *ngIf="((healthCertificateClaim$ | async)?.healthCertificate)">
       <the-wallet-heatlh-certificate-card
         [value]="(healthCertificateClaim$ | async)!.healthCertificate"
-        [qrCode]="value"
+        [qrCode]="value.qrCode"
         [isVerified]="(healthCertificateClaim$ | async)!.isVerified"
       >
       </the-wallet-heatlh-certificate-card>
@@ -21,7 +22,7 @@ import {HealthCertificateModel} from "covid-certificate-checker/dist/lib/models/
 export class HealthCertificateComponent implements OnInit, OnDestroy {
 
   @Input()
-  value!: string;
+  value!: CertificateWrapperModel;
 
 
   healthCertificateClaim$!: Observable<{
@@ -37,7 +38,7 @@ export class HealthCertificateComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-      this.healthCertificateClaim$ = this.covidCertificateService.decode(this.value);
+      this.healthCertificateClaim$ = this.covidCertificateService.decode(this.value.qrCode);
   }
 
   ngOnDestroy(): void {

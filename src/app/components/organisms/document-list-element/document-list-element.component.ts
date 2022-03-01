@@ -8,6 +8,8 @@ import {DocumentTypeEnum} from "../../../models/DocumentType.enum";
   template: `
     <ng-container [ngSwitch]="value.type">
       <the-wallet-health-certificate-preview
+        class="cursor-link"
+        [routerLink]="['/document', value.id]"
         *ngSwitchCase=documentTypeEnum.HEALTHCERTIFICATE
         [value]="value.content"
       >
