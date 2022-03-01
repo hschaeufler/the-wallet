@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {getCertificateType} from "../health-certificate-card/certificate-type.utils";
+import {getCertificateType} from "../components/organisms/health-certificate-card/certificate-type.utils";
 import {CertificateTypeEnum} from "../CertificateType.enum";
 import {HealthCertificateModel} from "covid-certificate-checker/dist/lib/models/HealthCertificate.model";
 import {CertificateTypeNamePipe} from "./certificate-type-name.pipe";

@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {HealthCertificateComponent} from "./health-certificate/health-certificate.component";
+import {HealthCertificateComponent} from "./components/pages/health-certificate/health-certificate.component";
 import {MatCardModule} from "@angular/material/card";
-import { QRCodeComponent } from './qrcode/qrcode.component';
+import { QRCodeComponent } from './components/organisms/qrcode/qrcode.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatListModule} from "@angular/material/list";
 import {HttpClientModule} from "@angular/common/http";
-import { VaccinationDetailComponent } from './vaccination-detail/vaccination-detail.component';
-import { TestDetailComponent } from './test-detail/test-detail.component';
-import { RecoveryDetailComponent } from './recovery-detail/recovery-detail.component';
-import { PersonDetailComponent } from './person-detail/person-detail.component';
+import { VaccinationDetailComponent } from './components/molecules/vaccination-detail/vaccination-detail.component';
+import { TestDetailComponent } from './components/molecules/test-detail/test-detail.component';
+import { RecoveryDetailComponent } from './components/molecules/recovery-detail/recovery-detail.component';
+import { PersonDetailComponent } from './components/molecules/person-detail/person-detail.component';
 import { CertificateTypeNamePipe } from './pipes/certificate-type-name.pipe';
-import {HeatlhCertificateCardComponent} from "./health-certificate-card/heatlh-certificate-card.component";
+import {HeatlhCertificateCardComponent} from "./components/organisms/health-certificate-card/heatlh-certificate-card.component";
 import {TestTypePipe} from "./pipes/test-type.pipe";
 import {TargetDiseasePipe} from "./pipes/target-disease.pipe";
 import {VaccineTypePipe} from "./pipes/vaccine-type.pipe";
@@ -24,13 +24,13 @@ import {ToTestResultPipe} from "./pipes/to-test-result.pipe";
 import {ToDisplayNamePipe} from "./pipes/to-display-name.pipe";
 import { CertificateTypePipe } from './pipes/certificate-type.pipe';
 import {MatExpansionModule} from "@angular/material/expansion";
-import { DefaultExpansionPanelComponent } from './default-expansion-panel/default-expansion-panel.component';
 import {MatChipsModule} from "@angular/material/chips";
-import { CertificateCardChipListComponent } from './certificate-card-chip-list/certificate-card-chip-list.component';
-import {DEFAULT_CONFIG, Driver, NgForageOptions} from "ngforage";
-import { HealthCertificatePreviewComponent } from './health-certificate-preview/health-certificate-preview.component';
+import { CertificateCardChipListComponent } from './components/molecules/certificate-card-chip-list/certificate-card-chip-list.component';
+import { HealthCertificatePreviewComponent } from './components/pages/health-certificate-preview/health-certificate-preview.component';
 import {MatIconModule} from "@angular/material/icon";
 import { ToCertificateTypeIconPipe } from './pipes/to-certificate-type-icon.pipe';
+import {DefaultExpansionPanelComponent} from "./components/molecules/default-expansion-panel/default-expansion-panel.component";
+import { CertificateCardHeaderComponent } from './components/molecules/certificate-card-header/certificate-card-header.component';
 
 
 
@@ -61,9 +61,11 @@ import { ToCertificateTypeIconPipe } from './pipes/to-certificate-type-icon.pipe
     CertificateCardChipListComponent,
     HealthCertificatePreviewComponent,
     ToCertificateTypeIconPipe,
+    CertificateCardHeaderComponent,
   ],
   exports: [
-    HealthCertificateComponent
+    HealthCertificateComponent,
+    HealthCertificatePreviewComponent
   ],
   imports: [
     CommonModule,

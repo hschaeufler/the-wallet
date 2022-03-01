@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DocumentModel} from "../../../models/Document.model";
 
 @Component({
@@ -13,14 +13,9 @@ import {DocumentModel} from "../../../models/Document.model";
   `,
   styleUrls: ['./document-list.component.scss']
 })
-export class DocumentListComponent implements OnInit {
+export class DocumentListComponent {
 
+  @Input()
   documentList: DocumentModel[] = [];
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
 
 }

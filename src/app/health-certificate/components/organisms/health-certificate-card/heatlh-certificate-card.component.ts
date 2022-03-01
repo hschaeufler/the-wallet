@@ -1,22 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HealthCertificateModel} from 'covid-certificate-checker/dist/lib/models/HealthCertificate.model';
-import {CertificateTypeEnum} from "../CertificateType.enum";
+import {CertificateTypeEnum} from "../../../CertificateType.enum";
 
 @Component({
   selector: 'the-wallet-heatlh-certificate-card',
   template: `
     <mat-card class="health-certificate-card">
-      <mat-card-header>
-        <button mat-card-avatar mat-fab disabled>
-          <mat-icon aria-label="Vaccination Image">{{value | toCertificateTypeIcon}}</mat-icon>
-        </button>
-          <mat-card-title>{{value.nam | toDisplayName}}</mat-card-title>
-          <mat-card-subtitle>{{value | certificateTypeName}} Certificate</mat-card-subtitle>
-        <the-wallet-certificate-card-chip-list
-          [isVerified]="isVerified"
-          [type]="value | certificateTypeName"
-        ></the-wallet-certificate-card-chip-list>
-      </mat-card-header>
+      <the-wallet-certificate-card-header
+        [isVerified]="isVerified"
+        [value]="value"
+      ></the-wallet-certificate-card-header>
       <mat-divider></mat-divider>
       <the-wallet-qrcode mat-card-image [value]="qrCode"></the-wallet-qrcode>
       <mat-divider></mat-divider>

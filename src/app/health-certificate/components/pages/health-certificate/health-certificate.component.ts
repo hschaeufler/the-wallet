@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {CovidCertificateService} from "../services/covid-certificate.service";
+import {CovidCertificateService} from "../../../services/covid-certificate.service";
 import {Observable, Subscription} from "rxjs";
 import {HealthCertificateModel} from "covid-certificate-checker/dist/lib/models/HealthCertificate.model";
 

@@ -1,13 +1,18 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DocumentModel} from "../../../models/Document.model";
+import {DocumentTypeEnum} from "../../../models/DocumentType.enum";
 
 
 @Component({
   selector: 'the-wallet-document-list-element',
   template: `
-    <p>
-      document-list-element works!
-    </p>
+    <ng-container [ngSwitch]="value.type">
+      <the-wallet-health-certificate-preview
+        *ngSwitchCase=documentTypeEnum.HEALTHCERTIFICATE
+        [value]="value.content"
+      >
+      </the-wallet-health-certificate-preview>
+    </ng-container>
   `,
   styleUrls: ['./document-list-element.component.scss']
 })
@@ -15,6 +20,10 @@ export class DocumentListElementComponent implements OnInit {
 
   @Input()
   value!: DocumentModel;
+
+  documentTypeEnum = DocumentTypeEnum;
+
+
 
   constructor() { }
 

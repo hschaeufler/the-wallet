@@ -1,5 +1,5 @@
 import {HealthCertificateModel} from "covid-certificate-checker/dist/lib/models/HealthCertificate.model";
-import {CertificateTypeEnum} from "../CertificateType.enum";
+import {CertificateTypeEnum} from "../../../CertificateType.enum";
 
 export function getCertificateType(hcert: HealthCertificateModel): CertificateTypeEnum{
   if(hcert.v && hcert.v.length > 0) {

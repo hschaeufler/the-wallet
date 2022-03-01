@@ -12,19 +12,14 @@ import {QRCodeModel} from "../../../camera-module/services/QRCode.model";
       <the-wallet-health-certificate *ngIf="qrCode"
                                      [value]="qrCode"></the-wallet-health-certificate>
     </the-wallet-page-template>
-    <button (click)="openDialog()" mat-fab color="primary" aria-label="QR_Code">
-      <mat-icon>qr_code</mat-icon>
-    </button>
   `,
   styleUrls: ['./document-page.component.scss']
 })
 export class DocumentPageComponent implements OnInit {
-  qrCode$?: Observable<QRCodeModel>;
   qrCode?: string;
 
   constructor(
     private covidCertificateService: CovidCertificateService,
-    private cameraService: CameraService,
   ) {
   }
 
@@ -35,10 +30,6 @@ export class DocumentPageComponent implements OnInit {
     this.qrCode = "HC1:NCFOXN%TS3DH+ZS9MI+SMA8M$CN5NL-AH-XIIOOW%IHOT$E08WAWN0%W0AT4V22F/8X*G3M9FQH+4J/-K$+CY73JC3MD3IFTNAJSZ4EJ0NTI4L6YO1%UG/YL WO*Z7ON1 *L:O80R5LY5K%JLY5W0S./RPZ5JT9A/RF H ZP4UBKS5%%H/P5VV3%-IHRIWQHYZKOP6OH6XO9IE5IVU5P2-GA*PE1H6IO2OO9$G40GHUZ4+FJE 4Y3LL/II 0SC9+W80OD1YHI$HIMIASQYQ7V34Q3QR$P2OIC0JVLA8J3ET3:H3A+2+33U SAAUOT3TPTO4UBZIC0JKQT.Q6Q+M3+L IMXDRHJUXYOOP6NQQ0THYZQ4H99$R2-JIS77%F.UINXU: RFTIDG62QEZUIQJAZGA+1VG%U5SI:TU+MM0W5CZ5+7VZX8F7D*OLRJVJ/94CD/*SNRHG6G.HE.JA37APM3Y7CB9SXW69B1U5SX:5/CTLNRZITVIRE FP2UCWJK0AH8K*/N1SPGV9F55W A/KNL7ET20RB643";
   }
 
-  openDialog() {
-    this.cameraService.openCameraDialog().afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
+
 
 }
