@@ -6,10 +6,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {MatToolbarModule} from "@angular/material/toolbar";
-import {CameraModule} from "./camera-module/camera.module";
+import {CameraModule} from "./modules/camera-module/camera.module";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
-import {HealthCertificateModule} from "./health-certificate/health-certificate.module";
+import {HealthCertificateModule} from "./modules/health-certificate/health-certificate.module";
 import {DEFAULT_CONFIG, Driver, NgForageOptions} from "ngforage";
 // @ts-ignore
 import memoryStorageDriver from "localforage-memoryStorageDriver/dist/localforage-memoryStorageDriver.es6";
@@ -21,6 +21,7 @@ import { DocumentListComponent } from './components/organisms/document-list/docu
 import {MatListModule} from "@angular/material/list";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { DocumentListElementComponent } from './components/organisms/document-list-element/document-list-element.component';
+import { SortDocumentsByArrayPipe } from './pipes/sort-by-array.pipe';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { DocumentListElementComponent } from './components/organisms/document-li
     PageTemplateComponent,
     DocumentListComponent,
     DocumentListElementComponent,
+    SortDocumentsByArrayPipe,
   ],
   imports: [
     BrowserModule,

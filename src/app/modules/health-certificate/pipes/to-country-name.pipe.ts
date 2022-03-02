@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import countryCodes from "../../../assets/ehn-dcc-valuesets/country-2-codes.json";
+import countryCodes from "../../../../assets/ehn-dcc-valuesets/country-2-codes.json";
 
 @Pipe({
   name: 'toCountryName'

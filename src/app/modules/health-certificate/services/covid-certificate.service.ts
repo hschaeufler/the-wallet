@@ -36,14 +36,14 @@ export class CovidCertificateService {
           qrCode: certificate
         })));
     } else {
-      return of(ElectronicHealthCertificateChecker.decode(certificate)).pipe(
-       // catchError(err => throwError(err)),
-        map(healthCertificateClaim => ({
-          healthCertificate: healthCertificateClaim.hcert,
-          isVerified: false,
-          qrCode: certificate,
-        }))
-      );
+        return of(ElectronicHealthCertificateChecker.decode(certificate)).pipe(
+          map(healthCertificateClaim => ({
+            healthCertificate: healthCertificateClaim.hcert,
+            isVerified: false,
+            qrCode: certificate,
+          }))
+        );
+
     }
   }
 

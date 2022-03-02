@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import testResultJSON from "../../../assets/ehn-dcc-valuesets/test-result.json";
+import testResultJSON from "../../../../assets/ehn-dcc-valuesets/test-result.json";
 
 @Pipe({
   name: 'toTestResult'

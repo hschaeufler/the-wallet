@@ -62,14 +62,12 @@ import {TestEntry} from "covid-certificate-checker/dist/lib/models/HealthCertifi
   `,
   styleUrls: ['./test-detail.component.scss']
 })
-export class TestDetailComponent implements OnInit {
+export class TestDetailComponent {
 
   @Input()
   value!: TestEntry;
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
 
 }

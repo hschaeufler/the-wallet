@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import vaccineTypeJSON from "../../../assets/ehn-dcc-valuesets/vaccine-prophylaxis.json"
+import vaccineTypeJSON from "../../../../assets/ehn-dcc-valuesets/vaccine-prophylaxis.json"
 
 @Pipe({
   name: 'vaccineType'

@@ -9,11 +9,7 @@ import { Component, OnInit } from '@angular/core';
   `,
   styleUrls: ['./route-not-found-page.component.scss']
 })
-export class RouteNotFoundPageComponent implements OnInit {
+export class RouteNotFoundPageComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

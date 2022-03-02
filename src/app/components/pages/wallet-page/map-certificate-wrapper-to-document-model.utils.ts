@@ -1,4 +1,4 @@
-import {CertificateWrapperModel} from "../../../health-certificate/CertificateWrapper.model";
+import {CertificateWrapperModel} from "../../../modules/health-certificate/CertificateWrapper.model";
 import {DocumentModel} from "../../../models/Document.model";
 import {DocumentTypeEnum} from "../../../models/DocumentType.enum";
 

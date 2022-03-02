@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {CovidCertificateService} from "./health-certificate/services/covid-certificate.service";
-import {CameraService} from "./camera-module/services/camera.service";
+import {CovidCertificateService} from "./modules/health-certificate/services/covid-certificate.service";
+import {CameraService} from "./modules/camera-module/services/camera.service";
 import {Observable} from "rxjs";
-import {QRCodeModel} from "./camera-module/services/QRCode.model";
+import {QRCodeModel} from "./modules/camera-module/services/QRCode.model";
 
 
 @Component({

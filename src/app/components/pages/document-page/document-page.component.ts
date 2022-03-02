@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {concatMap, from, map, Observable, tap, throwError} from "rxjs";
+import {concatMap, map, tap, throwError} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {DocumentStoreService} from "../../../store/document-store.service";
-import {CertificateWrapperModel} from "../../../health-certificate/CertificateWrapper.model";
+import {CertificateWrapperModel} from "../../../modules/health-certificate/CertificateWrapper.model";
 
 
 @Component({

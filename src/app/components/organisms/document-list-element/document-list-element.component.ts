@@ -18,7 +18,7 @@ import {DocumentTypeEnum} from "../../../models/DocumentType.enum";
   `,
   styleUrls: ['./document-list-element.component.scss']
 })
-export class DocumentListElementComponent implements OnInit {
+export class DocumentListElementComponent {
 
   @Input()
   value!: DocumentModel;
@@ -28,8 +28,5 @@ export class DocumentListElementComponent implements OnInit {
 
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

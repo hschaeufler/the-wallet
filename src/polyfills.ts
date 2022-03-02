@@ -51,6 +51,6 @@ import 'zone.js';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
-import "./app/camera-module/polyfills/image-capture-api.polyfill";
+import "./app/modules/camera-module/polyfills/image-capture-api.polyfill";
 
 (window as any)['global'] = window;

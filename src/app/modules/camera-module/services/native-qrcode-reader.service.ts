@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { QrcodeReaderService } from "./qrcode-reader.service";
 import { QRCodeModel } from "./QRCode.model";
 

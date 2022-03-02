@@ -19,7 +19,7 @@ import {CertificateWrapperModel} from "../../../CertificateWrapper.model";
   `,
   styleUrls: ['./health-certificate.component.scss']
 })
-export class HealthCertificateComponent implements OnInit, OnDestroy {
+export class HealthCertificateComponent implements OnInit {
 
   @Input()
   value!: CertificateWrapperModel;
@@ -39,9 +39,6 @@ export class HealthCertificateComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
       this.healthCertificateClaim$ = this.covidCertificateService.decode(this.value.qrCode);
-  }
-
-  ngOnDestroy(): void {
   }
 
 }
