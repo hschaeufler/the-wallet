@@ -1,0 +1,9 @@
+@use '@angular/material' as mat;
+
+$the-wallet-primary: mat.define-palette(mat.$deep-purple-palette, 900, 800, 900);
+$the-wallet-accent: mat.define-palette(mat.$green-palette, 800);
+$the-wallet-warn: mat.define-palette(mat.$red-palette, 900);
+
+$the-wallet-theme: mat.define-light-theme($the-wallet-primary, $the-wallet-accent, $the-wallet-warn);
+
+@include mat.all-component-themes($the-wallet-theme);
