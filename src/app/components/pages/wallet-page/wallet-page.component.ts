@@ -1,8 +1,8 @@
-import {ChangeDetectorRef, Component, DoCheck, IterableDiffer, IterableDiffers, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, DoCheck, IterableDiffer, IterableDiffers, OnDestroy, OnInit} from '@angular/core';
 import {DocumentStoreService} from "../../../store/document-store.service";
 import {DocumentModel} from "../../../models/Document.model";
 import {CameraService} from "../../../modules/camera-module/services/camera.service";
-import {concatMap, Observable, map, tap} from "rxjs";
+import {concatMap, Observable, map, tap, Subscription} from "rxjs";
 import {QRCodeModel} from "../../../modules/camera-module/services/QRCode.model";
 import {CovidCertificateService} from "../../../modules/health-certificate/services/covid-certificate.service";
 import {MatDialogRef} from "@angular/material/dialog";
@@ -26,32 +26,42 @@ import {SortStoreService} from "../../../store/sort-store.service";
   `,
   styleUrls: ['./wallet-page.component.scss']
 })
-export class WalletPageComponent implements OnInit {
-
+export class WalletPageComponent implements OnInit, OnDestroy {
 
 
   documentList: DocumentModel[] = [];
   sortOrder: string[] = [];
   qrCode$?: Observable<QRCodeModel>;
   cameraDialog?: MatDialogRef<CameraDialogComponent>;
+  documentChangeSubscription?: Subscription;
+  sortOrderSubscription?: Subscription;
 
   constructor(
     private documentStore: DocumentStoreService,
     private cameraService: CameraService,
     private certificateService: CovidCertificateService,
     private sortService: SortStoreService,
-    ) {
+  ) {
+  }
+
+  ngOnDestroy(): void {
+    if (this.documentChangeSubscription) {
+      this.documentChangeSubscription.unsubscribe();
+    }
+    if (this.sortOrderSubscription) {
+      this.sortOrderSubscription.unsubscribe();
+    }
   }
 
   ngOnInit(): void {
     this.documentStore.getDocuments().subscribe({
-    //Reassign Array so Angular will detect a change and redraw UI
-      next: value => this.documentList = [...this.documentList,value],
+      //Reassign Array so Angular will detect a change and redraw UI
+      next: value => this.documentList = [...this.documentList, value],
       error: err => console.error(err)
     })
     this.cameraService.qrCode$.pipe(
-      tap(()=> {
-        if(this.cameraDialog) {
+      tap(() => {
+        if (this.cameraDialog) {
           this.cameraDialog.close();
         }
       }),
@@ -60,28 +70,28 @@ export class WalletPageComponent implements OnInit {
       concatMap(document => this.documentStore.saveDocument(document)),
     ).subscribe({error: err => console.log(err)});
     //Subscribe for changed Documents
-    this.documentStore.documentChange$.subscribe(documentModelChange => {
+    this.documentChangeSubscription = this.documentStore.documentChange$.subscribe(documentModelChange => {
       console.log(documentModelChange);
       const index = this.documentList.findIndex(
-        (document)=> document.id === documentModelChange.id
+        (document) => document.id === documentModelChange.id
       );
       //Must be an Update
-      if(index != -1 && documentModelChange.document) {
+      if (index != -1 && documentModelChange.document) {
         this.documentList[index] = documentModelChange.document;
-      //Must be a Deletion
-      } else if(index != -1) {
-        this.documentList.splice(index,1);
+        //Must be a Deletion
+      } else if (index != -1) {
+        this.documentList.splice(index, 1);
         //Must be a new Document
-      } else if(documentModelChange.document) {
+      } else if (documentModelChange.document) {
         this.documentList.push(documentModelChange.document);
       }
       //trigger redraw
       this.documentList = [...this.documentList];
     });
-    this.sortService.getSortOrder().subscribe((sortOrder)=>{
+    this.sortService.getSortOrder().subscribe((sortOrder) => {
       this.sortOrder = sortOrder;
     });
-    this.sortService.sortOrder$.subscribe((sortOrder)=>{
+    this.sortOrderSubscription = this.sortService.sortOrder$.subscribe((sortOrder) => {
       console.log(sortOrder);
       this.sortOrder = sortOrder;
     });
