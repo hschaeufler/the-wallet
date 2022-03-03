@@ -33,6 +33,7 @@ import {DefaultExpansionPanelComponent} from "./components/molecules/default-exp
 import { CertificateCardHeaderComponent } from './components/molecules/certificate-card-header/certificate-card-header.component';
 import {UiComponentsModule} from "../ui-components/ui-components.module";
 import {TheWalletModule} from "../../the-wallet.module";
+import {RouterModule} from "@angular/router";
 
 
 
@@ -79,6 +80,7 @@ import {TheWalletModule} from "../../the-wallet.module";
     MatChipsModule,
     MatIconModule,
     UiComponentsModule,
+    RouterModule,
   ]
 })
 export class HealthCertificateModule { }
