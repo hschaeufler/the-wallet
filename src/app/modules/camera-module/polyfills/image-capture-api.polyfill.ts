@@ -67,6 +67,7 @@ export class ImageCaptureApi implements ImageCapture {
 
     async drawImageToCanvas(): Promise<{ canvas: HTMLCanvasElement, context: CanvasRenderingContext2D }> {
       // IE does not support readyState: https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack/readyState
+      console.log(this.track.readyState);
       if (!this.track.readyState || this.track.readyState === ImageCaptureApi.READY_STATE_LIVE) {
         return this._isPlayingPromise.then(() => {
           const width = this._videoElement.videoWidth;

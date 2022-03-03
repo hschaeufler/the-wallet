@@ -16,11 +16,11 @@ export class CameraService {
 
   static readonly MEDIA_DEVICE_KIND_VIDEOINPUT = "videoinput";
 
-  private videoStreamSource = new Subject<MediaStream>();
+  private mediaStreamSource = new Subject<MediaStream>();
   private pictureSource = new Subject<Blob>();
   private qrCodeSource = new Subject<QRCodeModel>();
 
-  mediaStream$: Observable<MediaStream> = this.videoStreamSource.asObservable();
+  mediaStream$: Observable<MediaStream> = this.mediaStreamSource.asObservable();
   picture$: Observable<Blob> = this.pictureSource.asObservable();
   qrCode$: Observable<QRCodeModel> = this.qrCodeSource.asObservable();
 
@@ -85,12 +85,14 @@ export class CameraService {
   }
 
   stop() {
+    this.imageCaptureApi = undefined;
     if (this.mediaStream?.active) {
       const tracks = this.mediaStream.getTracks();
       tracks.forEach((track) => {
         track.stop();
       })
     }
+    this.mediaStream = undefined;
   }
 
   scanStreamForQrCodes() {
@@ -114,6 +116,11 @@ export class CameraService {
     });
   }
 
+  /*startScanningForQRCodes(){
+    this.imageCaptureApi = undefined;
+    this.scanStreamForQrCodes();
+  }*/
+
 
   takePicture(photoSettings?: PhotoSettings) {
     if (this.mediaStream?.active) {
@@ -133,12 +140,12 @@ export class CameraService {
     mediaDevicePromise.then(
       (mediaStream: MediaStream) => {
         this.mediaStream = mediaStream;
-        this.videoStreamSource.next(mediaStream);
+        this.mediaStreamSource.next(mediaStream);
         if (scanForQRCodes) {
           this.scanStreamForQrCodes();
         }
       }).catch((reason: DOMException) => {
-      this.videoStreamSource.error(reason);
+      this.mediaStreamSource.error(reason);
     });
   }
 
