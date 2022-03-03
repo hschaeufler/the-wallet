@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, DoCheck, IterableDiffer, IterableDiffers, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DocumentStoreService} from "../../../store/document-store.service";
 import {DocumentModel} from "../../../models/Document.model";
 import {CameraService} from "../../../modules/camera-module/services/camera.service";
@@ -8,7 +8,6 @@ import {CovidCertificateService} from "../../../modules/health-certificate/servi
 import {MatDialogRef} from "@angular/material/dialog";
 import {CameraDialogComponent} from "../../../modules/camera-module/camera-dialog/camera-dialog.component";
 import {mapCertificateWrapperToDocumentModel} from "./map-certificate-wrapper-to-document-model.utils";
-import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 import {SortStoreService} from "../../../store/sort-store.service";
 
 @Component({
@@ -42,15 +41,6 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     private certificateService: CovidCertificateService,
     private sortService: SortStoreService,
   ) {
-  }
-
-  ngOnDestroy(): void {
-    if (this.documentChangeSubscription) {
-      this.documentChangeSubscription.unsubscribe();
-    }
-    if (this.sortOrderSubscription) {
-      this.sortOrderSubscription.unsubscribe();
-    }
   }
 
   ngOnInit(): void {
@@ -101,8 +91,16 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     this.cameraDialog = this.cameraService.openCameraDialog();
   }
 
-
   onSort(sort: string[]) {
     this.sortService.updateSortOrder(sort).subscribe();
+  }
+
+  ngOnDestroy(): void {
+    if (this.documentChangeSubscription) {
+      this.documentChangeSubscription.unsubscribe();
+    }
+    if (this.sortOrderSubscription) {
+      this.sortOrderSubscription.unsubscribe();
+    }
   }
 }
