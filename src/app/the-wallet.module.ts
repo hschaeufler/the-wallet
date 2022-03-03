@@ -22,6 +22,7 @@ import {MatListModule} from "@angular/material/list";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { DocumentListElementComponent } from './components/organisms/document-list-element/document-list-element.component';
 import { SortDocumentsByArrayPipe } from './pipes/sort-by-array.pipe';
+import { IconButtonComponent } from './components/atoms/icon-button/icon-button.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { SortDocumentsByArrayPipe } from './pipes/sort-by-array.pipe';
     DocumentListComponent,
     DocumentListElementComponent,
     SortDocumentsByArrayPipe,
+    IconButtonComponent,
   ],
   imports: [
     BrowserModule,
