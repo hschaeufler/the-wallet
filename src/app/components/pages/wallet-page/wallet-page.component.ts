@@ -14,7 +14,7 @@ import {SortStoreService} from "../../../store/sort-store.service";
 @Component({
   selector: 'the-wallet-wallet-page',
   template: `
-    <the-wallet-page-template>
+    <the-wallet-page-template title="Wallet">
       <the-wallet-document-list
         [documentList]="documentList | sortDocumentsByArray: sortOrder"
         (sort)="onSort($event)"

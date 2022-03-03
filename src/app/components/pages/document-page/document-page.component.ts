@@ -8,7 +8,7 @@ import {CertificateWrapperModel} from "../../../modules/health-certificate/Certi
 @Component({
   selector: 'the-wallet-certificate-page',
   template: `
-    <the-wallet-page-template>
+    <the-wallet-page-template title="Document">
       <the-wallet-health-certificate *ngIf="certificateWrapper"
                                      [value]="certificateWrapper"></the-wallet-health-certificate>
     </the-wallet-page-template>
