@@ -4,7 +4,7 @@ import {Component, Input} from '@angular/core';
   selector: 'the-wallet-page-template',
   template: `
     <mat-toolbar class="toolbar" color="primary">
-      <the-wallet-icon-button>arrow_back_ios</the-wallet-icon-button>
+     <the-wallet-icon-button>arrow_back_ios</the-wallet-icon-button>
       <span>{{title}}</span>
     </mat-toolbar>
     <!--Used as placeholder, so content is not hidden under Toolbar-->

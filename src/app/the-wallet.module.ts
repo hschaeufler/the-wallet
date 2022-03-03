@@ -22,7 +22,7 @@ import {MatListModule} from "@angular/material/list";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { DocumentListElementComponent } from './components/organisms/document-list-element/document-list-element.component';
 import { SortDocumentsByArrayPipe } from './pipes/sort-by-array.pipe';
-import { IconButtonComponent } from './components/atoms/icon-button/icon-button.component';
+import {UiComponentsModule} from "./modules/ui-components/ui-components.module";
 
 
 @NgModule({
@@ -35,7 +35,6 @@ import { IconButtonComponent } from './components/atoms/icon-button/icon-button.
     DocumentListComponent,
     DocumentListElementComponent,
     SortDocumentsByArrayPipe,
-    IconButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +52,8 @@ import { IconButtonComponent } from './components/atoms/icon-button/icon-button.
     MatButtonModule,
     HealthCertificateModule,
     MatListModule,
-    DragDropModule
+    DragDropModule,
+    UiComponentsModule,
   ],
   providers: [
     { // Initilaize Local Forage Driver
@@ -70,6 +70,7 @@ import { IconButtonComponent } from './components/atoms/icon-button/icon-button.
       } as NgForageOptions
     }
   ],
+  exports: [],
   bootstrap: [TheWalletComponent]
 })
 export class TheWalletModule { }
