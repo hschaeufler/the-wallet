@@ -10,6 +10,7 @@ import {CameraDialogComponent} from "../../../modules/camera-module/camera-dialo
 import {mapCertificateWrapperToDocumentModel} from "./map-certificate-wrapper-to-document-model.utils";
 import {SortStoreService} from "../../../store/sort-store.service";
 import {CameraDialogService} from "../../../modules/camera-module/services/camera-dialog.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'the-wallet-wallet-page',
@@ -23,6 +24,8 @@ import {CameraDialogService} from "../../../modules/camera-module/services/camer
       <the-wallet-document-list
         [documentList]="documentList | sortDocumentsByArray: sortOrder"
         (sort)="onSort($event)"
+        (delete)="onDelete($event)"
+        (showMore)="onShowMore($event)"
       ></the-wallet-document-list>
     </the-wallet-page-template>
     <button (click)="openDialog()" mat-fab color="primary" aria-label="QR_Code">
@@ -46,7 +49,8 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     private cameraService: CameraService,
     private certificateService: CovidCertificateService,
     private sortService: SortStoreService,
-    private cameraDialogService: CameraDialogService
+    private cameraDialogService: CameraDialogService,
+    private router: Router,
   ) {
   }
 
@@ -109,6 +113,20 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     }
     if (this.sortOrderSubscription) {
       this.sortOrderSubscription.unsubscribe();
+    }
+  }
+
+  onDelete(id: string) {
+    if(id) {
+      this.documentStore.deleteDocument(id).subscribe({
+        error: err => console.log(err)
+      });
+    }
+  }
+
+  onShowMore(id: string) {
+    if(id) {
+      this.router.navigate(["document", id]);
     }
   }
 }

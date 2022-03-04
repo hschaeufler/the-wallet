@@ -35,6 +35,7 @@ import {UiComponentsModule} from "../ui-components/ui-components.module";
 import {TheWalletModule} from "../../the-wallet.module";
 import {RouterModule} from "@angular/router";
 import {MatButtonModule} from "@angular/material/button";
+import { HealthCertificatePreviewActionsDirective } from './components/pages/health-certificate-preview/health-certificate-preview-actions.directive';
 
 
 
@@ -66,11 +67,13 @@ import {MatButtonModule} from "@angular/material/button";
     HealthCertificatePreviewComponent,
     ToCertificateTypeIconPipe,
     CertificateCardHeaderComponent,
+    HealthCertificatePreviewActionsDirective,
   ],
-  exports: [
-    HealthCertificateComponent,
-    HealthCertificatePreviewComponent
-  ],
+    exports: [
+        HealthCertificateComponent,
+        HealthCertificatePreviewComponent,
+        HealthCertificatePreviewActionsDirective
+    ],
   imports: [
     CommonModule,
     HttpClientModule,

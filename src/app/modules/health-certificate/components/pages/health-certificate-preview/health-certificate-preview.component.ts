@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CertificateWrapperModel} from "../../../CertificateWrapper.model";
 
 @Component({
@@ -8,18 +8,21 @@ import {CertificateWrapperModel} from "../../../CertificateWrapper.model";
       <the-wallet-certificate-card-header
         [value]="value.healthCertificate"
         [isVerified]="value.isVerified"
-        [routerLink]="link"
+        (click)="showMore.emit(value)"
       >
       </the-wallet-certificate-card-header>
       <ng-container *ngIf="expand">
         <the-wallet-qrcode
           [value]="value.qrCode"
-          [routerLink]="link">
+          (click)="showMore.emit(value)">
         </the-wallet-qrcode>
       </ng-container>
-      <mat-card-footer>
+      <mat-card-footer class="health-certificate-preview-footer" >
         <the-wallet-icon-button
           (click)="toogleExpand($event)">{{expand ? "expand_less" : "expand_more"}}</the-wallet-icon-button>
+          <div class="health-certificate-preview-actions">
+            <ng-content select="[theWalletHealthCertificatePreviewActions]"></ng-content>
+          </div>
       </mat-card-footer>
     </mat-card>
   `,
@@ -33,8 +36,8 @@ export class HealthCertificatePreviewComponent {
   @Input()
   value?: CertificateWrapperModel;
 
-  @Input()
-  link?: string | any[];
+  @Output()
+  showMore = new EventEmitter<CertificateWrapperModel>();
 
   toogleExpand($event: MouseEvent) {
     this.expand = !this.expand;
