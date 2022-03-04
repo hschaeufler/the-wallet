@@ -55,6 +55,6 @@ export class DocumentPageComponent implements OnInit {
   }
 
   delete($event: MouseEvent) {
-    
+
   }
 }
