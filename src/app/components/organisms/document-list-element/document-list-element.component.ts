@@ -13,6 +13,7 @@ import {DocumentTypeEnum} from "../../../models/DocumentType.enum";
         class="cursor-link"
         [link]="['/document', value.id]"
         [value]="value.content"
+        [expand]="isFirst"
       >
       </the-wallet-health-certificate-preview>
     </ng-container>
@@ -23,6 +24,9 @@ export class DocumentListElementComponent {
 
   @Input()
   value!: DocumentModel;
+
+  @Input()
+  isFirst = false;
 
   documentTypeEnum = DocumentTypeEnum;
 

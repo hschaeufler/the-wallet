@@ -8,12 +8,13 @@ import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
     <div
       cdkDropList
       (cdkDropListDropped)="handleDrop($event)"
+      class="document-list"
     >
         <the-wallet-document-list-element
           cdkDrag
           *ngFor="let document of documentList"
           [value]="document"
-          class="list-element"
+          class="document-list-element"
         >
         </the-wallet-document-list-element>
     </div>

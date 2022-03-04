@@ -6,11 +6,11 @@ import {HealthCertificateModel} from "covid-certificate-checker/dist/lib/models/
   template: `
     <ng-container *ngIf="value; else progressspinner">
       <mat-card-header>
-        <button mat-card-avatar mat-fab disabled>
-          <mat-icon aria-label="Vaccination Image">{{value | toCertificateTypeIcon}}</mat-icon>
+        <button mat-card-avatar mat-fab-mini disabled class="certificate-header-avatar">
+          <mat-icon aria-label="Vaccination Image" class="certificate-header-icon">{{value | toCertificateTypeIcon}}</mat-icon>
         </button>
         <mat-card-title>{{value.nam | toDisplayName}}</mat-card-title>
-        <mat-card-subtitle>{{value | certificateTypeName}} Certificate</mat-card-subtitle>
+        <mat-card-subtitle class="certificate-header-subtitle">{{value | certificateTypeName}} Certificate</mat-card-subtitle>
         <the-wallet-certificate-card-chip-list
           [isVerified]="isVerified"
           [type]="value | certificateTypeName"

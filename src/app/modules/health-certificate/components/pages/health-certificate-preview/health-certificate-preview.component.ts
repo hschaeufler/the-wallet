@@ -4,23 +4,22 @@ import {CertificateWrapperModel} from "../../../CertificateWrapper.model";
 @Component({
   selector: 'the-wallet-health-certificate-preview',
   template: `
-    <mat-card *ngIf="value" class="health-certificate-preview">
+    <mat-card *ngIf="value" [class]="expand ? 'health-certificate-expanded' : ''">
       <the-wallet-certificate-card-header
         [value]="value.healthCertificate"
         [isVerified]="value.isVerified"
         [routerLink]="link"
       >
       </the-wallet-certificate-card-header>
-      <ng-container *ngIf="expanded">
-        <mat-divider></mat-divider>
+      <ng-container *ngIf="expand">
         <the-wallet-qrcode
           [value]="value.qrCode"
           [routerLink]="link">
         </the-wallet-qrcode>
       </ng-container>
-      <mat-divider></mat-divider>
       <mat-card-footer>
-        <the-wallet-icon-button (click)="toogleExpand($event)">{{expanded ? "expand_less": "expand_more"}}</the-wallet-icon-button>
+        <the-wallet-icon-button
+          (click)="toogleExpand($event)">{{expand ? "expand_less" : "expand_more"}}</the-wallet-icon-button>
       </mat-card-footer>
     </mat-card>
   `,
@@ -28,7 +27,8 @@ import {CertificateWrapperModel} from "../../../CertificateWrapper.model";
 })
 export class HealthCertificatePreviewComponent {
 
-  expanded = false;
+  @Input()
+  expand = false;
 
   @Input()
   value?: CertificateWrapperModel;
@@ -37,6 +37,6 @@ export class HealthCertificatePreviewComponent {
   link?: string | any[];
 
   toogleExpand($event: MouseEvent) {
-    this.expanded = !this.expanded;
+    this.expand = !this.expand;
   }
 }

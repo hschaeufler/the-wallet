@@ -34,6 +34,7 @@ import { CertificateCardHeaderComponent } from './components/molecules/certifica
 import {UiComponentsModule} from "../ui-components/ui-components.module";
 import {TheWalletModule} from "../../the-wallet.module";
 import {RouterModule} from "@angular/router";
+import {MatButtonModule} from "@angular/material/button";
 
 
 
@@ -81,6 +82,7 @@ import {RouterModule} from "@angular/router";
     MatIconModule,
     UiComponentsModule,
     RouterModule,
+    MatButtonModule,
   ]
 })
 export class HealthCertificateModule { }
