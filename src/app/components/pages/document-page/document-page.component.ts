@@ -27,6 +27,7 @@ import {CertificateWrapperModel} from "../../../modules/health-certificate/Certi
 export class DocumentPageComponent implements OnInit {
 
   certificateWrapper?: CertificateWrapperModel;
+  id?: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,7 +40,7 @@ export class DocumentPageComponent implements OnInit {
     this.route.params.pipe(
       tap(params => console.log(params)),
       map(params => params["id"]),
-      tap(id => console.log(id)),
+      tap(id => this.id = id),
       concatMap(id => this.documentStore.getDocument(id)),
       map(document => {
         if(!document) {
@@ -55,6 +56,11 @@ export class DocumentPageComponent implements OnInit {
   }
 
   delete($event: MouseEvent) {
-
+    if(this.id) {
+      this.documentStore.deleteDocument(this.id).subscribe({
+        next: () => this.router.navigate(["wallet"]),
+        error: err => {console.error(err)}
+      });
+    }
   }
 }
