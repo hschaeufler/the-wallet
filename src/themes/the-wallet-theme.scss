@@ -1,0 +1,14 @@
+@use '@angular/material' as mat;
+@use 'src/app/modules/health-certificate/themes/health-certificate.theme' as health-certificate;
+
+@include mat.core();
+
+$the-wallet-primary: mat.define-palette(mat.$indigo-palette, A400);
+$the-wallet-accent: mat.define-palette(mat.$yellow-palette, 600);
+$the-wallet-warn: mat.define-palette(mat.$red-palette, 900);
+
+$the-wallet-theme: mat.define-light-theme($the-wallet-primary, $the-wallet-accent, $the-wallet-warn);
+
+@include mat.all-component-themes($the-wallet-theme);
+@include mat.strong-focus-indicators-theme($the-wallet-theme);
+@include health-certificate.theme($the-wallet-theme);

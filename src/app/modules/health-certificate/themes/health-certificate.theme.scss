@@ -1,0 +1,7 @@
+@use "../components/pages/health-certificate-preview/heatlh-certificate-preview.theme" as heatlh-certificate-preview;
+
+
+@mixin theme($theme) {
+  @include heatlh-certificate-preview.color($theme);
+}
+

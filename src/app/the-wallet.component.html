@@ -1,13 +1,1 @@
-<mat-toolbar class="toolbar" color="primary">
-  <span>{{title}}</span>
-</mat-toolbar>
-<mat-toolbar color="primary">
-</mat-toolbar>
-<div class="container">
-  <main class="main">
-    <the-wallet-health-certificate *ngIf="(qrCode$ | async)" [value]="(qrCode$ | async)!.value"></the-wallet-health-certificate>
-  </main>
-</div>
-<button (click)="openDialog()" mat-fab color="primary" aria-label="QR_Code">
-  <mat-icon>qr_code</mat-icon>
-</button>
+<router-outlet></router-outlet>
