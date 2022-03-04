@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CameraService} from "../services/camera.service";
+import {CameraTypeEnum} from "../services/CameraTypeEnum";
 
 @Component({
   selector: 'the-wallet-camera-control-strip',
@@ -9,7 +10,7 @@ import {CameraService} from "../services/camera.service";
       <button [disabled]="!supportsFlash" mat-mini-fab aria-label="Light!" color="primary">
         <mat-icon>flashlight_on</mat-icon>
       </button>
-      <button (click)="takePhoto()" mat-fab aria-label="Photo!" color="primary">
+      <button [disabled]="cameraType !== cameraTypeEnum.DEFAULT" (click)="takePhoto()" mat-fab aria-label="Photo!" color="primary">
         <mat-icon>photo_camera</mat-icon>
       </button>
       <button (click)="switchCamera()" mat-mini-fab aria-label="Switch Camera!" color="primary">
@@ -21,6 +22,11 @@ import {CameraService} from "../services/camera.service";
   styleUrls: ['./camera-control-strip.component.scss']
 })
 export class CameraControlStripComponent implements OnInit {
+
+  @Input()
+  cameraType? = CameraTypeEnum.DEFAULT;
+
+  cameraTypeEnum = CameraTypeEnum;
 
   supportsFlash = false;
 

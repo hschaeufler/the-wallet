@@ -14,7 +14,7 @@ import {Subscription} from "rxjs";
 export class CameraVideoComponent implements AfterViewInit, OnInit, OnDestroy {
 
   @Input()
-  scanForQRCode = false;
+  scanForQRCode? = false;
 
   //not allowed private, so Template can read value
   mediaStream?: MediaStream;

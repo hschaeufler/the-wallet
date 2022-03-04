@@ -1,5 +1,5 @@
-import {CameraDialogTypeEnum} from "./CameraDialogType.enum";
+import {CameraTypeEnum} from "./CameraTypeEnum";
 
 export interface CameraDialogOptionsModel {
-  dialogType?: CameraDialogTypeEnum;
+  cameraType?: CameraTypeEnum;
 }

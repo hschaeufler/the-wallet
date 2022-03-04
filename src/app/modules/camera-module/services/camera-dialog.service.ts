@@ -5,7 +5,7 @@ import {CameraService} from "./camera.service";
 import {take} from "rxjs";
 import {QRCodeModel} from "./QRCode.model";
 import {CameraDialogOptionsModel} from "./CameraDialogOptions.model";
-import {CameraDialogTypeEnum} from "./CameraDialogType.enum";
+import {CameraTypeEnum} from "./CameraTypeEnum";
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,7 @@ export class CameraDialogService {
       QRCodeModel | undefined>(
       CameraDialogComponent, {
         panelClass: 'camera-dialog',
-        data: {dialogType: CameraDialogTypeEnum.QRCODE}
+        data: {cameraType: CameraTypeEnum.QRCODE}
       }
     );
     const qrCodeSubscription$ = this.cameraService.qrCode$.pipe(
