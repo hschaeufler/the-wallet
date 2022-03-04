@@ -2,13 +2,14 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DocumentStoreService} from "../../../store/document-store.service";
 import {DocumentModel} from "../../../models/Document.model";
 import {CameraService} from "../../../modules/camera-module/services/camera.service";
-import {concatMap, Observable, map, tap, Subscription} from "rxjs";
+import {concatMap, Observable, map, tap, Subscription, skipWhile} from "rxjs";
 import {QRCodeModel} from "../../../modules/camera-module/services/QRCode.model";
 import {CovidCertificateService} from "../../../modules/health-certificate/services/covid-certificate.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {CameraDialogComponent} from "../../../modules/camera-module/camera-dialog/camera-dialog.component";
 import {mapCertificateWrapperToDocumentModel} from "./map-certificate-wrapper-to-document-model.utils";
 import {SortStoreService} from "../../../store/sort-store.service";
+import {CameraDialogService} from "../../../modules/camera-module/services/camera-dialog.service";
 
 @Component({
   selector: 'the-wallet-wallet-page',
@@ -40,6 +41,7 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     private cameraService: CameraService,
     private certificateService: CovidCertificateService,
     private sortService: SortStoreService,
+    private cameraDialogService: CameraDialogService
   ) {
   }
 
@@ -49,16 +51,6 @@ export class WalletPageComponent implements OnInit, OnDestroy {
       next: value => this.documentList = [...this.documentList, value],
       error: err => console.error(err)
     })
-    this.cameraService.qrCode$.pipe(
-      tap(() => {
-        if (this.cameraDialog) {
-          this.cameraDialog.close();
-        }
-      }),
-      concatMap(qrCode => this.certificateService.decode(qrCode.value)),
-      map(certificateWrapper => mapCertificateWrapperToDocumentModel(certificateWrapper)),
-      concatMap(document => this.documentStore.saveDocument(document)),
-    ).subscribe({error: err => console.log(err)});
     //Subscribe for changed Documents
     this.documentChangeSubscription = this.documentStore.documentChange$.subscribe(documentModelChange => {
       console.log(documentModelChange);
@@ -88,7 +80,18 @@ export class WalletPageComponent implements OnInit, OnDestroy {
   }
 
   openDialog() {
-    this.cameraDialog = this.cameraService.openCameraDialog();
+    this.cameraDialogService.openQRCodeScannerDialog()
+      .afterClosed()
+      .pipe(
+        skipWhile(qrCode => !qrCode),
+        // @ts-ignore
+        concatMap(qrCode => this.certificateService.decode(qrCode.value)),
+        map(certificateWrapper => mapCertificateWrapperToDocumentModel(certificateWrapper)),
+        concatMap(document => this.documentStore.saveDocument(document)),
+      ).subscribe({
+      error: err => console.log(err),
+      complete: () => console.log("closed"),
+      });
   }
 
   onSort(sort: string[]) {

@@ -25,7 +25,6 @@ export class CameraVideoComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngOnDestroy(): void {
         this.mediaStreamSubscription?.unsubscribe();
-        this.qrCodeSubscription?.unsubscribe();
         this.cameraService.stop();
     }
 
@@ -37,9 +36,6 @@ export class CameraVideoComponent implements AfterViewInit, OnInit, OnDestroy {
         },
         error: error => console.log(error)
       });
-      this.qrCodeSubscription = this.cameraService.qrCode$.subscribe((qrCode)=>{
-        console.log(qrCode);
-      })
     }
   }
 

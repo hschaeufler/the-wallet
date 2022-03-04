@@ -39,7 +39,6 @@ export class CameraService {
   constructor(
     private qrcodeReaderService: QrcodeReaderService,
     private featureDetectionService: FeatureDetectionService,
-    private matDialog: MatDialog,
   ) {
     console.log(qrcodeReaderService.getImplementation());
   }
@@ -149,9 +148,4 @@ export class CameraService {
     });
   }
 
-  openCameraDialog(): MatDialogRef<CameraDialogComponent>{
-    //have a look at: https://stackoverflow.com/questions/48688614/angular-custom-style-to-mat-dialog
-    //style is in style.css
-    return this.matDialog.open(CameraDialogComponent, {panelClass: 'camera-dialog'});
-  }
 }
