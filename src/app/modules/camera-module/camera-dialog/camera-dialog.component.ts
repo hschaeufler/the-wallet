@@ -1,4 +1,7 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, Inject, ViewEncapsulation} from '@angular/core';
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {CameraDialogOptionsModel} from "../services/CameraDialogOptions.model";
+import {CameraDialogTypeEnum} from "../services/CameraDialogType.enum";
 
 @Component({
   selector: 'the-wallet-camera-dialog',
@@ -12,7 +15,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
         </mat-toolbar-row>
       </mat-toolbar>
       <mat-dialog-content>
-        <the-wallet-camera-video>
+        <the-wallet-camera-video [scanForQRCode]="data.dialogType === dialogType.QRCODE">
         </the-wallet-camera-video>
       </mat-dialog-content>
       <the-wallet-camera-control-strip></the-wallet-camera-control-strip>
@@ -21,7 +24,11 @@ import {Component, ViewEncapsulation} from '@angular/core';
 })
 export class CameraDialogComponent {
 
-  constructor() { }
+  dialogType = CameraDialogTypeEnum;
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: CameraDialogOptionsModel) {
+    console.log(data);
+  }
 
 
 }

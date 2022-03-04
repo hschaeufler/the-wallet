@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CameraService} from "../services/camera.service";
 import {Subscription} from "rxjs";
 
@@ -12,6 +12,9 @@ import {Subscription} from "rxjs";
   styleUrls: ['./camera-video.component.scss']
 })
 export class CameraVideoComponent implements AfterViewInit, OnInit, OnDestroy {
+
+  @Input()
+  scanForQRCode = false;
 
   //not allowed private, so Template can read value
   mediaStream?: MediaStream;
@@ -41,7 +44,7 @@ export class CameraVideoComponent implements AfterViewInit, OnInit, OnDestroy {
 
   //Start streaming after Video-Element is ready
   ngAfterViewInit(): void {
-    this.cameraService.start();
+    this.cameraService.start(undefined, this.scanForQRCode);
   }
 
 

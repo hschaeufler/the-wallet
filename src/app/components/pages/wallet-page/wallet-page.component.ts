@@ -91,7 +91,7 @@ export class WalletPageComponent implements OnInit, OnDestroy {
       ).subscribe({
       error: err => console.log(err),
       complete: () => console.log("closed"),
-      });
+    });
   }
 
   onSort(sort: string[]) {
