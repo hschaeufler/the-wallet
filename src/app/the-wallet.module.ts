@@ -23,6 +23,10 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
 import { DocumentListElementComponent } from './components/organisms/document-list-element/document-list-element.component';
 import { SortDocumentsByArrayPipe } from './pipes/sort-by-array.pipe';
 import {UiComponentsModule} from "./modules/ui-components/ui-components.module";
+import { PageTemplateHeaderDirective } from './components/templates/page-template/page-template-header.directive';
+import { AppBarComponent } from './components/molecules/app-bar/app-bar.component';
+import { AppBarStartElementsDirective } from './components/molecules/app-bar/app-bar-start-elements.directive';
+import { AppBarEndElementsDirective } from './components/molecules/app-bar/app-bar-end-elements.directive';
 
 
 @NgModule({
@@ -35,6 +39,10 @@ import {UiComponentsModule} from "./modules/ui-components/ui-components.module";
     DocumentListComponent,
     DocumentListElementComponent,
     SortDocumentsByArrayPipe,
+    PageTemplateHeaderDirective,
+    AppBarComponent,
+    AppBarStartElementsDirective,
+    AppBarEndElementsDirective,
   ],
   imports: [
     BrowserModule,

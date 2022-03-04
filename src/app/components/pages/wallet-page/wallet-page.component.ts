@@ -14,7 +14,12 @@ import {CameraDialogService} from "../../../modules/camera-module/services/camer
 @Component({
   selector: 'the-wallet-wallet-page',
   template: `
-    <the-wallet-page-template title="Wallet">
+    <the-wallet-page-template>
+      <the-wallet-app-bar title="Wallet" theWalletPageTemplateHeader>
+        <ng-container theWalletAppBarStartElements>
+          <mat-icon>account_balance_wallet</mat-icon>
+        </ng-container>
+      </the-wallet-app-bar>
       <the-wallet-document-list
         [documentList]="documentList | sortDocumentsByArray: sortOrder"
         (sort)="onSort($event)"
