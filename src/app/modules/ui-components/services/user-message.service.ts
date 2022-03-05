@@ -8,7 +8,7 @@ import { MatSnackBarConfig } from '@angular/material/snack-bar/snack-bar-config'
 export class UserMessageService {
   static readonly ERROR_MESSAGE_ACTION = 'OK';
   static readonly ERROR_MESSAGE_CONFIG: MatSnackBarConfig = {
-    duration: 1000,
+    duration: 5000,
   };
 
   constructor(private snackBar: MatSnackBar) {}

@@ -15,6 +15,8 @@ import { ActionMenuComponent } from '../../../modules/ui-components/components/m
 import { mapCertificateWrapperToDocumentModel } from './map-certificate-wrapper-to-document-model.utils';
 import { ActionMenuSheetService } from '../../../modules/ui-components/services/action-menu-sheet.service';
 import { ActionListItemModel } from '../../../modules/ui-components/ActionListItem.model';
+import { FileSystemService } from '../../../modules/file-system/services/file-system.service';
+import { UserMessageService } from '../../../modules/ui-components/services/user-message.service';
 
 @Component({
   selector: 'the-wallet-wallet-page',
@@ -63,7 +65,7 @@ export class WalletPageComponent implements OnInit, OnDestroy {
       matIcon: 'file_upload',
       name: 'Import Health Certificate',
       action: () => {
-        this.openDialog();
+        this.importImage();
       },
     },
   ];
@@ -75,14 +77,16 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     private sortService: SortStoreService,
     private cameraDialogService: CameraDialogService,
     private router: Router,
-    private actionMenuSheetService: ActionMenuSheetService
+    private actionMenuSheetService: ActionMenuSheetService,
+    private fileSystemService: FileSystemService,
+    private userMessageService: UserMessageService
   ) {}
 
   ngOnInit(): void {
     this.documentStore.getDocuments().subscribe({
       //Reassign Array so Angular will detect a change and redraw UI
       next: (value) => (this.documentList = [...this.documentList, value]),
-      error: (err) => console.error(err),
+      error: (err) => this.userMessageService.showErrorMessage(err),
     });
     //Subscribe for changed Documents
     this.documentChangeSubscription =
@@ -109,7 +113,6 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     });
     this.sortOrderSubscription = this.sortService.sortOrder$.subscribe(
       (sortOrder) => {
-        console.log(sortOrder);
         this.sortOrder = sortOrder;
       }
     );
@@ -117,6 +120,13 @@ export class WalletPageComponent implements OnInit, OnDestroy {
 
   openActionMenu() {
     this.actionMenuSheetService.open(this.actionList);
+  }
+
+  importImage() {
+    this.fileSystemService.readfile().subscribe({
+      next: (value) => console.log(value),
+      error: (err) => this.userMessageService.showErrorMessage(err),
+    });
   }
 
   openDialog() {
@@ -133,7 +143,7 @@ export class WalletPageComponent implements OnInit, OnDestroy {
         concatMap((document) => this.documentStore.saveDocument(document))
       )
       .subscribe({
-        error: (err) => console.log(err),
+        error: (err) => this.userMessageService.showErrorMessage(err),
         complete: () => console.log('closed'),
       });
   }
@@ -154,7 +164,7 @@ export class WalletPageComponent implements OnInit, OnDestroy {
   onDelete(id: string) {
     if (id) {
       this.documentStore.deleteDocument(id).subscribe({
-        error: (err) => console.log(err),
+        error: (err) => this.userMessageService.showErrorMessage(err),
       });
     }
   }
