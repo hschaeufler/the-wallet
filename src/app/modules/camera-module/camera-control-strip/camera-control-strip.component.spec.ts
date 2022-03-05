@@ -8,9 +8,8 @@ describe('CameraControlStripComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CameraControlStripComponent ]
-    })
-    .compileComponents();
+      declarations: [CameraControlStripComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

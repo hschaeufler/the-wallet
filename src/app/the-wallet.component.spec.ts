@@ -5,12 +5,8 @@ import { TheWalletComponent } from './the-wallet.component';
 describe('TheWalletComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        TheWalletComponent
-      ],
+      imports: [RouterTestingModule],
+      declarations: [TheWalletComponent],
     }).compileComponents();
   });
 
@@ -30,6 +26,8 @@ describe('TheWalletComponent', () => {
     const fixture = TestBed.createComponent(TheWalletComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('the-wallet app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain(
+      'the-wallet app is running!'
+    );
   });
 });

@@ -8,9 +8,8 @@ describe('QRCodeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ QRCodeComponent ]
-    })
-    .compileComponents();
+      declarations: [QRCodeComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,10 +1,8 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[theWalletAppBarEndElements]'
+  selector: '[theWalletAppBarEndElements]',
 })
 export class AppBarEndElementsDirective {
-
-  constructor() { }
-
+  constructor() {}
 }

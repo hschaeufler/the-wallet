@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'the-wallet-page-template',
@@ -10,13 +10,11 @@ import {Component, Input} from '@angular/core';
       </main>
     </div>
   `,
-  styleUrls: ['./page-template.component.scss']
+  styleUrls: ['./page-template.component.scss'],
 })
 export class PageTemplateComponent {
-
   @Input()
-  title: string = "";
+  title: string = '';
 
-  constructor() { }
-
+  constructor() {}
 }

@@ -1,14 +1,13 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {CovidCertificateService} from "../../../services/covid-certificate.service";
-import {Observable, Subscription} from "rxjs";
-import {HealthCertificateModel} from "covid-certificate-checker/dist/lib/models/HealthCertificate.model";
-import {CertificateWrapperModel} from "../../../CertificateWrapper.model";
-
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { CovidCertificateService } from '../../../services/covid-certificate.service';
+import { Observable, Subscription } from 'rxjs';
+import { HealthCertificateModel } from 'covid-certificate-checker/dist/lib/models/HealthCertificate.model';
+import { CertificateWrapperModel } from '../../../CertificateWrapper.model';
 
 @Component({
   selector: 'the-wallet-health-certificate',
   template: `
-    <ng-container *ngIf="((healthCertificateClaim$ | async)?.healthCertificate)">
+    <ng-container *ngIf="(healthCertificateClaim$ | async)?.healthCertificate">
       <the-wallet-heatlh-certificate-card
         [value]="(healthCertificateClaim$ | async)!.healthCertificate"
         [qrCode]="value.qrCode"
@@ -17,28 +16,22 @@ import {CertificateWrapperModel} from "../../../CertificateWrapper.model";
       </the-wallet-heatlh-certificate-card>
     </ng-container>
   `,
-  styleUrls: ['./health-certificate.component.scss']
+  styleUrls: ['./health-certificate.component.scss'],
 })
 export class HealthCertificateComponent implements OnInit {
-
   @Input()
   value!: CertificateWrapperModel;
 
-
   healthCertificateClaim$!: Observable<{
-    healthCertificate: HealthCertificateModel,
-    isVerified: boolean
+    healthCertificate: HealthCertificateModel;
+    isVerified: boolean;
   }>;
 
-
-
-
-  constructor(private covidCertificateService: CovidCertificateService) {
-
-  }
+  constructor(private covidCertificateService: CovidCertificateService) {}
 
   ngOnInit(): void {
-      this.healthCertificateClaim$ = this.covidCertificateService.decode(this.value.qrCode);
+    this.healthCertificateClaim$ = this.covidCertificateService.decode(
+      this.value.qrCode
+    );
   }
-
 }

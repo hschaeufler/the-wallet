@@ -1,18 +1,23 @@
-import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {CameraService} from "../services/camera.service";
-import {Subscription} from "rxjs";
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { CameraService } from '../services/camera.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'the-wallet-camera-video',
   template: `
     <div class="video-component">
-        <video autoplay [srcObject]="mediaStream"></video>
+      <video autoplay [srcObject]="mediaStream"></video>
     </div>
   `,
-  styleUrls: ['./camera-video.component.scss']
+  styleUrls: ['./camera-video.component.scss'],
 })
 export class CameraVideoComponent implements AfterViewInit, OnInit, OnDestroy {
-
   @Input()
   scanForQRCode? = false;
 
@@ -21,15 +26,12 @@ export class CameraVideoComponent implements AfterViewInit, OnInit, OnDestroy {
   private mediaStreamSubscription?: Subscription;
   private qrCodeSubscription?: Subscription;
 
-  constructor(
-    private cameraService: CameraService,
-  ) {
-  }
+  constructor(private cameraService: CameraService) {}
 
   ngOnDestroy(): void {
-        this.mediaStreamSubscription?.unsubscribe();
-        this.cameraService.stop();
-    }
+    this.mediaStreamSubscription?.unsubscribe();
+    this.cameraService.stop();
+  }
 
   ngOnInit(): void {
     if (this.cameraService.supportsCameraApi()) {
@@ -37,7 +39,7 @@ export class CameraVideoComponent implements AfterViewInit, OnInit, OnDestroy {
         next: (mediaStream) => {
           this.mediaStream = mediaStream;
         },
-        error: error => console.log(error)
+        error: (error) => console.log(error),
       });
     }
   }
@@ -46,6 +48,4 @@ export class CameraVideoComponent implements AfterViewInit, OnInit, OnDestroy {
   ngAfterViewInit(): void {
     this.cameraService.start(undefined, this.scanForQRCode);
   }
-
-
 }

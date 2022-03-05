@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {DocumentModel} from "../../../models/Document.model";
-import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DocumentModel } from '../../../models/Document.model';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'the-wallet-document-list',
@@ -10,9 +10,11 @@ import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
       (cdkDropListDropped)="handleDrop($event)"
       class="document-list"
     >
-      <div *ngFor="let document of documentList"
-           class="document-list-element"
-           cdkDrag>
+      <div
+        *ngFor="let document of documentList"
+        class="document-list-element"
+        cdkDrag
+      >
         <the-wallet-document-list-element
           [value]="document"
           (delete)="delete.emit($event)"
@@ -22,10 +24,9 @@ import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
       </div>
     </div>
   `,
-  styleUrls: ['./document-list.component.scss']
+  styleUrls: ['./document-list.component.scss'],
 })
 export class DocumentListComponent {
-
   @Input()
   documentList: DocumentModel[] = [];
 
@@ -39,10 +40,8 @@ export class DocumentListComponent {
   showMore = new EventEmitter<string>();
 
   handleDrop(event: CdkDragDrop<DocumentModel[]>) {
-    let sortOrder = this.documentList.map(document => document.id)
+    let sortOrder = this.documentList.map((document) => document.id);
     moveItemInArray(sortOrder, event.previousIndex, event.currentIndex);
     this.sort.emit(sortOrder);
   }
-
-
 }

@@ -1,4 +1,4 @@
-import {DocumentTypeEnum} from "./DocumentType.enum";
+import { DocumentTypeEnum } from './DocumentType.enum';
 
 export interface DocumentModel {
   id: string;
