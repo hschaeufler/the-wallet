@@ -20,7 +20,12 @@ export class CameraDialogService {
   openCameraDialog(): MatDialogRef<CameraDialogComponent>{
     //have a look at: https://stackoverflow.com/questions/48688614/angular-custom-style-to-mat-dialog
     //style is in style.css
-    return this.matDialog.open(CameraDialogComponent, {panelClass: 'camera-dialog'});
+    return this.matDialog.open<
+      CameraDialogComponent,
+      CameraDialogOptionsModel,
+      any>(CameraDialogComponent, {
+        panelClass: 'camera-dialog',
+        data: {cameraType: CameraTypeEnum.DEFAULT} });
   }
 
   openQRCodeScannerDialog(): MatDialogRef<CameraDialogComponent, QRCodeModel | undefined>{

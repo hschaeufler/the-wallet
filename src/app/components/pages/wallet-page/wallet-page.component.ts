@@ -7,10 +7,14 @@ import {QRCodeModel} from "../../../modules/camera-module/services/QRCode.model"
 import {CovidCertificateService} from "../../../modules/health-certificate/services/covid-certificate.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {CameraDialogComponent} from "../../../modules/camera-module/camera-dialog/camera-dialog.component";
-import {mapCertificateWrapperToDocumentModel} from "./map-certificate-wrapper-to-document-model.utils";
 import {SortStoreService} from "../../../store/sort-store.service";
 import {CameraDialogService} from "../../../modules/camera-module/services/camera-dialog.service";
 import {Router} from "@angular/router";
+import {MatBottomSheet} from "@angular/material/bottom-sheet";
+import {ActionMenuComponent} from "../../../modules/ui-components/components/molecules/action-menu/action-menu.component";
+import {mapCertificateWrapperToDocumentModel} from "./map-certificate-wrapper-to-document-model.utils";
+import {ActionMenuSheetService} from "../../../modules/ui-components/services/action-menu-sheet.service";
+import {ActionListItemModel} from "../../../modules/ui-components/ActionListItem.model";
 
 @Component({
   selector: 'the-wallet-wallet-page',
@@ -28,8 +32,8 @@ import {Router} from "@angular/router";
         (showMore)="onShowMore($event)"
       ></the-wallet-document-list>
     </the-wallet-page-template>
-    <button (click)="openDialog()" mat-fab color="primary" aria-label="QR_Code">
-      <mat-icon>qr_code</mat-icon>
+    <button (click)="openActionMenu()" mat-fab color="primary" aria-label="QR_Code">
+      <mat-icon>add</mat-icon>
     </button>
   `,
   styleUrls: ['./wallet-page.component.scss']
@@ -44,6 +48,20 @@ export class WalletPageComponent implements OnInit, OnDestroy {
   documentChangeSubscription?: Subscription;
   sortOrderSubscription?: Subscription;
 
+  actionList: ActionListItemModel[] = [
+    {
+      matIcon: "qr_code_scanner",
+      name: "Scan Health Certificate",
+      action: ()=>{ this.openDialog()}
+    },
+    {
+      matIcon: "file_upload",
+      name: "Import Health Certificate",
+      action: ()=>{ this.openDialog()}
+    },
+
+  ]
+
   constructor(
     private documentStore: DocumentStoreService,
     private cameraService: CameraService,
@@ -51,6 +69,7 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     private sortService: SortStoreService,
     private cameraDialogService: CameraDialogService,
     private router: Router,
+    private actionMenuSheetService: ActionMenuSheetService
   ) {
   }
 
@@ -86,6 +105,10 @@ export class WalletPageComponent implements OnInit, OnDestroy {
       console.log(sortOrder);
       this.sortOrder = sortOrder;
     });
+  }
+
+  openActionMenu() {
+    this.actionMenuSheetService.open(this.actionList);
   }
 
   openDialog() {

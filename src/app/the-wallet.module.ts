@@ -18,7 +18,6 @@ import {RouteNotFoundPageComponent} from "./components/pages/route-not-found-pag
 import {PageTemplateComponent} from "./components/templates/page-template/page-template.component";
 import {WalletPageComponent} from "./components/pages/wallet-page/wallet-page.component";
 import { DocumentListComponent } from './components/organisms/document-list/document-list.component';
-import {MatListModule} from "@angular/material/list";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { DocumentListElementComponent } from './components/organisms/document-list-element/document-list-element.component';
 import { SortDocumentsByArrayPipe } from './pipes/sort-by-array.pipe';
@@ -59,7 +58,6 @@ import { AppBarEndElementsDirective } from './components/molecules/app-bar/app-b
     MatIconModule,
     MatButtonModule,
     HealthCertificateModule,
-    MatListModule,
     DragDropModule,
     UiComponentsModule,
   ],

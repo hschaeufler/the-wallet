@@ -32,7 +32,6 @@ import { ToCertificateTypeIconPipe } from './pipes/to-certificate-type-icon.pipe
 import {DefaultExpansionPanelComponent} from "./components/molecules/default-expansion-panel/default-expansion-panel.component";
 import { CertificateCardHeaderComponent } from './components/molecules/certificate-card-header/certificate-card-header.component';
 import {UiComponentsModule} from "../ui-components/ui-components.module";
-import {TheWalletModule} from "../../the-wallet.module";
 import {RouterModule} from "@angular/router";
 import {MatButtonModule} from "@angular/material/button";
 import { HealthCertificatePreviewActionsDirective } from './components/pages/health-certificate-preview/health-certificate-preview-actions.directive';
