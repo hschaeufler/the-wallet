@@ -25,6 +25,7 @@
     "@angular/service-worker": "~13.2.1",
     "@types/lodash": "^4.14.178",
     "@types/w3c-image-capture": "^1.0.5",
+    "@types/wicg-file-system-access": "^2020.9.5",
     "covid-certificate-checker": "^1.0.2",
     "jsqr": "^1.4.0",
     "localforage": "^1.9.0",
