@@ -5,6 +5,7 @@
     "outDir": "./out-tsc/app",
     "types": [
       "w3c-image-capture",
+      "wicg-file-system-access"
     ]
   },
   "files": [
