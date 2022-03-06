@@ -9,6 +9,7 @@ import { ActionMenuSheetComponent } from './components/organisms/action-menu-she
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NonFreezingSpinnerComponent } from './components/atoms/non-freezing-spinner/non-freezing-spinner.component';
+import { EmptyComponent } from './components/atoms/empty/empty.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { NonFreezingSpinnerComponent } from './components/atoms/non-freezing-spi
     ActionMenuComponent,
     ActionMenuSheetComponent,
     NonFreezingSpinnerComponent,
+    EmptyComponent,
   ],
   imports: [
     CommonModule,

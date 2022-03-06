@@ -25,7 +25,6 @@ import { OverlayService } from '../../../modules/ui-components/services/overlay.
           <mat-icon>account_balance_wallet</mat-icon>
         </ng-container>
       </the-wallet-app-bar>
-      <the-wallet-spinner></the-wallet-spinner>
       <the-wallet-document-list
         [documentList]="documentList | sortDocumentsByArray: sortOrder"
         (sort)="onSort($event)"
@@ -55,7 +54,7 @@ export class WalletPageComponent implements OnInit, OnDestroy {
       matIcon: 'qr_code_scanner',
       name: 'Scan Health Certificate',
       action: () => {
-        this.openDialog();
+        this.openCameraDialog();
       },
     },
     {
@@ -122,10 +121,12 @@ export class WalletPageComponent implements OnInit, OnDestroy {
   }
 
   importImage() {
+    this.actionMenuSheetService.close();
+    this.overlayService.openEmptyOverlay();
     this.fileSystemService
       .readfile()
       .pipe(
-        tap(() => this.overlayService.open()),
+        tap(() => this.overlayService.openSpinnerOverlay()),
         concatMap((image) => blobToImageData(image)),
         concatMap((imageData) =>
           from(this.qrcodeReaderService.detectImage(imageData))
@@ -155,7 +156,8 @@ export class WalletPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  openDialog() {
+  openCameraDialog() {
+    this.actionMenuSheetService.close();
     this.cameraDialogService
       .openQRCodeScannerDialog()
       .afterClosed()
