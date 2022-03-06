@@ -1,14 +1,4 @@
-import {
-  concatMap,
-  first,
-  forkJoin,
-  from,
-  fromEvent,
-  map,
-  merge,
-  Observable,
-  throwError,
-} from 'rxjs';
+import { from, fromEvent, map, merge, Observable, throwError } from 'rxjs';
 
 export const blobToDataURL = (blob: Blob): Observable<string> => {
   const result$ = new Observable<string>((observer$) => {
@@ -38,15 +28,20 @@ export const blobToArrayBuffer = (blob: Blob): Observable<ArrayBuffer> => {
   }
 };
 
-export const blobToImageData = (blob: Blob) => {
+export const blobToImageData = (blob: Blob): Observable<ImageData> => {
   try {
     const image = new Image();
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     const objectURL = URL.createObjectURL(blob);
+    //throw Error when Error occurs or form to ImageData
     const result$ = merge(
       fromEvent(image, 'error').pipe(
-        concatMap((event) => throwError(() => event))
+        map((event) => {
+          //need to Revoke ObjectURL so no MemoryLeek occurs
+          URL.revokeObjectURL(objectURL);
+          throw event;
+        })
       ),
       fromEvent(image, 'load').pipe(
         map(() => {
@@ -58,7 +53,7 @@ export const blobToImageData = (blob: Blob) => {
           return ctx!.getImageData(0, 0, width, height);
         })
       )
-    ).pipe(first());
+    );
     image.src = objectURL;
     return result$;
   } catch (e) {
