@@ -27,6 +27,7 @@ import { AppBarComponent } from './components/molecules/app-bar/app-bar.componen
 import { AppBarStartElementsDirective } from './components/molecules/app-bar/app-bar-start-elements.directive';
 import { AppBarEndElementsDirective } from './components/molecules/app-bar/app-bar-end-elements.directive';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FileSystemModule } from './modules/file-system/file-system.module';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     DragDropModule,
     UiComponentsModule,
     MatProgressSpinnerModule,
+    FileSystemModule,
   ],
   providers: [
     {

@@ -10,11 +10,11 @@ import { Router } from '@angular/router';
 import { mapCertificateWrapperToDocumentModel } from './map-certificate-wrapper-to-document-model.utils';
 import { ActionMenuSheetService } from '../../../modules/ui-components/services/action-menu-sheet.service';
 import { ActionListItemModel } from '../../../modules/ui-components/ActionListItem.model';
-import { FileSystemService } from '../../../modules/file-system/services/file-system.service';
 import { UserMessageService } from '../../../modules/ui-components/services/user-message.service';
 import { QrcodeReaderService } from '../../../modules/camera-module/services/qrcode-reader.service';
 import { blobToImageData } from './image-conversion.utils';
 import { OverlayService } from '../../../modules/ui-components/services/overlay.service';
+import { FileSystemService } from '../../../modules/file-system/services/FileSystem.service';
 
 @Component({
   selector: 'the-wallet-wallet-page',
@@ -124,10 +124,20 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     this.actionMenuSheetService.close();
     this.overlayService.openEmptyOverlay();
     this.fileSystemService
-      .readfile()
+      .readFiles(
+        [
+          {
+            description: 'Images',
+            accept: {
+              'image/jpeg+jpg+png': ['.jpeg', '.jpg', '.png'],
+            },
+          },
+        ],
+        false
+      )
       .pipe(
         tap(() => this.overlayService.openSpinnerOverlay()),
-        concatMap((image) => blobToImageData(image)),
+        concatMap((image) => blobToImageData(image[0])),
         concatMap((imageData) =>
           from(this.qrcodeReaderService.detectImage(imageData))
         ),
