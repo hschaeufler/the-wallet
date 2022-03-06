@@ -24,7 +24,6 @@ export class CameraVideoComponent implements AfterViewInit, OnInit, OnDestroy {
   //not allowed private, so Template can read value
   mediaStream?: MediaStream;
   private mediaStreamSubscription?: Subscription;
-  private qrCodeSubscription?: Subscription;
 
   constructor(private cameraService: CameraService) {}
 

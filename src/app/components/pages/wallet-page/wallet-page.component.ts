@@ -2,7 +2,16 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DocumentStoreService } from '../../../store/document-store.service';
 import { DocumentModel } from '../../../models/Document.model';
 import { CameraService } from '../../../modules/camera-module/services/camera.service';
-import { concatMap, Observable, map, tap, Subscription, skipWhile } from 'rxjs';
+import {
+  concatMap,
+  Observable,
+  map,
+  tap,
+  Subscription,
+  skipWhile,
+  from,
+  throwError,
+} from 'rxjs';
 import { QRCodeModel } from '../../../modules/camera-module/services/QRCode.model';
 import { CovidCertificateService } from '../../../modules/health-certificate/services/covid-certificate.service';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -17,6 +26,8 @@ import { ActionMenuSheetService } from '../../../modules/ui-components/services/
 import { ActionListItemModel } from '../../../modules/ui-components/ActionListItem.model';
 import { FileSystemService } from '../../../modules/file-system/services/file-system.service';
 import { UserMessageService } from '../../../modules/ui-components/services/user-message.service';
+import { QrcodeReaderService } from '../../../modules/camera-module/services/qrcode-reader.service';
+import { blobToImageData } from './image-conversion.utils';
 
 @Component({
   selector: 'the-wallet-wallet-page',
@@ -48,8 +59,6 @@ import { UserMessageService } from '../../../modules/ui-components/services/user
 export class WalletPageComponent implements OnInit, OnDestroy {
   documentList: DocumentModel[] = [];
   sortOrder: string[] = [];
-  qrCode$?: Observable<QRCodeModel>;
-  cameraDialog?: MatDialogRef<CameraDialogComponent>;
   documentChangeSubscription?: Subscription;
   sortOrderSubscription?: Subscription;
 
@@ -79,7 +88,8 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private actionMenuSheetService: ActionMenuSheetService,
     private fileSystemService: FileSystemService,
-    private userMessageService: UserMessageService
+    private userMessageService: UserMessageService,
+    private qrcodeReaderService: QrcodeReaderService
   ) {}
 
   ngOnInit(): void {
@@ -123,10 +133,30 @@ export class WalletPageComponent implements OnInit, OnDestroy {
   }
 
   importImage() {
-    this.fileSystemService.readfile().subscribe({
-      next: (value) => console.log(value),
-      error: (err) => this.userMessageService.showErrorMessage(err),
-    });
+    this.fileSystemService
+      .readfile()
+      .pipe(
+        concatMap((image) => blobToImageData(image)),
+        concatMap((imageData) =>
+          from(this.qrcodeReaderService.detectImage(imageData))
+        ),
+        map((qrCode) => {
+          if (!qrCode || qrCode.length < 1) {
+            throw new DOMException('No Valid QR-Code!');
+          }
+          return qrCode;
+        }),
+        // @ts-ignore
+        concatMap((qrCode) => this.certificateService.decode(qrCode[0].value)),
+        map((certificateWrapper) =>
+          mapCertificateWrapperToDocumentModel(certificateWrapper)
+        ),
+        concatMap((document) => this.documentStore.saveDocument(document))
+      )
+      .subscribe({
+        next: (value) => console.log(value),
+        error: (err) => this.userMessageService.showErrorMessage(err),
+      });
   }
 
   openDialog() {
