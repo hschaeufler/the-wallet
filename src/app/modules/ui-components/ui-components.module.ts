@@ -8,12 +8,14 @@ import { MatListModule } from '@angular/material/list';
 import { ActionMenuSheetComponent } from './components/organisms/action-menu-sheet/action-menu-sheet.component';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SpinnerComponent } from './components/atoms/spinner/spinner.component';
 
 @NgModule({
   declarations: [
     IconButtonComponent,
     ActionMenuComponent,
     ActionMenuSheetComponent,
+    SpinnerComponent,
   ],
   imports: [
     CommonModule,
@@ -23,6 +25,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatBottomSheetModule,
     MatSnackBarModule,
   ],
-  exports: [IconButtonComponent, ActionMenuComponent, ActionMenuSheetComponent],
+  exports: [
+    IconButtonComponent,
+    ActionMenuComponent,
+    ActionMenuSheetComponent,
+    SpinnerComponent,
+  ],
 })
 export class UiComponentsModule {}

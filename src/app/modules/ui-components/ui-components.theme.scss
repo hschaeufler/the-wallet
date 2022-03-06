@@ -1,0 +1,7 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+@use "components/atoms/spinner/spinner.theme" as spinner;
+
+@mixin theme($theme) {
+  @include spinner.color($theme);
+}

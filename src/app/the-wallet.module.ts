@@ -26,6 +26,7 @@ import { PageTemplateHeaderDirective } from './components/templates/page-templat
 import { AppBarComponent } from './components/molecules/app-bar/app-bar.component';
 import { AppBarStartElementsDirective } from './components/molecules/app-bar/app-bar-start-elements.directive';
 import { AppBarEndElementsDirective } from './components/molecules/app-bar/app-bar-end-elements.directive';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { AppBarEndElementsDirective } from './components/molecules/app-bar/app-b
     HealthCertificateModule,
     DragDropModule,
     UiComponentsModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     {

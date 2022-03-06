@@ -2,25 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DocumentStoreService } from '../../../store/document-store.service';
 import { DocumentModel } from '../../../models/Document.model';
 import { CameraService } from '../../../modules/camera-module/services/camera.service';
-import {
-  concatMap,
-  Observable,
-  map,
-  tap,
-  Subscription,
-  skipWhile,
-  from,
-  throwError,
-} from 'rxjs';
-import { QRCodeModel } from '../../../modules/camera-module/services/QRCode.model';
+import { concatMap, map, tap, Subscription, skipWhile, from } from 'rxjs';
 import { CovidCertificateService } from '../../../modules/health-certificate/services/covid-certificate.service';
-import { MatDialogRef } from '@angular/material/dialog';
-import { CameraDialogComponent } from '../../../modules/camera-module/camera-dialog/camera-dialog.component';
 import { SortStoreService } from '../../../store/sort-store.service';
 import { CameraDialogService } from '../../../modules/camera-module/services/camera-dialog.service';
 import { Router } from '@angular/router';
-import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { ActionMenuComponent } from '../../../modules/ui-components/components/molecules/action-menu/action-menu.component';
 import { mapCertificateWrapperToDocumentModel } from './map-certificate-wrapper-to-document-model.utils';
 import { ActionMenuSheetService } from '../../../modules/ui-components/services/action-menu-sheet.service';
 import { ActionListItemModel } from '../../../modules/ui-components/ActionListItem.model';
@@ -28,6 +14,7 @@ import { FileSystemService } from '../../../modules/file-system/services/file-sy
 import { UserMessageService } from '../../../modules/ui-components/services/user-message.service';
 import { QrcodeReaderService } from '../../../modules/camera-module/services/qrcode-reader.service';
 import { blobToImageData } from './image-conversion.utils';
+import { OverlayService } from '../../../modules/ui-components/services/overlay.service';
 
 @Component({
   selector: 'the-wallet-wallet-page',
@@ -38,6 +25,7 @@ import { blobToImageData } from './image-conversion.utils';
           <mat-icon>account_balance_wallet</mat-icon>
         </ng-container>
       </the-wallet-app-bar>
+      <the-wallet-spinner></the-wallet-spinner>
       <the-wallet-document-list
         [documentList]="documentList | sortDocumentsByArray: sortOrder"
         (sort)="onSort($event)"
@@ -89,7 +77,8 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     private actionMenuSheetService: ActionMenuSheetService,
     private fileSystemService: FileSystemService,
     private userMessageService: UserMessageService,
-    private qrcodeReaderService: QrcodeReaderService
+    private qrcodeReaderService: QrcodeReaderService,
+    private overlayService: OverlayService
   ) {}
 
   ngOnInit(): void {
@@ -136,6 +125,7 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     this.fileSystemService
       .readfile()
       .pipe(
+        tap(() => this.overlayService.open()),
         concatMap((image) => blobToImageData(image)),
         concatMap((imageData) =>
           from(this.qrcodeReaderService.detectImage(imageData))
@@ -151,11 +141,17 @@ export class WalletPageComponent implements OnInit, OnDestroy {
         map((certificateWrapper) =>
           mapCertificateWrapperToDocumentModel(certificateWrapper)
         ),
-        concatMap((document) => this.documentStore.saveDocument(document))
+        concatMap((document) => this.documentStore.saveDocument(document)),
+        tap(() => {
+          this.overlayService.close();
+        })
       )
       .subscribe({
         next: (value) => console.log(value),
-        error: (err) => this.userMessageService.showErrorMessage(err),
+        error: (err) => {
+          this.overlayService.close();
+          this.userMessageService.showErrorMessage(err);
+        },
       });
   }
 
