@@ -8,7 +8,7 @@ import { MatListModule } from '@angular/material/list';
 import { ActionMenuSheetComponent } from './components/organisms/action-menu-sheet/action-menu-sheet.component';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { NonFreezingSpinnerComponent } from './components/atoms/spinner/non-freezing-spinner.component';
+import { NonFreezingSpinnerComponent } from './components/atoms/non-freezing-spinner/non-freezing-spinner.component';
 
 @NgModule({
   declarations: [
