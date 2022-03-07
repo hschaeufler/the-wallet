@@ -3,6 +3,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
@@ -10,6 +11,7 @@ import { CertificateWrapperModel } from '../../../CertificateWrapper.model';
 import { concatMap } from 'rxjs';
 import { dataURLToFile } from '../../../../commons/utils/image-conversion.utils';
 import { QRCodeGeneratorService } from '../../../../qrcode-generator/services/qrcode-generator.service';
+import { HealthCertificateAbstractButtonComponent } from '../../organisms/health-certificate-abstract-button/health-certificate-abstract-button.component';
 
 @Component({
   selector: 'the-wallet-helth-certificate-share-button',
@@ -21,39 +23,24 @@ import { QRCodeGeneratorService } from '../../../../qrcode-generator/services/qr
   `,
   styleUrls: ['./health-certificate-share-button.component.scss'],
 })
-export class HealthCertificateShareButtonComponent {
-  private _value?: CertificateWrapperModel;
+export class HealthCertificateShareButtonComponent
+  extends HealthCertificateAbstractButtonComponent
+  implements OnInit
+{
   _shareData?: ShareData;
   static readonly FILE_NAME = 'Health_Certificate.png';
   static readonly SHARE_TEXT = 'EU Health Certificate';
   static readonly SHARE_TITLE = 'Health Certificate';
 
-  @Input()
-  get value(): CertificateWrapperModel | undefined {
-    return this._value;
-  }
-  set value(value: CertificateWrapperModel | undefined) {
-    if (value) {
-      this._value = value;
-      this.qrCodeService
-        .toDataURL(value.qrCode)
-        .pipe(
-          concatMap((dataURL) =>
-            dataURLToFile(
-              dataURL,
-              HealthCertificateShareButtonComponent.FILE_NAME
-            )
-          )
-        )
-        .subscribe((file) => {
-          this._shareData = {
-            files: [file],
-            text: HealthCertificateShareButtonComponent.SHARE_TEXT,
-            title: HealthCertificateShareButtonComponent.SHARE_TITLE,
-          };
-          this.shareContentCreated.emit(this._shareData);
-        });
-    }
+  ngOnInit() {
+    this.qrCodeFile$.subscribe((file) => {
+      this._shareData = {
+        files: [file],
+        text: HealthCertificateShareButtonComponent.SHARE_TEXT,
+        title: HealthCertificateShareButtonComponent.SHARE_TITLE,
+      };
+      this.shareContentCreated.emit(this._shareData);
+    });
   }
 
   @Input()
@@ -65,5 +52,7 @@ export class HealthCertificateShareButtonComponent {
   @Output()
   shareContentCreated = new EventEmitter<ShareData>();
 
-  constructor(private qrCodeService: QRCodeGeneratorService) {}
+  constructor(private _qrCodeService: QRCodeGeneratorService) {
+    super(_qrCodeService);
+  }
 }
