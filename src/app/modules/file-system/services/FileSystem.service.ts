@@ -4,5 +4,5 @@ export abstract class FileSystemService {
   abstract readFiles(
     types?: FilePickerAcceptType[],
     allowMultipleFiles?: boolean
-  ): Observable<Blob[]>;
+  ): Observable<File[]>;
 }

@@ -17,7 +17,7 @@ export class FileSystemAccessApiService implements FileSystemService {
     types?: FilePickerAcceptType[],
     allowMultipleFiles?: boolean,
     excludeAcceptAllOption?: boolean
-  ): Observable<Blob[]> {
+  ): Observable<File[]> {
     try {
       return from(
         window.showOpenFilePicker({
