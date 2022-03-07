@@ -32,6 +32,7 @@ import { FileSystemService } from '../../../modules/file-system/services/FileSys
         (showMore)="onShowMore($event)"
         (documentShared)="onDocumentShared($event)"
         (error)="onError($event)"
+        (documentDownloaded)="onDocumentDownloaded($event)"
       ></the-wallet-document-list>
     </the-wallet-page-template>
     <button
@@ -217,6 +218,10 @@ export class WalletPageComponent implements OnInit, OnDestroy {
 
   onDocumentShared(document: DocumentModel) {
     this.userMessageService.showUserMessage('Document shared!');
+  }
+
+  onDocumentDownloaded(document: DocumentModel) {
+    this.userMessageService.showUserMessage('Document downloaded!');
   }
 
   onError(error: any) {

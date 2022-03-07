@@ -14,15 +14,21 @@ import { DocumentTypeEnum } from '../../../models/DocumentType.enum';
         (showMore)="showMore.emit(value.id)"
       >
         <ng-container theWalletHealthCertificatePreviewActions>
+          <the-wallet-icon-button (click)="delete.emit(value.id)">
+            delete_forever
+          </the-wallet-icon-button>
           <the-wallet-document-share-button
             [value]="value"
             (error)="error.emit($event)"
             (documentShared)="documentShared.emit(value)"
           >
           </the-wallet-document-share-button>
-          <the-wallet-icon-button (click)="delete.emit(value.id)">
-            delete_forever
-          </the-wallet-icon-button>
+          <the-wallet-document-download-button
+            [value]="value"
+            (error)="error.emit($event)"
+            (documentDownloaded)="documentDownloaded.emit(value)"
+          >
+          </the-wallet-document-download-button>
         </ng-container>
       </the-wallet-health-certificate-preview>
     </ng-container>
@@ -50,6 +56,9 @@ export class DocumentListElementComponent {
 
   @Output()
   documentShared = new EventEmitter<DocumentModel>();
+
+  @Output()
+  documentDownloaded = new EventEmitter<DocumentModel>();
 
   documentTypeEnum = DocumentTypeEnum;
 
