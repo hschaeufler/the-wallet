@@ -12,10 +12,7 @@ export class WebShareService {
   }
 
   canShare(data: ShareData) {
-    if (this.isSupported()) {
-      return navigator.canShare(data);
-    }
-    return false;
+    return this.isSupported() && navigator.canShare(data);
   }
 
   share(data: ShareData) {

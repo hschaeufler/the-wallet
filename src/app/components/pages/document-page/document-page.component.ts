@@ -3,6 +3,13 @@ import { concatMap, map, tap, throwError } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentStoreService } from '../../../store/document-store.service';
 import { CertificateWrapperModel } from '../../../modules/health-certificate/CertificateWrapper.model';
+import { WebShareService } from '../../../modules/web-share/services/web-share.service';
+import { QRCodeGeneratorService } from '../../../modules/qrcode-generator/services/qrcode-generator.service';
+import {
+  dataUrlToBlob,
+  dataURLToFile,
+} from '../../../utils/image-conversion.utils';
+import { UserMessageService } from '../../../modules/ui-components/services/user-message.service';
 
 @Component({
   selector: 'the-wallet-certificate-page',
@@ -19,9 +26,12 @@ import { CertificateWrapperModel } from '../../../modules/health-certificate/Cer
           <mat-icon>privacy_tip</mat-icon>
         </ng-container>
         <ng-container theWalletAppBarEndElements>
-          <the-wallet-icon-button (click)="delete($event)"
-            >delete_forever</the-wallet-icon-button
-          >
+          <the-wallet-icon-button (click)="delete($event)">
+            delete_forever
+          </the-wallet-icon-button>
+          <the-wallet-icon-button *ngIf="canShare()" (click)="share($event)">
+            share
+          </the-wallet-icon-button>
         </ng-container>
       </the-wallet-app-bar>
       <the-wallet-health-certificate
@@ -35,11 +45,15 @@ import { CertificateWrapperModel } from '../../../modules/health-certificate/Cer
 export class DocumentPageComponent implements OnInit {
   certificateWrapper?: CertificateWrapperModel;
   id?: string;
+  file?: File;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private documentStore: DocumentStoreService
+    private documentStore: DocumentStoreService,
+    private webShareService: WebShareService,
+    private qrCodeService: QRCodeGeneratorService,
+    private userMessageService: UserMessageService
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +68,20 @@ export class DocumentPageComponent implements OnInit {
             throwError(() => 'Document does not Exist');
           }
           return document!.content as CertificateWrapperModel;
+        }),
+        //Generate a QR-Code-Image-File for Webshare-Api
+        tap((certificateWrapper) => {
+          this.qrCodeService
+            .toDataURL(certificateWrapper.qrCode)
+            .pipe(
+              concatMap((dataURl) =>
+                dataURLToFile(dataURl, 'Health_Certificate.png')
+              )
+            )
+            .subscribe((file) => {
+              console.log(file);
+              this.file = file;
+            });
         })
       )
       .subscribe((certificate) => (this.certificateWrapper = certificate));
@@ -72,5 +100,24 @@ export class DocumentPageComponent implements OnInit {
         },
       });
     }
+  }
+
+  canShare() {
+    const canShare =
+      !!this.file && this.webShareService.canShare({ files: [this.file] });
+    console.log(canShare);
+    return canShare;
+  }
+
+  share($event: MouseEvent) {
+    this.webShareService
+      .share({
+        files: [this.file!],
+        text: 'Health Certificate',
+        title: 'Health Certificate',
+      })
+      .subscribe({
+        error: (err) => this.userMessageService.showErrorMessage(err),
+      });
   }
 }

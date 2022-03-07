@@ -12,7 +12,7 @@ import { ActionMenuSheetService } from '../../../modules/ui-components/services/
 import { ActionListItemModel } from '../../../modules/ui-components/ActionListItem.model';
 import { UserMessageService } from '../../../modules/ui-components/services/user-message.service';
 import { QrcodeReaderService } from '../../../modules/camera-module/services/qrcode-reader.service';
-import { blobToImageData } from './image-conversion.utils';
+import { blobToImageData } from '../../../utils/image-conversion.utils';
 import { OverlayService } from '../../../modules/ui-components/services/overlay.service';
 import { FileSystemService } from '../../../modules/file-system/services/FileSystem.service';
 
