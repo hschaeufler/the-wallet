@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FileSystemService } from './FileSystem.service';
-import { delay, fromEvent, map, merge, Observable, race, timeout } from 'rxjs';
+import { delay, fromEvent, map, Observable, race } from 'rxjs';
 import { filePickerAcceptTypesToAcceptString } from './dom-file-api.utils';
 
 @Injectable({
