@@ -36,6 +36,8 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { HealthCertificatePreviewActionsDirective } from './components/pages/health-certificate-preview/health-certificate-preview-actions.directive';
 import { HealthCertificateShareButtonComponent } from './components/pages/helth-certificate-share-button/health-certificate-share-button.component';
+import { HealthCertificateDownloadButtonComponent } from './components/pages/health-certificate-download-button/health-certificate-download-button.component';
+import { HealthCertificateAbstractButtonComponent } from './components/organisms/health-certificate-abstract-button/health-certificate-abstract-button.component';
 
 @NgModule({
   declarations: [
@@ -66,12 +68,14 @@ import { HealthCertificateShareButtonComponent } from './components/pages/helth-
     CertificateCardHeaderComponent,
     HealthCertificatePreviewActionsDirective,
     HealthCertificateShareButtonComponent,
+    HealthCertificateDownloadButtonComponent,
   ],
   exports: [
     HealthCertificateComponent,
     HealthCertificatePreviewComponent,
     HealthCertificatePreviewActionsDirective,
     HealthCertificateShareButtonComponent,
+    HealthCertificateDownloadButtonComponent,
   ],
   imports: [
     CommonModule,

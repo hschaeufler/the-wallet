@@ -18,7 +18,7 @@ export class FileSystemAccessApiService implements FileSystemService {
     suggestedName?: string,
     types?: FilePickerAcceptType[],
     excludeAcceptAllOption?: boolean
-  ) {
+  ): Observable<void> {
     return from(
       window.showSaveFilePicker({
         suggestedName: suggestedName,

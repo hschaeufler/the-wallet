@@ -9,6 +9,15 @@ import { filePickerAcceptTypesToAcceptString } from './dom-file-api.utils';
 export class DomFileApiService implements FileSystemService {
   constructor() {}
 
+  writeFile(
+    file: File,
+    suggestedName?: string,
+    types?: FilePickerAcceptType[],
+    excludeAcceptAllOption?: boolean
+  ): Observable<void> {
+    throw new Error('Method not implemented.');
+  }
+
   readFiles(
     types?: FilePickerAcceptType[],
     allowMultipleFiles?: boolean

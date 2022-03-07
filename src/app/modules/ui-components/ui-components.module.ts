@@ -37,6 +37,7 @@ import { DownloadButtonComponent } from './components/molecules/download-button/
     ActionMenuSheetComponent,
     NonFreezingSpinnerComponent,
     ShareButtonComponent,
+    DownloadButtonComponent,
   ],
 })
 export class UiComponentsModule {}

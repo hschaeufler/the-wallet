@@ -16,8 +16,8 @@ import { DocumentModel } from '../../../models/Document.model';
       >
         <ng-container theWalletAppBarStartElements>
           <the-wallet-icon-button (click)="goBack($event)"
-            >arrow_back_ios</the-wallet-icon-button
-          >
+            >arrow_back_ios
+          </the-wallet-icon-button>
           <mat-icon>privacy_tip</mat-icon>
         </ng-container>
         <ng-container theWalletAppBarEndElements>
@@ -26,9 +26,15 @@ import { DocumentModel } from '../../../models/Document.model';
           </the-wallet-icon-button>
           <the-wallet-document-share-button
             [value]="document"
-            (error)="onShareError($event)"
+            (error)="onError($event)"
             (documentShared)="onDocumentShared($event)"
           ></the-wallet-document-share-button>
+          <the-wallet-document-download-button
+            [value]="document"
+            (error)="onError($event)"
+            (documentDownloaded)="onDocumentDownloaded($event)"
+          >
+          </the-wallet-document-download-button>
         </ng-container>
       </the-wallet-app-bar>
       <the-wallet-document
@@ -86,11 +92,15 @@ export class DocumentPageComponent implements OnInit {
     }
   }
 
-  onShareError(err: any) {
+  onError(err: any) {
     this.userMessageService.showUserMessage(err);
   }
 
   onDocumentShared(document: DocumentModel) {
     this.userMessageService.showUserMessage('Document shared!');
+  }
+
+  onDocumentDownloaded(document: DocumentModel) {
+    this.userMessageService.showUserMessage('Document downloaded!');
   }
 }

@@ -30,6 +30,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FileSystemModule } from './modules/file-system/file-system.module';
 import { DocumentComponent } from './components/organisms/document/document.component';
 import { DocumentShareButtonComponent } from './components/organisms/document-share-button/document-share-button.component';
+import { DocumentDownloadButtonComponent } from './components/organisms/document-download-button/document-download-button.component';
+import { QRCodeGeneratorModule } from './modules/qrcode-generator/qrcode-generator.module';
+import { CommonsModule } from './modules/commons/commons.module';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,7 @@ import { DocumentShareButtonComponent } from './components/organisms/document-sh
     AppBarEndElementsDirective,
     DocumentComponent,
     DocumentShareButtonComponent,
+    DocumentDownloadButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +71,8 @@ import { DocumentShareButtonComponent } from './components/organisms/document-sh
     UiComponentsModule,
     MatProgressSpinnerModule,
     FileSystemModule,
+    QRCodeGeneratorModule,
+    CommonsModule,
   ],
   providers: [
     {
