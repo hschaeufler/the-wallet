@@ -30,7 +30,9 @@ export class DomFileApiService implements FileSystemService {
         })
       ),
       /*
-       * Firefox does not send a change event when the file picker is closed. If 1000 miliseconds after firing the focusin event the change event was not fired, we assume that the user did not make a file selection.
+       * Firefox does not send a change event when the file picker is closed.
+       * If 1000 miliseconds after firing the focusin event the change event was not fired,
+       * we assume that the user did not make a file selection.
        * */
       fromEvent(window, 'focusin').pipe(
         delay(1000),
