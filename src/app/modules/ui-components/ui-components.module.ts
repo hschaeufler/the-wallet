@@ -11,6 +11,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NonFreezingSpinnerComponent } from './components/atoms/non-freezing-spinner/non-freezing-spinner.component';
 import { EmptyComponent } from './components/atoms/empty/empty.component';
 import { ShareButtonComponent } from './components/molecules/share-button/share-button.component';
+import { DownloadButtonComponent } from './components/molecules/download-button/download-button.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ShareButtonComponent } from './components/molecules/share-button/share-
     NonFreezingSpinnerComponent,
     EmptyComponent,
     ShareButtonComponent,
+    DownloadButtonComponent,
   ],
   imports: [
     CommonModule,
