@@ -8,9 +8,8 @@ describe('CertificateCardChipListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CertificateCardChipListComponent ]
-    })
-    .compileComponents();
+      declarations: [CertificateCardChipListComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

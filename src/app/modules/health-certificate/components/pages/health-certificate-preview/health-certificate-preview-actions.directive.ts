@@ -1,10 +1,8 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[theWalletHealthCertificatePreviewActions]'
+  selector: '[theWalletHealthCertificatePreviewActions]',
 })
 export class HealthCertificatePreviewActionsDirective {
-
-  constructor() { }
-
+  constructor() {}
 }

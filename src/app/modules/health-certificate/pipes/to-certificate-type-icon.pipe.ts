@@ -1,17 +1,16 @@
-import {Pipe, PipeTransform} from '@angular/core';
-import {getCertificateType} from "../components/organisms/health-certificate-card/certificate-type.utils";
-import {CertificateTypeEnum} from "../CertificateType.enum";
-import {HealthCertificateModel} from "covid-certificate-checker/dist/lib/models/HealthCertificate.model";
-import {CertificateTypeNamePipe} from "./certificate-type-name.pipe";
+import { Pipe, PipeTransform } from '@angular/core';
+import { getCertificateType } from '../components/organisms/health-certificate-card/certificate-type.utils';
+import { CertificateTypeEnum } from '../CertificateType.enum';
+import { HealthCertificateModel } from 'covid-certificate-checker/dist/lib/models/HealthCertificate.model';
+import { CertificateTypeNamePipe } from './certificate-type-name.pipe';
 
 @Pipe({
-  name: 'toCertificateTypeIcon'
+  name: 'toCertificateTypeIcon',
 })
 export class ToCertificateTypeIconPipe implements PipeTransform {
-
-  static readonly VACCINATION_ICON = "vaccines";
-  static readonly TEST_ICON = "policiy";
-  static readonly RECOVERY_ICON = "health_and_safety";
+  static readonly VACCINATION_ICON = 'vaccines';
+  static readonly TEST_ICON = 'policiy';
+  static readonly RECOVERY_ICON = 'health_and_safety';
 
   transform(value: HealthCertificateModel): unknown {
     const certificateType = getCertificateType(value);
@@ -26,9 +25,8 @@ export class ToCertificateTypeIconPipe implements PipeTransform {
         return ToCertificateTypeIconPipe.RECOVERY_ICON;
         break;
       default:
-        return "";
+        return '';
         break;
     }
   }
-
 }

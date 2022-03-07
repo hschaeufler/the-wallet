@@ -7,8 +7,6 @@ import { Component, OnInit } from '@angular/core';
       <mat-icon><ng-content></ng-content></mat-icon>
     </button>
   `,
-  styleUrls: ['./icon-button.component.scss']
+  styleUrls: ['./icon-button.component.scss'],
 })
-export class IconButtonComponent {
-
-}
+export class IconButtonComponent {}

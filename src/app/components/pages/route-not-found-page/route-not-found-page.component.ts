@@ -10,11 +10,10 @@ import { Component, OnInit } from '@angular/core';
         </ng-container>
       </the-wallet-app-bar>
       <h1>Diese Seite existiert nicht!</h1>
-      </the-wallet-page-template>
+    </the-wallet-page-template>
   `,
-  styleUrls: ['./route-not-found-page.component.scss']
+  styleUrls: ['./route-not-found-page.component.scss'],
 })
 export class RouteNotFoundPageComponent {
-
-  constructor() { }
+  constructor() {}
 }

@@ -1,10 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'toLocaleDate'
+  name: 'toLocaleDate',
 })
 export class ToLocaleDatePipe implements PipeTransform {
-
   transform(value: string): string {
     try {
       const date = new Date(value);
@@ -14,5 +13,4 @@ export class ToLocaleDatePipe implements PipeTransform {
       return value;
     }
   }
-
 }

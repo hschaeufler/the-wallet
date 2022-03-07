@@ -1,0 +1,7 @@
+.angular
+.vscode
+.idea
+node_modules
+src/assets
+src/environments
+dist

@@ -1,4 +1,4 @@
-import {HealthCertificateModel} from "covid-certificate-checker/dist/lib/models/HealthCertificate.model";
+import { HealthCertificateModel } from 'covid-certificate-checker/dist/lib/models/HealthCertificate.model';
 
 export interface CertificateWrapperModel {
   qrCode: string;

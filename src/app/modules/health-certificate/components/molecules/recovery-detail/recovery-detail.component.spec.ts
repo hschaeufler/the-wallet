@@ -8,9 +8,8 @@ describe('RecoveryDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RecoveryDetailComponent ]
-    })
-    .compileComponents();
+      declarations: [RecoveryDetailComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
