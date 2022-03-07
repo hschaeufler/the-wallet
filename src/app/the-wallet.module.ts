@@ -28,6 +28,8 @@ import { AppBarStartElementsDirective } from './components/molecules/app-bar/app
 import { AppBarEndElementsDirective } from './components/molecules/app-bar/app-bar-end-elements.directive';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FileSystemModule } from './modules/file-system/file-system.module';
+import { DocumentComponent } from './components/organisms/document/document.component';
+import { DocumentShareButtonComponent } from './components/organisms/document-share-button/document-share-button.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { FileSystemModule } from './modules/file-system/file-system.module';
     AppBarComponent,
     AppBarStartElementsDirective,
     AppBarEndElementsDirective,
+    DocumentComponent,
+    DocumentShareButtonComponent,
   ],
   imports: [
     BrowserModule,

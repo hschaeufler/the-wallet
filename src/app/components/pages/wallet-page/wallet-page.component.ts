@@ -12,7 +12,7 @@ import { ActionMenuSheetService } from '../../../modules/ui-components/services/
 import { ActionListItemModel } from '../../../modules/ui-components/ActionListItem.model';
 import { UserMessageService } from '../../../modules/ui-components/services/user-message.service';
 import { QrcodeReaderService } from '../../../modules/camera-module/services/qrcode-reader.service';
-import { blobToImageData } from '../../../utils/image-conversion.utils';
+import { blobToImageData } from '../../../modules/commons/utils/image-conversion.utils';
 import { OverlayService } from '../../../modules/ui-components/services/overlay.service';
 import { FileSystemService } from '../../../modules/file-system/services/FileSystem.service';
 
@@ -30,6 +30,8 @@ import { FileSystemService } from '../../../modules/file-system/services/FileSys
         (sort)="onSort($event)"
         (delete)="onDelete($event)"
         (showMore)="onShowMore($event)"
+        (documentShared)="onDocumentShared($event)"
+        (error)="onError($event)"
       ></the-wallet-document-list>
     </the-wallet-page-template>
     <button
@@ -84,7 +86,7 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     this.documentStore.getDocuments().subscribe({
       //Reassign Array so Angular will detect a change and redraw UI
       next: (value) => (this.documentList = [...this.documentList, value]),
-      error: (err) => this.userMessageService.showErrorMessage(err),
+      error: (err) => this.userMessageService.showUserMessage(err),
     });
     //Subscribe for changed Documents
     this.documentChangeSubscription =
@@ -161,7 +163,7 @@ export class WalletPageComponent implements OnInit, OnDestroy {
         next: (value) => console.log(value),
         error: (err) => {
           this.overlayService.close();
-          this.userMessageService.showErrorMessage(err);
+          this.userMessageService.showUserMessage(err);
         },
       });
   }
@@ -181,7 +183,7 @@ export class WalletPageComponent implements OnInit, OnDestroy {
         concatMap((document) => this.documentStore.saveDocument(document))
       )
       .subscribe({
-        error: (err) => this.userMessageService.showErrorMessage(err),
+        error: (err) => this.userMessageService.showUserMessage(err),
         complete: () => console.log('closed'),
       });
   }
@@ -202,7 +204,7 @@ export class WalletPageComponent implements OnInit, OnDestroy {
   onDelete(id: string) {
     if (id) {
       this.documentStore.deleteDocument(id).subscribe({
-        error: (err) => this.userMessageService.showErrorMessage(err),
+        error: (err) => this.userMessageService.showUserMessage(err),
       });
     }
   }
@@ -211,5 +213,13 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     if (id) {
       this.router.navigate(['document', id]);
     }
+  }
+
+  onDocumentShared(document: DocumentModel) {
+    this.userMessageService.showUserMessage('Document shared!');
+  }
+
+  onError(error: any) {
+    this.userMessageService.showUserMessage(error);
   }
 }

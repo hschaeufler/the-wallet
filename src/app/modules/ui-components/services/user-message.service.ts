@@ -6,19 +6,19 @@ import { MatSnackBarConfig } from '@angular/material/snack-bar/snack-bar-config'
   providedIn: 'root',
 })
 export class UserMessageService {
-  static readonly ERROR_MESSAGE_ACTION = 'OK';
-  static readonly ERROR_MESSAGE_CONFIG: MatSnackBarConfig = {
+  static readonly MESSAGE_ACTION = 'OK';
+  static readonly MESSAGE_CONFIG: MatSnackBarConfig = {
     duration: 5000,
   };
 
   constructor(private snackBar: MatSnackBar) {}
 
-  showErrorMessage(
+  showUserMessage(
     message: string,
-    action: string = UserMessageService.ERROR_MESSAGE_ACTION,
-    config: MatSnackBarConfig = UserMessageService.ERROR_MESSAGE_CONFIG
+    action: string = UserMessageService.MESSAGE_ACTION,
+    config: MatSnackBarConfig = UserMessageService.MESSAGE_CONFIG
   ) {
-    console.error(message);
+    console.info(message);
     this.snackBar.open(message, action, config);
   }
 }

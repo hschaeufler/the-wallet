@@ -35,6 +35,7 @@ import { UiComponentsModule } from '../ui-components/ui-components.module';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { HealthCertificatePreviewActionsDirective } from './components/pages/health-certificate-preview/health-certificate-preview-actions.directive';
+import { HealthCertificateShareButtonComponent } from './components/pages/helth-certificate-share-button/health-certificate-share-button.component';
 
 @NgModule({
   declarations: [
@@ -64,11 +65,13 @@ import { HealthCertificatePreviewActionsDirective } from './components/pages/hea
     ToCertificateTypeIconPipe,
     CertificateCardHeaderComponent,
     HealthCertificatePreviewActionsDirective,
+    HealthCertificateShareButtonComponent,
   ],
   exports: [
     HealthCertificateComponent,
     HealthCertificatePreviewComponent,
     HealthCertificatePreviewActionsDirective,
+    HealthCertificateShareButtonComponent,
   ],
   imports: [
     CommonModule,

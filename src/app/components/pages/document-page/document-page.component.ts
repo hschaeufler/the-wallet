@@ -2,17 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { concatMap, map, tap, throwError } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentStoreService } from '../../../store/document-store.service';
-import { CertificateWrapperModel } from '../../../modules/health-certificate/CertificateWrapper.model';
-import { WebShareService } from '../../../modules/web-share/services/web-share.service';
 import { QRCodeGeneratorService } from '../../../modules/qrcode-generator/services/qrcode-generator.service';
-import {
-  dataUrlToBlob,
-  dataURLToFile,
-} from '../../../utils/image-conversion.utils';
 import { UserMessageService } from '../../../modules/ui-components/services/user-message.service';
+import { DocumentModel } from '../../../models/Document.model';
 
 @Component({
-  selector: 'the-wallet-certificate-page',
+  selector: 'the-wallet-document-page',
   template: `
     <the-wallet-page-template>
       <the-wallet-app-bar
@@ -29,21 +24,23 @@ import { UserMessageService } from '../../../modules/ui-components/services/user
           <the-wallet-icon-button (click)="delete($event)">
             delete_forever
           </the-wallet-icon-button>
-          <the-wallet-icon-button *ngIf="canShare()" (click)="share($event)">
-            share
-          </the-wallet-icon-button>
+          <the-wallet-document-share-button
+            [value]="document"
+            (error)="onShareError($event)"
+            (documentShared)="onDocumentShared($event)"
+          ></the-wallet-document-share-button>
         </ng-container>
       </the-wallet-app-bar>
-      <the-wallet-health-certificate
-        *ngIf="certificateWrapper"
-        [value]="certificateWrapper"
-      ></the-wallet-health-certificate>
+      <the-wallet-document
+        *ngIf="document"
+        [value]="document"
+      ></the-wallet-document>
     </the-wallet-page-template>
   `,
   styleUrls: ['./document-page.component.scss'],
 })
 export class DocumentPageComponent implements OnInit {
-  certificateWrapper?: CertificateWrapperModel;
+  document?: DocumentModel;
   id?: string;
   file?: File;
 
@@ -51,7 +48,6 @@ export class DocumentPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private documentStore: DocumentStoreService,
-    private webShareService: WebShareService,
     private qrCodeService: QRCodeGeneratorService,
     private userMessageService: UserMessageService
   ) {}
@@ -59,32 +55,20 @@ export class DocumentPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.params
       .pipe(
-        tap((params) => console.log(params)),
         map((params) => params['id']),
         tap((id) => (this.id = id)),
         concatMap((id) => this.documentStore.getDocument(id)),
         map((document) => {
           if (!document) {
-            throwError(() => 'Document does not Exist');
+            throw new DOMException('Document does not Exist');
           }
-          return document!.content as CertificateWrapperModel;
-        }),
-        //Generate a QR-Code-Image-File for Webshare-Api
-        tap((certificateWrapper) => {
-          this.qrCodeService
-            .toDataURL(certificateWrapper.qrCode)
-            .pipe(
-              concatMap((dataURl) =>
-                dataURLToFile(dataURl, 'Health_Certificate.png')
-              )
-            )
-            .subscribe((file) => {
-              console.log(file);
-              this.file = file;
-            });
+          return document;
         })
       )
-      .subscribe((certificate) => (this.certificateWrapper = certificate));
+      .subscribe({
+        next: (document) => (this.document = document),
+        error: (err) => this.userMessageService.showUserMessage(err),
+      });
   }
 
   goBack($event: MouseEvent) {
@@ -102,22 +86,11 @@ export class DocumentPageComponent implements OnInit {
     }
   }
 
-  canShare() {
-    const canShare =
-      !!this.file && this.webShareService.canShare({ files: [this.file] });
-    console.log(canShare);
-    return canShare;
+  onShareError(err: any) {
+    this.userMessageService.showUserMessage(err);
   }
 
-  share($event: MouseEvent) {
-    this.webShareService
-      .share({
-        files: [this.file!],
-        text: 'Health Certificate',
-        title: 'Health Certificate',
-      })
-      .subscribe({
-        error: (err) => this.userMessageService.showErrorMessage(err),
-      });
+  onDocumentShared(document: DocumentModel) {
+    this.userMessageService.showUserMessage('Document shared!');
   }
 }
