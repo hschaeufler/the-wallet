@@ -7,6 +7,7 @@ import {
   map,
   merge,
   Observable,
+  take,
   throwError,
 } from 'rxjs';
 
@@ -75,6 +76,7 @@ export const drawImageToCanvas = (
         })
       ),
       fromEvent(image, 'load').pipe(
+        take(1),
         map(() => {
           const [width, height] = [image.width, image.height];
           canvas.width = width;

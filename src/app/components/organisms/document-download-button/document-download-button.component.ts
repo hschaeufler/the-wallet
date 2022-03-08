@@ -3,6 +3,7 @@ import { DocumentModel } from '../../../models/Document.model';
 import { DocumentTypeEnum } from '../../../models/DocumentType.enum';
 import { FileSystemService } from '../../../modules/file-system/services/FileSystem.service';
 import { types } from 'util';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'the-wallet-document-download-button',

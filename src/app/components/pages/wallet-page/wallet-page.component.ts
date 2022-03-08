@@ -2,7 +2,16 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DocumentStoreService } from '../../../store/document-store.service';
 import { DocumentModel } from '../../../models/Document.model';
 import { CameraService } from '../../../modules/camera-module/services/camera.service';
-import { concatMap, map, tap, Subscription, skipWhile, from } from 'rxjs';
+import {
+  concatMap,
+  map,
+  tap,
+  Subscription,
+  skipWhile,
+  from,
+  timeout,
+  catchError,
+} from 'rxjs';
 import { CovidCertificateService } from '../../../modules/health-certificate/services/covid-certificate.service';
 import { SortStoreService } from '../../../store/sort-store.service';
 import { CameraDialogService } from '../../../modules/camera-module/services/camera-dialog.service';
@@ -125,7 +134,6 @@ export class WalletPageComponent implements OnInit, OnDestroy {
 
   importImage() {
     this.actionMenuSheetService.close();
-    this.overlayService.openEmptyOverlay();
     this.fileSystemService
       .readFiles(
         [
@@ -140,6 +148,7 @@ export class WalletPageComponent implements OnInit, OnDestroy {
       )
       .pipe(
         tap(() => this.overlayService.openSpinnerOverlay()),
+        timeout(10000),
         concatMap((image) => blobToImageData(image[0])),
         concatMap((imageData) =>
           from(this.qrcodeReaderService.detectImage(imageData))
@@ -158,13 +167,18 @@ export class WalletPageComponent implements OnInit, OnDestroy {
         concatMap((document) => this.documentStore.saveDocument(document)),
         tap(() => {
           this.overlayService.close();
-        })
+        }),
+        catchError((err) => {
+          this.overlayService.close();
+          this.userMessageService.showUserMessage(err);
+          throw err;
+        }),
+        timeout(100000)
       )
       .subscribe({
         next: (value) => console.log(value),
         error: (err) => {
-          this.overlayService.close();
-          this.userMessageService.showUserMessage(err);
+          console.error(err);
         },
       });
   }
