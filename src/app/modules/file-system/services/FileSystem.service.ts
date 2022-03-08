@@ -5,4 +5,11 @@ export abstract class FileSystemService {
     types?: FilePickerAcceptType[],
     allowMultipleFiles?: boolean
   ): Observable<File[]>;
+
+  abstract writeFile(
+    file: File,
+    suggestedName?: string,
+    types?: FilePickerAcceptType[],
+    excludeAcceptAllOption?: boolean
+  ): Observable<void>;
 }

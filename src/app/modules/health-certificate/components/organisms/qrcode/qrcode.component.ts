@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import QRCode from 'qrcode';
 import { from } from 'rxjs';
+import { QRCodeGeneratorService } from '../../../../qrcode-generator/services/qrcode-generator.service';
 
 @Component({
   selector: 'the-wallet-qrcode',
@@ -26,11 +27,11 @@ export class QRCodeComponent implements OnChanges {
 
   qrCodeDataURL?: string;
 
-  constructor() {}
+  constructor(private qrCodeGenerator: QRCodeGeneratorService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.value) {
-      from(QRCode.toDataURL(this.value)).subscribe({
+      this.qrCodeGenerator.toDataURL(this.value).subscribe({
         next: (qrCodeDataURL) => (this.qrCodeDataURL = qrCodeDataURL),
         error: (err) => console.error(err),
       });

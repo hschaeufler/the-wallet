@@ -13,6 +13,27 @@ export class FileSystemAccessApiService implements FileSystemService {
     return detectFileSystemAccessApi();
   }
 
+  writeFile(
+    file: File,
+    suggestedName?: string,
+    types?: FilePickerAcceptType[],
+    excludeAcceptAllOption?: boolean
+  ): Observable<void> {
+    return from(
+      window.showSaveFilePicker({
+        suggestedName: suggestedName,
+        types: types,
+        excludeAcceptAllOption: excludeAcceptAllOption || true,
+      })
+    ).pipe(
+      concatMap((fileHandle) => from(fileHandle.createWritable())),
+      concatMap((writable) =>
+        from(writable.write(file)).pipe(map(() => writable))
+      ),
+      concatMap((writable) => from(writable.close()))
+    );
+  }
+
   readFiles(
     types?: FilePickerAcceptType[],
     allowMultipleFiles?: boolean,

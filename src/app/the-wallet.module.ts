@@ -28,6 +28,11 @@ import { AppBarStartElementsDirective } from './components/molecules/app-bar/app
 import { AppBarEndElementsDirective } from './components/molecules/app-bar/app-bar-end-elements.directive';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FileSystemModule } from './modules/file-system/file-system.module';
+import { DocumentComponent } from './components/organisms/document/document.component';
+import { DocumentShareButtonComponent } from './components/organisms/document-share-button/document-share-button.component';
+import { DocumentDownloadButtonComponent } from './components/organisms/document-download-button/document-download-button.component';
+import { QRCodeGeneratorModule } from './modules/qrcode-generator/qrcode-generator.module';
+import { CommonsModule } from './modules/commons/commons.module';
 
 @NgModule({
   declarations: [
@@ -43,6 +48,9 @@ import { FileSystemModule } from './modules/file-system/file-system.module';
     AppBarComponent,
     AppBarStartElementsDirective,
     AppBarEndElementsDirective,
+    DocumentComponent,
+    DocumentShareButtonComponent,
+    DocumentDownloadButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +71,8 @@ import { FileSystemModule } from './modules/file-system/file-system.module';
     UiComponentsModule,
     MatProgressSpinnerModule,
     FileSystemModule,
+    QRCodeGeneratorModule,
+    CommonsModule,
   ],
   providers: [
     {

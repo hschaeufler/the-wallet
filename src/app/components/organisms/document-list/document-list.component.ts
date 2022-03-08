@@ -19,6 +19,9 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
           [value]="document"
           (delete)="delete.emit($event)"
           (showMore)="showMore.emit($event)"
+          (error)="error.emit($event)"
+          (documentShared)="documentShared.emit($event)"
+          (documentDownloaded)="documentDownloaded.emit($event)"
         >
         </the-wallet-document-list-element>
       </div>
@@ -38,6 +41,15 @@ export class DocumentListComponent {
 
   @Output()
   showMore = new EventEmitter<string>();
+
+  @Output()
+  error = new EventEmitter<any>();
+
+  @Output()
+  documentShared = new EventEmitter<DocumentModel>();
+
+  @Output()
+  documentDownloaded = new EventEmitter<DocumentModel>();
 
   handleDrop(event: CdkDragDrop<DocumentModel[]>) {
     let sortOrder = this.documentList.map((document) => document.id);
