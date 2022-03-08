@@ -5,8 +5,6 @@ import { QRCodeModel } from './QRCode.model';
 import { ImageCaptureUtils } from './image-capture.utils';
 import { FeatureDetectionService } from './feature-detection.service';
 import { ImageCaptureApi } from '../polyfills/image-capture-api.polyfill';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CameraDialogComponent } from '../camera-dialog/camera-dialog.component';
 
 @Injectable({
   providedIn: 'root',

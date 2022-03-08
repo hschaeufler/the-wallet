@@ -4,11 +4,11 @@ import { DocumentModel } from '../../../models/Document.model';
 import { CameraService } from '../../../modules/camera-module/services/camera.service';
 import {
   concatMap,
-  map,
-  tap,
-  Subscription,
-  skipWhile,
   from,
+  map,
+  skipWhile,
+  Subscription,
+  tap,
   timeout,
   TimeoutError,
 } from 'rxjs';

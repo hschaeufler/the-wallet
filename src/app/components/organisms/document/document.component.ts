@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DocumentModel } from '../../../models/Document.model';
 import { DocumentTypeEnum } from '../../../models/DocumentType.enum';
 

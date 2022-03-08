@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FileSystemService } from './FileSystem.service';
-import {
-  delay,
-  fromEvent,
-  map,
-  Observable,
-  race,
-  take,
-  throwError,
-} from 'rxjs';
+import { fromEvent, map, Observable, take, throwError } from 'rxjs';
 import { filePickerAcceptTypesToAcceptString } from '../utils/dom-file-api.utils';
 import { blobToDataURL } from '../../commons/utils/image-conversion.utils';
 

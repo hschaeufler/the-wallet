@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 /* Spinner doesn't freeze when Thread is blocked, because it uses CSS animations
  * */
 @Component({

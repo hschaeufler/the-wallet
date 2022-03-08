@@ -1,4 +1,4 @@
-import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CameraDialogOptionsModel } from '../services/CameraDialogOptions.model';
 import { CameraTypeEnum } from '../services/CameraTypeEnum';

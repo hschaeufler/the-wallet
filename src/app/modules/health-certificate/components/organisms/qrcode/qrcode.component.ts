@@ -1,12 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
-import QRCode from 'qrcode';
-import { from } from 'rxjs';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { QRCodeGeneratorService } from '../../../../qrcode-generator/services/qrcode-generator.service';
 
 @Component({

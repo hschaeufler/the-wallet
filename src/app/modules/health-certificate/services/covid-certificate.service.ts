@@ -1,6 +1,6 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import ElectronicHealthCertificateChecker from 'covid-certificate-checker';
-import { catchError, from, map, Observable, of, throwError } from 'rxjs';
+import { from, map, Observable, of } from 'rxjs';
 import { TrustListModel } from 'covid-certificate-checker/dist/lib/models/TrustList.model';
 import { DocumentSignerCertificateServiceService } from './document-signer-certificate-service.service';
 import { CertificateWrapperModel } from '../CertificateWrapper.model';
