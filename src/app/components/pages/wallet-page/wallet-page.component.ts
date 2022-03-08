@@ -24,6 +24,7 @@ import { QrcodeReaderService } from '../../../modules/camera-module/services/qrc
 import { blobToImageData } from '../../../modules/commons/utils/image-conversion.utils';
 import { OverlayService } from '../../../modules/ui-components/services/overlay.service';
 import { FileSystemService } from '../../../modules/file-system/services/FileSystem.service';
+import { PkpassService } from '../../../modules/pkpass/services/pkpass.service';
 
 @Component({
   selector: 'the-wallet-wallet-page',
@@ -76,6 +77,13 @@ export class WalletPageComponent implements OnInit, OnDestroy {
         this.importImage();
       },
     },
+    {
+      matIcon: 'airplane_ticket',
+      name: 'Import PKPass',
+      action: () => {
+        this.importPKPass();
+      },
+    },
   ];
 
   constructor(
@@ -89,7 +97,8 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     private fileSystemService: FileSystemService,
     private userMessageService: UserMessageService,
     private qrcodeReaderService: QrcodeReaderService,
-    private overlayService: OverlayService
+    private overlayService: OverlayService,
+    private pkpassService: PkpassService
   ) {}
 
   ngOnInit(): void {
@@ -240,5 +249,23 @@ export class WalletPageComponent implements OnInit, OnDestroy {
 
   onError(error: any) {
     this.userMessageService.showUserMessage(error);
+  }
+
+  private importPKPass() {
+    this.actionMenuSheetService.close();
+    this.fileSystemService
+      .readFiles(
+        [
+          {
+            description: 'Images',
+            accept: {
+              'application/vnd.apple.pkpass': ['.pkpass'],
+            },
+          },
+        ],
+        false
+      )
+      .pipe(concatMap((files) => this.pkpassService.readPkpass(files[0])))
+      .subscribe((wrapper) => console.log(wrapper));
   }
 }
