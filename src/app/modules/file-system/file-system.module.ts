@@ -1,7 +1,7 @@
 import { forwardRef, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FileSystemService } from './services/FileSystem.service';
-import { detectFileSystemAccessApi } from './services/file-system-access-api.utils';
+import { detectFileSystemAccessApi } from './utils/file-system-access-api.utils';
 import { DomFileApiService } from './services/dom-file-api.service';
 import { FileSystemAccessApiService } from './services/file-system-access-api.service';
 

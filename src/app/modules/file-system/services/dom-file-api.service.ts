@@ -9,7 +9,7 @@ import {
   take,
   throwError,
 } from 'rxjs';
-import { filePickerAcceptTypesToAcceptString } from './dom-file-api.utils';
+import { filePickerAcceptTypesToAcceptString } from '../utils/dom-file-api.utils';
 import { blobToDataURL } from '../../commons/utils/image-conversion.utils';
 
 @Injectable({

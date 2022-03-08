@@ -18,7 +18,6 @@ export class UserMessageService {
     action: string = UserMessageService.MESSAGE_ACTION,
     config: MatSnackBarConfig = UserMessageService.MESSAGE_CONFIG
   ) {
-    console.info(message);
     this.snackBar.open(message, action, config);
   }
 }

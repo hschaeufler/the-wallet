@@ -77,7 +77,7 @@ export class DocumentStoreService {
 
   saveDocument(document: DocumentModel) {
     console.log(document);
-    document.id = uuid();
+    document.id = document.id ? document.id : uuid();
     return from(
       this.ngForage.setItem<DocumentModel>(document.id, document)
     ).pipe(

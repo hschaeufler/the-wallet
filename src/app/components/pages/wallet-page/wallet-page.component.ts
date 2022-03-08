@@ -10,13 +10,16 @@ import {
   skipWhile,
   from,
   timeout,
-  catchError,
+  TimeoutError,
 } from 'rxjs';
 import { CovidCertificateService } from '../../../modules/health-certificate/services/covid-certificate.service';
 import { SortStoreService } from '../../../store/sort-store.service';
 import { CameraDialogService } from '../../../modules/camera-module/services/camera-dialog.service';
 import { Router } from '@angular/router';
-import { mapCertificateWrapperToDocumentModel } from './map-certificate-wrapper-to-document-model.utils';
+import {
+  mapCertificateWrapperToDocumentModel,
+  mapPkpassWrapperToDocumentModel,
+} from './map-to-document-model.utils';
 import { ActionMenuSheetService } from '../../../modules/ui-components/services/action-menu-sheet.service';
 import { ActionListItemModel } from '../../../modules/ui-components/ActionListItem.model';
 import { UserMessageService } from '../../../modules/ui-components/services/user-message.service';
@@ -25,6 +28,7 @@ import { blobToImageData } from '../../../modules/commons/utils/image-conversion
 import { OverlayService } from '../../../modules/ui-components/services/overlay.service';
 import { FileSystemService } from '../../../modules/file-system/services/FileSystem.service';
 import { PkpassService } from '../../../modules/pkpass/services/pkpass.service';
+import { FilePickerAcceptTypesConstants } from '../../../modules/file-system/utils/FilePickerAcceptTypes.constants';
 
 @Component({
   selector: 'the-wallet-wallet-page',
@@ -141,88 +145,8 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     this.actionMenuSheetService.open(this.actionList);
   }
 
-  importImage() {
-    this.actionMenuSheetService.close();
-    this.fileSystemService
-      .readFiles(
-        [
-          {
-            description: 'Images',
-            accept: {
-              'image/jpeg+jpg+png': ['.jpeg', '.jpg', '.png'],
-            },
-          },
-        ],
-        false
-      )
-      .pipe(
-        tap(() => this.overlayService.openSpinnerOverlay()),
-        timeout(10000),
-        concatMap((image) => blobToImageData(image[0])),
-        concatMap((imageData) =>
-          from(this.qrcodeReaderService.detectImage(imageData))
-        ),
-        map((qrCode) => {
-          if (!qrCode || qrCode.length < 1) {
-            throw new DOMException('No Valid QR-Code!');
-          }
-          return qrCode;
-        }),
-        // @ts-ignore
-        concatMap((qrCode) => this.certificateService.decode(qrCode[0].value)),
-        map((certificateWrapper) =>
-          mapCertificateWrapperToDocumentModel(certificateWrapper)
-        ),
-        concatMap((document) => this.documentStore.saveDocument(document)),
-        tap(() => {
-          this.overlayService.close();
-        }),
-        catchError((err) => {
-          this.overlayService.close();
-          this.userMessageService.showUserMessage(err);
-          throw err;
-        }),
-        timeout(100000)
-      )
-      .subscribe({
-        next: (value) => console.log(value),
-        error: (err) => {
-          console.error(err);
-        },
-      });
-  }
-
-  openCameraDialog() {
-    this.actionMenuSheetService.close();
-    this.cameraDialogService
-      .openQRCodeScannerDialog()
-      .afterClosed()
-      .pipe(
-        skipWhile((qrCode) => !qrCode),
-        // @ts-ignore
-        concatMap((qrCode) => this.certificateService.decode(qrCode.value)),
-        map((certificateWrapper) =>
-          mapCertificateWrapperToDocumentModel(certificateWrapper)
-        ),
-        concatMap((document) => this.documentStore.saveDocument(document))
-      )
-      .subscribe({
-        error: (err) => this.userMessageService.showUserMessage(err),
-        complete: () => console.log('closed'),
-      });
-  }
-
   onSort(sort: string[]) {
     this.sortService.updateSortOrder(sort).subscribe();
-  }
-
-  ngOnDestroy(): void {
-    if (this.documentChangeSubscription) {
-      this.documentChangeSubscription.unsubscribe();
-    }
-    if (this.sortOrderSubscription) {
-      this.sortOrderSubscription.unsubscribe();
-    }
   }
 
   onDelete(id: string) {
@@ -251,21 +175,99 @@ export class WalletPageComponent implements OnInit, OnDestroy {
     this.userMessageService.showUserMessage(error);
   }
 
+  handleError(exception: any) {
+    this.overlayService.close();
+    if (!(exception instanceof TimeoutError)) {
+      console.error(exception);
+      this.userMessageService.showUserMessage(exception);
+    } else {
+      console.log('intended Timeout of Observable.');
+    }
+  }
+
+  openCameraDialog() {
+    this.actionMenuSheetService.close();
+    this.cameraDialogService
+      .openQRCodeScannerDialog()
+      .afterClosed()
+      .pipe(
+        skipWhile((qrCode) => !qrCode),
+        // @ts-ignore
+        concatMap((qrCode) => this.certificateService.decode(qrCode.value)),
+        map((certificateWrapper) =>
+          mapCertificateWrapperToDocumentModel(certificateWrapper)
+        ),
+        concatMap((document) => this.documentStore.saveDocument(document))
+      )
+      .subscribe({
+        error: (err) => this.handleError(err),
+        complete: () => console.log('closed'),
+      });
+  }
+
+  importImage() {
+    this.actionMenuSheetService.close();
+    this.fileSystemService
+      .readFiles([FilePickerAcceptTypesConstants.IMAGES], false)
+      .pipe(
+        //Cleanup Observable when there is no File selected in 100 seconds
+        timeout(100000),
+        tap(() => this.overlayService.openSpinnerOverlay()),
+        concatMap((image) => blobToImageData(image[0])),
+        concatMap((imageData) =>
+          from(this.qrcodeReaderService.detectImage(imageData))
+        ),
+        map((qrCode) => {
+          if (!qrCode || qrCode.length < 1) {
+            throw new DOMException('No Valid QR-Code!');
+          }
+          return qrCode;
+        }),
+        // @ts-ignore
+        concatMap((qrCode) => this.certificateService.decode(qrCode[0].value)),
+        map((certificateWrapper) =>
+          mapCertificateWrapperToDocumentModel(certificateWrapper)
+        ),
+        concatMap((document) => this.documentStore.saveDocument(document)),
+        tap(() => {
+          this.overlayService.close();
+        })
+      )
+      .subscribe({
+        next: (value) => console.log(value),
+        error: (err) => this.handleError(err),
+      });
+  }
+
   private importPKPass() {
     this.actionMenuSheetService.close();
     this.fileSystemService
-      .readFiles(
-        [
-          {
-            description: 'Images',
-            accept: {
-              'application/vnd.apple.pkpass': ['.pkpass'],
-            },
-          },
-        ],
-        false
+      .readFiles([FilePickerAcceptTypesConstants.PKPASS], false)
+      .pipe(
+        //Cleanup Observable when there is no File selected in 100 seconds
+        timeout(100000),
+        tap(() => this.overlayService.openSpinnerOverlay()),
+        concatMap((files) => this.pkpassService.readPkpass(files[0])),
+        map((pkpassWrapper) => mapPkpassWrapperToDocumentModel(pkpassWrapper)),
+        concatMap((pkpassDocument) =>
+          this.documentStore.saveDocument(pkpassDocument)
+        ),
+        tap(() => {
+          this.overlayService.close();
+        })
       )
-      .pipe(concatMap((files) => this.pkpassService.readPkpass(files[0])))
-      .subscribe((wrapper) => console.log(wrapper));
+      .subscribe({
+        next: (pkpassDocument) => console.log(pkpassDocument),
+        error: (err) => this.handleError(err),
+      });
+  }
+
+  ngOnDestroy(): void {
+    if (this.documentChangeSubscription) {
+      this.documentChangeSubscription.unsubscribe();
+    }
+    if (this.sortOrderSubscription) {
+      this.sortOrderSubscription.unsubscribe();
+    }
   }
 }
