@@ -37,6 +37,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HealthCertificatePreviewActionsDirective } from './components/pages/health-certificate-preview/health-certificate-preview-actions.directive';
 import { HealthCertificateShareButtonComponent } from './components/pages/helth-certificate-share-button/health-certificate-share-button.component';
 import { HealthCertificateDownloadButtonComponent } from './components/pages/health-certificate-download-button/health-certificate-download-button.component';
+import { DocumentModuleApiModule } from '../document-module-api/document-module-api.module';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { HealthCertificateDownloadButtonComponent } from './components/pages/hea
     UiComponentsModule,
     RouterModule,
     MatButtonModule,
+    DocumentModuleApiModule,
   ],
 })
 export class HealthCertificateModule {}

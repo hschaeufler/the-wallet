@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { AbstractDocumentPreviewComponent } from '../../../../document-module-api/components/pages/abstract-document-preview/abstract-document-preview.component';
 import { CertificateWrapperModel } from '../../../CertificateWrapper.model';
 
 @Component({
@@ -35,17 +36,4 @@ import { CertificateWrapperModel } from '../../../CertificateWrapper.model';
   `,
   styleUrls: ['./health-certificate-preview.component.scss'],
 })
-export class HealthCertificatePreviewComponent {
-  @Input()
-  expand = false;
-
-  @Input()
-  value?: CertificateWrapperModel;
-
-  @Output()
-  showMore = new EventEmitter<CertificateWrapperModel>();
-
-  toogleExpand($event: MouseEvent) {
-    this.expand = !this.expand;
-  }
-}
+export class HealthCertificatePreviewComponent extends AbstractDocumentPreviewComponent<CertificateWrapperModel> {}
