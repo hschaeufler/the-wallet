@@ -5,7 +5,9 @@ import { PkpassWrapperModel } from '../../../PkpassWrapper.model';
 @Component({
   selector: 'the-wallet-pkpass',
   template: `
-    <the-wallet-pkpass-card [value]="value"></the-wallet-pkpass-card>
+    <the-wallet-document-template>
+      <the-wallet-pkpass-card [value]="value"></the-wallet-pkpass-card>
+    </the-wallet-document-template>
   `,
   styleUrls: ['./pkpass.component.scss'],
 })

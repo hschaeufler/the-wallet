@@ -13,17 +13,17 @@ import { PkpassWrapperModel } from '../../../PkpassWrapper.model';
           disabled
           class="certificate-header-avatar"
         >
-          <mat-icon aria-label="Pass Icon"> airplane_ticket </mat-icon>
+          <mat-icon aria-label="Pass Icon"> airplane_ticket</mat-icon>
         </button>
         <mat-card-title>{{
           value.passData.logoText || value.passType
         }}</mat-card-title>
-        <mat-card-subtitle class="document-header-secondary-text">{{
+        <mat-card-subtitle class="secondary-text">{{
           value.passData.logoText ? value.passType : ''
         }}</mat-card-subtitle>
         <the-wallet-pkpass-header-field-list
           [fields]="value.passFields.headerFields"
-          class="document-header-secondary-text"
+          class="secondary-text"
         ></the-wallet-pkpass-header-field-list>
         <div></div>
       </mat-card-header>

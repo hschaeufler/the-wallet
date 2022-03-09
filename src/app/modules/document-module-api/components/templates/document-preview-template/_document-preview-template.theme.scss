@@ -12,7 +12,7 @@
       color: mat.get-color-from-palette($foreground-palette, secondary-text);
     }
 
-    .document-header-secondary-text {
+    .secondary-text {
       color: mat.get-color-from-palette($foreground-palette, secondary-text);
     }
   }
@@ -25,7 +25,7 @@
       color: mat.get-color-from-palette($primary-palette, default-contrast);
     }
 
-    .document-header-secondary-text {
+    .secondary-text {
       color: mat.get-color-from-palette($primary-palette, default-contrast);
     }
 

@@ -20,9 +20,9 @@ import { CommonsModule } from '../commons/commons.module';
 import { PkpassTransitTypeIconPipe } from './pipes/pkpass-transit-type-icon.pipe';
 import { TransitTypeIconComponent } from './components/atoms/transit-type-icon/transit-type-icon.component';
 import { BoardingPassPrimaryFieldListComponent } from './components/molecules/boarding-pass-primary-field-list/boarding-pass-primary-field-list.component';
-import { BoardingPassHeaderFieldComponent } from './components/atoms/boarding-pass-header-field/boarding-pass-header-field.component';
 import { PassStructureToTransitTypePipe } from './pipes/pass-structure-to-transit-type.pipe';
 import { PkpassPrimaryFieldsComponent } from './components/molecules/pkpass-primary-fields/pkpass-primary-fields.component';
+import { BoardingPassPrimaryFieldComponent } from './components/atoms/boarding-pass-primary-field/boarding-pass-primary-field.component';
 
 @NgModule({
   declarations: [
@@ -38,9 +38,9 @@ import { PkpassPrimaryFieldsComponent } from './components/molecules/pkpass-prim
     PkpassTransitTypeIconPipe,
     TransitTypeIconComponent,
     BoardingPassPrimaryFieldListComponent,
-    BoardingPassHeaderFieldComponent,
     PassStructureToTransitTypePipe,
     PkpassPrimaryFieldsComponent,
+    BoardingPassPrimaryFieldComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +52,7 @@ import { PkpassPrimaryFieldsComponent } from './components/molecules/pkpass-prim
     HealthCertificateModule,
     QRCodeGeneratorModule,
     CommonsModule,
+    DocumentModuleApiModule,
   ],
   exports: [PkpassPreviewComponent, PkpassComponent],
 })
