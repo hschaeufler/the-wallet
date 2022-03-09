@@ -19,7 +19,7 @@ import { AbstractDocumentComponent } from '../../../../document-module-api/compo
     >
       <the-wallet-heatlh-certificate-card
         [value]="healthCertificateClaim.healthCertificate"
-        [qrCode]="value.qrCode"
+        [qrCode]="value!.qrCode"
         [isVerified]="healthCertificateClaim.isVerified"
       >
       </the-wallet-heatlh-certificate-card>

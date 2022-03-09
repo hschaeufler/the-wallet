@@ -1,5 +1,8 @@
+@use "sass:map" as map;
 @use '@angular/material' as mat;
 @use 'src/app/modules/health-certificate/themes/health-certificate.theme' as health-certificate;
+@use 'src/app/modules/pkpass/themes/pkpass.theme' as pkpass;
+@use 'src/app/modules/document-module-api/themes/document-module-api.theme' as document-module-api;
 @use 'src/app/modules/ui-components/ui-components.theme' as ui-components;
 
 @include mat.core();
@@ -12,5 +15,7 @@ $the-wallet-theme: mat.define-light-theme($the-wallet-primary, $the-wallet-accen
 
 @include mat.all-component-themes($the-wallet-theme);
 @include mat.strong-focus-indicators-theme($the-wallet-theme);
+@include document-module-api.theme($the-wallet-theme);
 @include health-certificate.theme($the-wallet-theme);
+@include pkpass.theme($the-wallet-theme);
 @include ui-components.theme($the-wallet-theme);

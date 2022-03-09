@@ -11,24 +11,29 @@ export const passDataToPassStructure = (
   if ('boardingPass' in passData) {
     return [PassTypeEnum.BOARDINGPASS, passData.boardingPass];
   } else if ('coupon' in passData) {
-    return [PassTypeEnum.BOARDINGPASS, passData.coupon];
+    return [PassTypeEnum.COUPON, passData.coupon];
   } else if ('eventTicket' in passData) {
-    return [PassTypeEnum.BOARDINGPASS, passData.eventTicket];
+    return [PassTypeEnum.EVENTICKET, passData.eventTicket];
   } else if ('generic' in passData) {
-    return [PassTypeEnum.BOARDINGPASS, passData.generic];
+    return [PassTypeEnum.GENERIC, passData.generic];
   } else if ('storeCard' in passData) {
-    return [PassTypeEnum.BOARDINGPASS, passData.storeCard];
+    return [PassTypeEnum.STORECARD, passData.storeCard];
   }
   throw new DOMException('No valid PassData found!');
 };
 
-export const getLogoName = (manifest: ManifestModel): string | undefined => {
+export const getLogoName = (
+  manifest: ManifestModel,
+  highResolution: boolean
+): string | undefined => {
   const manifestEntries = Object.entries(manifest);
   const logos = manifestEntries
     .filter((entry) => entry[0].startsWith('logo'))
     .map((entry) => entry[0])
     .sort();
-  return logos.length > 0 ? logos[logos.length - 1] : undefined;
+  return logos.length > 0
+    ? logos[highResolution ? logos.length - 1 : 0]
+    : undefined;
 };
 
 export const readPKPASS = async (file: File): Promise<PkpassWrapperModel> => {
@@ -64,13 +69,14 @@ export const readPKPASS = async (file: File): Promise<PkpassWrapperModel> => {
       : deprecatedBarcode;
 
     let logo;
-    const logoName = getLogoName(manifest);
+    const logoName = getLogoName(manifest, false);
     if (logoName) {
       const logoEntry = entries.find((entry) => entry.filename === logoName);
       logo =
         logoEntry && logoEntry.getData
-          ? await logoEntry.getData(new zip.BlobWriter())
+          ? await logoEntry.getData(new zip.BlobWriter('image/png'))
           : undefined;
+      console.log(logo);
     }
 
     const pkpassWrapper: PkpassWrapperModel = {

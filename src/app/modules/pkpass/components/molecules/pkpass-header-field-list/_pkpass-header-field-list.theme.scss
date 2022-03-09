@@ -1,0 +1,12 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+@mixin color($theme) {
+  // See: https://material.angular.io/guide/theming-your-components
+  $color-config: mat.get-color-config($theme);
+  $foreground-palette: map.get($color-config, "foreground");
+
+  .pkpass-header-field-list-item-line {
+    color: mat.get-color-from-palette($foreground-palette, secondary-text);
+  }
+}

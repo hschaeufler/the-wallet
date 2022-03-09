@@ -31,6 +31,12 @@ import { DocumentTypeEnum } from '../../../models/DocumentType.enum';
           </the-wallet-document-download-button>
         </ng-container>
       </the-wallet-health-certificate-preview>
+      <the-wallet-pkpass-preview
+        *ngSwitchCase="documentTypeEnum.PKPASS"
+        [value]="value.content"
+        [expand]="isFirst"
+        (showMore)="showMore.emit(value.id)"
+      ></the-wallet-pkpass-preview>
     </ng-container>
   `,
   styleUrls: ['./document-list-element.component.scss'],

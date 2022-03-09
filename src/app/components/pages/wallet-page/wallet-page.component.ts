@@ -252,6 +252,9 @@ export class WalletPageComponent implements OnInit, OnDestroy {
         concatMap((pkpassDocument) =>
           this.documentStore.saveDocument(pkpassDocument)
         ),
+        tap((documet) => {
+          console.log(documet);
+        }),
         tap(() => {
           this.overlayService.close();
         })

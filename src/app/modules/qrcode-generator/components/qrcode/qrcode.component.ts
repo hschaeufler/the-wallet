@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { QRCodeGeneratorService } from '../../../../qrcode-generator/services/qrcode-generator.service';
+import { QRCodeGeneratorService } from '../../services/qrcode-generator.service';
 
 @Component({
   selector: 'the-wallet-qrcode',

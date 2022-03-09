@@ -12,6 +12,7 @@ import { NonFreezingSpinnerComponent } from './components/atoms/non-freezing-spi
 import { EmptyComponent } from './components/atoms/empty/empty.component';
 import { ShareButtonComponent } from './components/molecules/share-button/share-button.component';
 import { DownloadButtonComponent } from './components/molecules/download-button/download-button.component';
+import { BlobImageComponent } from './components/atoms/blob-image/blob-image.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { DownloadButtonComponent } from './components/molecules/download-button/
     EmptyComponent,
     ShareButtonComponent,
     DownloadButtonComponent,
+    BlobImageComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +40,7 @@ import { DownloadButtonComponent } from './components/molecules/download-button/
     NonFreezingSpinnerComponent,
     ShareButtonComponent,
     DownloadButtonComponent,
+    BlobImageComponent,
   ],
 })
 export class UiComponentsModule {}

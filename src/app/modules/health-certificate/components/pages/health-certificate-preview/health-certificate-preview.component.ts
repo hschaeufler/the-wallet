@@ -19,6 +19,7 @@ import { CertificateWrapperModel } from '../../../CertificateWrapper.model';
         <the-wallet-qrcode
           [value]="value.qrCode"
           (click)="showMore.emit(value)"
+          mat-card-image
         >
         </the-wallet-qrcode>
       </ng-container>
