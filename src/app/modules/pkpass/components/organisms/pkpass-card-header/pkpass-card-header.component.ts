@@ -23,7 +23,7 @@ import { PkpassWrapperModel } from '../../../PkpassWrapper.model';
         }}</mat-card-subtitle>
         <the-wallet-pkpass-header-field-list
           [fields]="value.passFields.headerFields"
-          class="secondary-text"
+          class="secondary-text pkpass-card-header-field-list"
         ></the-wallet-pkpass-header-field-list>
         <div></div>
       </mat-card-header>
