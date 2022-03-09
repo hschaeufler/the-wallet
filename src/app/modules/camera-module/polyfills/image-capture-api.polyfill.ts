@@ -30,6 +30,9 @@ export class ImageCaptureApi implements ImageCapture {
 
     this.track = track;
     this._videoElement = document.createElement('video');
+    //Fix for iOS 10
+    //see: https://stackoverflow.com/questions/19521667/disable-fullscreen-iphone-video
+    this._videoElement.playsInline = true;
     this._canvasElement = document.createElement('canvas');
     // @ts-ignore
     this._context = this._canvasElement.getContext('2d');

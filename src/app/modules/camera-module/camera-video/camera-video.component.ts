@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   selector: 'the-wallet-camera-video',
   template: `
     <div class="video-component">
-      <video autoplay [srcObject]="mediaStream"></video>
+      <video playsinline autoplay [srcObject]="mediaStream"></video>
     </div>
   `,
   styleUrls: ['./camera-video.component.scss'],
