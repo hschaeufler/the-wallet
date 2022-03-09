@@ -3,7 +3,9 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'the-wallet-document-preview-template',
   template: `
-    <mat-card [class]="expand ? 'document-preview-expanded' : ''">
+    <mat-card
+      [class]="expand ? 'document-preview-expanded' : 'document-preview'"
+    >
       <ng-container *ngIf="!isLoading; else spinner">
         <ng-content select="[theWalletDocumentPreviewHeader]"></ng-content>
         <ng-container *ngIf="expand">

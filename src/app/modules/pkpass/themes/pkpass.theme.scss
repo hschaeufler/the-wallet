@@ -1,6 +1,6 @@
-@use "../components/molecules/pkpass-header-field-list/pkpass-header-field-list.theme"
-  as pkpass-header-field-list;
+@use "../components/organisms/pkpass-card-header/pkpass-card-header.theme" as
+  pkpass-card-header;
 
 @mixin theme($theme) {
-  @include pkpass-header-field-list.color($theme);
+  @include pkpass-card-header.color($theme);
 }

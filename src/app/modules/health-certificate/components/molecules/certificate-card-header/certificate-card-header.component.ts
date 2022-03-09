@@ -10,7 +10,7 @@ import { HealthCertificateModel } from 'covid-certificate-checker/dist/lib/model
           mat-card-avatar
           mat-fab-mini
           disabled
-          class="certificate-header-avatar"
+          class="document-header-avatar"
         >
           <mat-icon
             aria-label="Vaccination Image"
@@ -19,7 +19,7 @@ import { HealthCertificateModel } from 'covid-certificate-checker/dist/lib/model
           >
         </button>
         <mat-card-title>{{ value.nam | toDisplayName }}</mat-card-title>
-        <mat-card-subtitle
+        <mat-card-subtitle class="document-header-secondary-text"
           >{{ value | certificateTypeName }} Certificate</mat-card-subtitle
         >
         <the-wallet-certificate-card-chip-list
