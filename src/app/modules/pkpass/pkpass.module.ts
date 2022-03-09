@@ -23,6 +23,9 @@ import { BoardingPassPrimaryFieldListComponent } from './components/molecules/bo
 import { PassStructureToTransitTypePipe } from './pipes/pass-structure-to-transit-type.pipe';
 import { PkpassPrimaryFieldsComponent } from './components/molecules/pkpass-primary-fields/pkpass-primary-fields.component';
 import { BoardingPassPrimaryFieldComponent } from './components/atoms/boarding-pass-primary-field/boarding-pass-primary-field.component';
+import { PkpassDownloadButtonComponent } from './components/pages/pkpass-download-button/pkpass-download-button.component';
+import { PkpassShareButtonComponent } from './components/pages/pkpass-share-button/pkpass-share-button.component';
+import { WebShareModule } from '../web-share/web-share.module';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,8 @@ import { BoardingPassPrimaryFieldComponent } from './components/atoms/boarding-p
     PassStructureToTransitTypePipe,
     PkpassPrimaryFieldsComponent,
     BoardingPassPrimaryFieldComponent,
+    PkpassDownloadButtonComponent,
+    PkpassShareButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -53,7 +58,14 @@ import { BoardingPassPrimaryFieldComponent } from './components/atoms/boarding-p
     QRCodeGeneratorModule,
     CommonsModule,
     DocumentModuleApiModule,
+    WebShareModule,
   ],
-  exports: [PkpassPreviewComponent, PkpassComponent],
+  exports: [
+    PkpassPreviewComponent,
+    PkpassComponent,
+    PkpassDownloadButtonComponent,
+    PkpassShareButtonComponent,
+    PkpassPreviewActionsDirective,
+  ],
 })
 export class PkpassModule {}

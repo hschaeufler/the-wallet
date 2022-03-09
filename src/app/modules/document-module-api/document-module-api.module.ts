@@ -8,6 +8,8 @@ import { DocumentPreviewHeaderDirective } from './directives/document-preview-he
 import { DocumentPreviewExpandedContentDirective } from './directives/document-preview-expanded-content.directive';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DocumentTemplateComponent } from './components/templates/document-template/document-template.component';
+import { AbstractDocumentDownloadButtonComponent } from './components/pages/abstract-document-download-button/abstract-document-download-button.component';
+import { AbstractDocumentShareButtonComponent } from './components/pages/abstract-document-share-button/abstract-document-share-button.component';
 
 @NgModule({
   declarations: [

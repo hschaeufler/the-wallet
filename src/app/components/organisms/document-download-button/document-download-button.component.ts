@@ -13,6 +13,12 @@ import { FileSystemService } from '../../../modules/file-system/services/FileSys
         (download)="onDownload($event)"
       >
       </the-wallet-health-certificate-download-button>
+      <the-wallet-pkpass-download-button
+        *ngSwitchCase="documentTypeEnum.PKPASS"
+        [value]="value.content"
+        (download)="onDownload($event)"
+      >
+      </the-wallet-pkpass-download-button>
     </ng-container>
   `,
   styleUrls: ['./document-download-button.component.scss'],

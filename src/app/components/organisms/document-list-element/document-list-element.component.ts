@@ -37,7 +37,25 @@ import { DocumentTypeEnum } from '../../../models/DocumentType.enum';
         [expand]="isFirst"
         (showMore)="showMore.emit(value.id)"
         class="cursor-link"
-      ></the-wallet-pkpass-preview>
+      >
+        <ng-container theWalletPkpassPreviewActions>
+          <the-wallet-icon-button (click)="delete.emit(value.id)">
+            delete_forever
+          </the-wallet-icon-button>
+          <the-wallet-document-share-button
+            [value]="value"
+            (error)="error.emit($event)"
+            (documentShared)="documentShared.emit(value)"
+          >
+          </the-wallet-document-share-button>
+          <the-wallet-document-download-button
+            [value]="value"
+            (error)="error.emit($event)"
+            (documentDownloaded)="documentDownloaded.emit(value)"
+          >
+          </the-wallet-document-download-button>
+        </ng-container>
+      </the-wallet-pkpass-preview>
     </ng-container>
   `,
   styleUrls: ['./document-list-element.component.scss'],

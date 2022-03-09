@@ -27,7 +27,7 @@ import { PkpassWrapperModel } from '../../../PkpassWrapper.model';
         ></the-wallet-pkpass-barcode>
       </ng-container>
       <ng-container theWalletDocumentPreviewActions>
-        <ng-content select="theWalletPkpassPreviewActions"></ng-content>
+        <ng-content select="[theWalletPkpassPreviewActions]"></ng-content>
       </ng-container>
     </the-wallet-document-preview-template>
   `,

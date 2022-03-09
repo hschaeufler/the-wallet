@@ -15,6 +15,14 @@ import { WebShareService } from '../../../modules/web-share/services/web-share.s
         (share)="onShare($event)"
       >
       </the-wallet-helth-certificate-share-button>
+      <the-wallet-pkpass-share-button
+        *ngSwitchCase="documentTypeEnum.PKPASS"
+        [value]="value.content"
+        [canShare]="canShare"
+        (shareContentCreated)="onShareContentCreated($event)"
+        (share)="onShare($event)"
+      >
+      </the-wallet-pkpass-share-button>
     </ng-container>
   `,
   styleUrls: ['./document-share-button.component.scss'],

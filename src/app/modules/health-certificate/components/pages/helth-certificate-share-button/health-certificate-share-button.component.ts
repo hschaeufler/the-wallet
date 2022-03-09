@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { QRCodeGeneratorService } from '../../../../qrcode-generator/services/qrcode-generator.service';
 import { HealthCertificateAbstractButtonComponent } from '../../organisms/health-certificate-abstract-button/health-certificate-abstract-button.component';
+import { AbstractDocumentShareButtonComponent } from '../../../../document-module-api/components/pages/abstract-document-share-button/abstract-document-share-button.component';
+import { CertificateWrapperModel } from '../../../CertificateWrapper.model';
 
 @Component({
   selector: 'the-wallet-helth-certificate-share-button',
@@ -14,7 +16,9 @@ import { HealthCertificateAbstractButtonComponent } from '../../organisms/health
 })
 export class HealthCertificateShareButtonComponent
   extends HealthCertificateAbstractButtonComponent
-  implements OnInit
+  implements
+    OnInit,
+    AbstractDocumentShareButtonComponent<CertificateWrapperModel>
 {
   _shareData?: ShareData;
   static readonly FILE_NAME = 'Health_Certificate.png';
