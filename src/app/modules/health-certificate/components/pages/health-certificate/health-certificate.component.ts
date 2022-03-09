@@ -14,7 +14,7 @@ import { AbstractDocumentComponent } from '../../../../document-module-api/compo
 @Component({
   selector: 'the-wallet-health-certificate',
   template: `
-    <ng-container
+    <the-wallet-document-template
       *ngIf="healthCertificateClaim$ | async as healthCertificateClaim"
     >
       <the-wallet-heatlh-certificate-card
@@ -23,7 +23,7 @@ import { AbstractDocumentComponent } from '../../../../document-module-api/compo
         [isVerified]="healthCertificateClaim.isVerified"
       >
       </the-wallet-heatlh-certificate-card>
-    </ng-container>
+    </the-wallet-document-template>
   `,
   styleUrls: ['./health-certificate.component.scss'],
 })
@@ -43,7 +43,7 @@ export class HealthCertificateComponent
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes['value'] && changes['value'].currentValue) {
       this.healthCertificateClaim$ = this.covidCertificateService.decode(
-        changes['value'].currentValue
+        changes['value'].currentValue.qrCode
       );
     }
   }

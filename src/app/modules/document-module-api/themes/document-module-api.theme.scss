@@ -1,6 +1,8 @@
 @use "../components/templates/document-preview-template/document-preview-template.theme"
   as document-preview-template;
+@use "../components/templates/document-template/document.theme" as document;
 
 @mixin theme($theme) {
   @include document-preview-template.color($theme);
+  @include document.color($theme);
 }

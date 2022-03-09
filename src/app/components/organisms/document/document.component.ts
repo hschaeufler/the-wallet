@@ -10,6 +10,11 @@ import { DocumentTypeEnum } from '../../../models/DocumentType.enum';
         *ngSwitchCase="documentTypeEnum.HEALTHCERTIFICATE"
         [value]="value.content"
       ></the-wallet-health-certificate>
+      <the-wallet-pkpass
+        *ngSwitchCase="documentTypeEnum.PKPASS"
+        [value]="value.content"
+      >
+      </the-wallet-pkpass>
     </ng-container>
   `,
   styleUrls: ['./document.component.scss'],

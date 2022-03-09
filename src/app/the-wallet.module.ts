@@ -92,7 +92,7 @@ import { PkpassModule } from './modules/pkpass/pkpass.module';
       } as NgForageOptions,
     },
   ],
-  exports: [],
+  exports: [DocumentComponent],
   bootstrap: [TheWalletComponent],
 })
 export class TheWalletModule {}

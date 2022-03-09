@@ -13,6 +13,8 @@ import { EmptyComponent } from './components/atoms/empty/empty.component';
 import { ShareButtonComponent } from './components/molecules/share-button/share-button.component';
 import { DownloadButtonComponent } from './components/molecules/download-button/download-button.component';
 import { BlobImageComponent } from './components/atoms/blob-image/blob-image.component';
+import { DefaultExpansionPanelComponent } from './components/molecules/default-expansion-panel/default-expansion-panel.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { BlobImageComponent } from './components/atoms/blob-image/blob-image.com
     ShareButtonComponent,
     DownloadButtonComponent,
     BlobImageComponent,
+    DefaultExpansionPanelComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +35,7 @@ import { BlobImageComponent } from './components/atoms/blob-image/blob-image.com
     MatListModule,
     MatBottomSheetModule,
     MatSnackBarModule,
+    MatExpansionModule,
   ],
   exports: [
     IconButtonComponent,
@@ -41,6 +45,7 @@ import { BlobImageComponent } from './components/atoms/blob-image/blob-image.com
     ShareButtonComponent,
     DownloadButtonComponent,
     BlobImageComponent,
+    DefaultExpansionPanelComponent,
   ],
 })
 export class UiComponentsModule {}
