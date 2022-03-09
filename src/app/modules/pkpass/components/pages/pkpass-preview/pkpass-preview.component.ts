@@ -16,6 +16,7 @@ import { PkpassWrapperModel } from '../../../PkpassWrapper.model';
           [passType]="value.passType"
           [passFields]="value.passFields"
           *ngIf="value"
+          (click)="showMore.emit(value)"
         >
         </the-wallet-pkpass-primary-fields>
         <the-wallet-pkpass-barcode

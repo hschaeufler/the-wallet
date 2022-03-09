@@ -6,9 +6,9 @@ import { Field } from '@pkpass/types/src/field';
   template: `
     <mat-list>
       <ng-container *ngFor="let field of fields">
-        <mat-list-item>
+        <mat-list-item class="pkpass-field-list-item">
           <p mat-line>{{ field.label | shorten: DEFAULT_SHORT_VALUE }}</p>
-          <h1 mat-line>
+          <h1 mat-line class="pkpass-field-list-item-value">
             {{ field.value | shorten: DEFAULT_SHORT_VALUE }}
           </h1>
         </mat-list-item>

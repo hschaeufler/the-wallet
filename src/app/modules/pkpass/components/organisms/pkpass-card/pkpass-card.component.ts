@@ -32,7 +32,11 @@ import { PassTypeEnum } from '../../../PassType.enum';
           [fields]="value.passFields.auxiliaryFields"
         ></the-wallet-pkpass-field-list>
         <br />
-        <the-wallet-default-expansion-panel title="Backside" [expanded]="false">
+        <the-wallet-default-expansion-panel
+          *ngIf="value.passFields.backFields"
+          title="Backside"
+          [expanded]="false"
+        >
           <the-wallet-pkpass-field-list
             [fields]="value.passFields.backFields"
           ></the-wallet-pkpass-field-list>
