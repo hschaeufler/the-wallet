@@ -1,15 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
-import { CertificateWrapperModel } from '../../../CertificateWrapper.model';
-import { concatMap } from 'rxjs';
-import { dataURLToFile } from '../../../../commons/utils/image-conversion.utils';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { QRCodeGeneratorService } from '../../../../qrcode-generator/services/qrcode-generator.service';
 import { HealthCertificateAbstractButtonComponent } from '../../organisms/health-certificate-abstract-button/health-certificate-abstract-button.component';
 

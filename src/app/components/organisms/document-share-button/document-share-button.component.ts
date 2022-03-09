@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DocumentModel } from '../../../models/Document.model';
 import { DocumentTypeEnum } from '../../../models/DocumentType.enum';
 import { WebShareService } from '../../../modules/web-share/services/web-share.service';

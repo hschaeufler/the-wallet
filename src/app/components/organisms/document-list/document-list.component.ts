@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DocumentModel } from '../../../models/Document.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 

@@ -1,0 +1,6 @@
+@use "../components/organisms/pkpass-card-header/pkpass-card-header.theme" as
+  pkpass-card-header;
+
+@mixin theme($theme) {
+  @include pkpass-card-header.color($theme);
+}

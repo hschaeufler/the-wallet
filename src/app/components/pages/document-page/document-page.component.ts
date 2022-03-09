@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { concatMap, map, tap, throwError } from 'rxjs';
+import { concatMap, map, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentStoreService } from '../../../store/document-store.service';
 import { QRCodeGeneratorService } from '../../../modules/qrcode-generator/services/qrcode-generator.service';

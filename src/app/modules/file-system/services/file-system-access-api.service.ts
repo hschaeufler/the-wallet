@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { concatMap, forkJoin, from, map, Observable, throwError } from 'rxjs';
 import { FileSystemService } from './FileSystem.service';
-import { detectFileSystemAccessApi } from './file-system-access-api.utils';
+import { detectFileSystemAccessApi } from '../utils/file-system-access-api.utils';
 
 @Injectable({
   providedIn: 'root',

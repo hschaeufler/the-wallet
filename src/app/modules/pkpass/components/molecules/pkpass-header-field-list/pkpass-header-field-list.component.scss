@@ -1,0 +1,9 @@
+.pkpass-header-field-list {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+
+  &-item {
+    margin-left: 0.5rem;
+  }
+}

@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DedicatedInstanceFactory, Driver, NgForage } from 'ngforage';
-import {
-  BehaviorSubject,
-  concatMap,
-  from,
-  map,
-  Observable,
-  Subject,
-  tap,
-} from 'rxjs';
+import { from, Observable, Subject, tap } from 'rxjs';
 // @ts-ignore
 import memoryStorageDriver from 'localforage-memoryStorageDriver/dist/localforage-memoryStorageDriver.es6';
 import { DocumentModel } from '../models/Document.model';
@@ -77,7 +69,7 @@ export class DocumentStoreService {
 
   saveDocument(document: DocumentModel) {
     console.log(document);
-    document.id = uuid();
+    document.id = document.id ? document.id : uuid();
     return from(
       this.ngForage.setItem<DocumentModel>(document.id, document)
     ).pipe(

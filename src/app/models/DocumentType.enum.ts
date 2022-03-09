@@ -1,3 +1,4 @@
 export enum DocumentTypeEnum {
   HEALTHCERTIFICATE = 'HEALTHCERTIFICATE',
+  PKPASS = 'PKPASS',
 }

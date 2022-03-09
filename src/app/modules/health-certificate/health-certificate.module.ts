@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HealthCertificateComponent } from './components/pages/health-certificate/health-certificate.component';
 import { MatCardModule } from '@angular/material/card';
-import { QRCodeComponent } from './components/organisms/qrcode/qrcode.component';
+import { QRCodeComponent } from '../qrcode-generator/components/qrcode/qrcode.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
@@ -37,7 +37,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HealthCertificatePreviewActionsDirective } from './components/pages/health-certificate-preview/health-certificate-preview-actions.directive';
 import { HealthCertificateShareButtonComponent } from './components/pages/helth-certificate-share-button/health-certificate-share-button.component';
 import { HealthCertificateDownloadButtonComponent } from './components/pages/health-certificate-download-button/health-certificate-download-button.component';
-import { HealthCertificateAbstractButtonComponent } from './components/organisms/health-certificate-abstract-button/health-certificate-abstract-button.component';
+import { DocumentModuleApiModule } from '../document-module-api/document-module-api.module';
 
 @NgModule({
   declarations: [
@@ -76,6 +76,7 @@ import { HealthCertificateAbstractButtonComponent } from './components/organisms
     HealthCertificatePreviewActionsDirective,
     HealthCertificateShareButtonComponent,
     HealthCertificateDownloadButtonComponent,
+    QRCodeComponent,
   ],
   imports: [
     CommonModule,
@@ -89,6 +90,7 @@ import { HealthCertificateAbstractButtonComponent } from './components/organisms
     UiComponentsModule,
     RouterModule,
     MatButtonModule,
+    DocumentModuleApiModule,
   ],
 })
 export class HealthCertificateModule {}

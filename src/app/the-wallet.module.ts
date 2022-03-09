@@ -33,6 +33,7 @@ import { DocumentShareButtonComponent } from './components/organisms/document-sh
 import { DocumentDownloadButtonComponent } from './components/organisms/document-download-button/document-download-button.component';
 import { QRCodeGeneratorModule } from './modules/qrcode-generator/qrcode-generator.module';
 import { CommonsModule } from './modules/commons/commons.module';
+import { PkpassModule } from './modules/pkpass/pkpass.module';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { CommonsModule } from './modules/commons/commons.module';
     FileSystemModule,
     QRCodeGeneratorModule,
     CommonsModule,
+    PkpassModule,
   ],
   providers: [
     {
