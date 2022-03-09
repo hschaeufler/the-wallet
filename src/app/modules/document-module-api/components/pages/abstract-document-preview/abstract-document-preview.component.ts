@@ -11,9 +11,5 @@ export abstract class AbstractDocumentPreviewComponent<T> {
   @Output()
   showMore = new EventEmitter<T>();
 
-  toogleExpand($event: MouseEvent) {
-    this.expand = !this.expand;
-  }
-
   constructor() {}
 }

@@ -7,6 +7,7 @@ import { DocumentPreviewActionsDirective } from './directives/document-preview-a
 import { DocumentPreviewHeaderDirective } from './directives/document-preview-header.directive';
 import { DocumentPreviewExpandedContentDirective } from './directives/document-preview-expanded-content.directive';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DocumentCardTemplateComponent } from './components/templates/document-card-template/document-card-template.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     DocumentPreviewActionsDirective,
     DocumentPreviewHeaderDirective,
     DocumentPreviewExpandedContentDirective,
+    DocumentCardTemplateComponent,
   ],
   imports: [
     CommonModule,

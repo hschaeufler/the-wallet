@@ -43,7 +43,7 @@ export class HealthCertificateComponent
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes['value'] && changes['value'].currentValue) {
       this.healthCertificateClaim$ = this.covidCertificateService.decode(
-        changes['value'].currentValue
+        changes['value'].currentValue.qrCode
       );
     }
   }

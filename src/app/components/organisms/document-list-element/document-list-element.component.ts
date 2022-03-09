@@ -36,6 +36,7 @@ import { DocumentTypeEnum } from '../../../models/DocumentType.enum';
         [value]="value.content"
         [expand]="isFirst"
         (showMore)="showMore.emit(value.id)"
+        class="cursor-link"
       ></the-wallet-pkpass-preview>
     </ng-container>
   `,

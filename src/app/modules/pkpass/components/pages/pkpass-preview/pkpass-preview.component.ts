@@ -9,12 +9,20 @@ import { PkpassWrapperModel } from '../../../PkpassWrapper.model';
       <the-wallet-pkpass-card-header
         theWalletDocumentPreviewHeader
         [value]="value"
+        (click)="showMore.emit(value)"
       ></the-wallet-pkpass-card-header>
       <ng-container theWalletDocumentPreviewExpandedContent>
+        <the-wallet-pkpass-primary-fields
+          [passType]="value.passType"
+          [passFields]="value.passFields"
+          *ngIf="value"
+        >
+        </the-wallet-pkpass-primary-fields>
         <the-wallet-pkpass-barcode
           mat-card-image
           *ngIf="value"
           [barcode]="value.barcode"
+          (click)="showMore.emit(value)"
         ></the-wallet-pkpass-barcode>
       </ng-container>
       <ng-container theWalletDocumentPreviewActions>

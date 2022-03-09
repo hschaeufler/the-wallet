@@ -7,7 +7,7 @@
   $foreground-palette: map.get($color-config, "foreground");
 
   .pkpass-card-header {
-    &-field-list {
+    .pkpass-header-field-list {
       color: mat.get-color-from-palette($foreground-palette, secondary-text);
     }
   }
