@@ -34,6 +34,9 @@ import { DocumentDownloadButtonComponent } from './components/organisms/document
 import { QRCodeGeneratorModule } from './modules/qrcode-generator/qrcode-generator.module';
 import { CommonsModule } from './modules/commons/commons.module';
 import { PkpassModule } from './modules/pkpass/pkpass.module';
+import { DragDropSliderComponent } from './components/molecules/drag-drop-slider/drag-drop-slider.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,7 @@ import { PkpassModule } from './modules/pkpass/pkpass.module';
     DocumentComponent,
     DocumentShareButtonComponent,
     DocumentDownloadButtonComponent,
+    DragDropSliderComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +79,8 @@ import { PkpassModule } from './modules/pkpass/pkpass.module';
     QRCodeGeneratorModule,
     CommonsModule,
     PkpassModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {
