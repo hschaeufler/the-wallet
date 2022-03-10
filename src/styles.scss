@@ -14,3 +14,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 
 }
+
+@media screen and (min-width: 600px) {
+  .camera-dialog {
+    max-width: 80vw !important;
+    max-height: 65vh !important;
+    height: auto;
+    width: auto;
+  }
+}
