@@ -5,7 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './the-wallet.component.html',
   styleUrls: ['./the-wallet.component.scss'],
 })
-export class TheWalletComponent {
-  title = 'the wallet';
-  value = '';
-}
+export class TheWalletComponent {}

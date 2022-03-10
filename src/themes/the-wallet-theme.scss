@@ -7,15 +7,19 @@
 
 @include mat.core();
 
-$the-wallet-primary: mat.define-palette(mat.$indigo-palette, A400);
+
+$the-wallet-primary: mat.define-palette(mat.$blue-gray-palette, 800);
+$the-wallet-primary-lighter: mat.define-palette(mat.$blue-gray-palette, 600);
 $the-wallet-accent: mat.define-palette(mat.$yellow-palette, 600);
 $the-wallet-warn: mat.define-palette(mat.$red-palette, 900);
 
-$the-wallet-theme: mat.define-light-theme($the-wallet-primary, $the-wallet-accent, $the-wallet-warn);
+$the-wallet-primary-theme: mat.define-light-theme($the-wallet-primary, $the-wallet-accent, $the-wallet-warn);
+$the-wallet-lighter-theme: mat.define-light-theme($the-wallet-primary-lighter, $the-wallet-accent, $the-wallet-warn);
 
-@include mat.all-component-themes($the-wallet-theme);
-@include mat.strong-focus-indicators-theme($the-wallet-theme);
-@include document-module-api.theme($the-wallet-theme);
-@include health-certificate.theme($the-wallet-theme);
-@include pkpass.theme($the-wallet-theme);
-@include ui-components.theme($the-wallet-theme);
+
+@include mat.all-component-themes($the-wallet-primary-theme);
+@include mat.strong-focus-indicators-theme($the-wallet-primary-theme);
+@include document-module-api.theme($the-wallet-lighter-theme);
+@include health-certificate.theme($the-wallet-lighter-theme);
+@include pkpass.theme($the-wallet-lighter-theme);
+@include ui-components.theme($the-wallet-lighter-theme);

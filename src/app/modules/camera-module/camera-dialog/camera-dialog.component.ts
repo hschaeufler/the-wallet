@@ -14,8 +14,9 @@ import { CameraTypeEnum } from '../services/CameraTypeEnum';
         </button>
       </mat-toolbar-row>
     </mat-toolbar>
-    <mat-dialog-content>
+    <mat-dialog-content class="camera-dialog-content">
       <the-wallet-camera-video
+        class="camera-dialog-camera-video"
         [scanForQRCode]="data.cameraType === cameraTypeEnum.QRCODE"
       >
       </the-wallet-camera-video>

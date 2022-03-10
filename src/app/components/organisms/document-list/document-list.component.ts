@@ -1,6 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+} from '@angular/core';
 import { DocumentModel } from '../../../models/Document.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { DragAndDropStateService } from '../../molecules/drag-drop-slider/drag-and-drop-state.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'the-wallet-document-list',
@@ -14,6 +22,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
         *ngFor="let document of documentList"
         class="document-list-element"
         cdkDrag
+        [cdkDragDisabled]="!dragAndDropEnabled"
       >
         <the-wallet-document-list-element
           [value]="document"
@@ -29,7 +38,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
   `,
   styleUrls: ['./document-list.component.scss'],
 })
-export class DocumentListComponent {
+export class DocumentListComponent implements OnDestroy {
   @Input()
   documentList: DocumentModel[] = [];
 
@@ -51,9 +60,26 @@ export class DocumentListComponent {
   @Output()
   documentDownloaded = new EventEmitter<DocumentModel>();
 
+  dragAndDropEnabled = false;
+
+  private dragAndDropEnabledSubscription$: Subscription;
+
+  constructor(dragAndDropState: DragAndDropStateService) {
+    this.dragAndDropEnabledSubscription$ =
+      dragAndDropState.dragAndDropEnabled$.subscribe(
+        (dragAndDropEnabled) => (this.dragAndDropEnabled = dragAndDropEnabled)
+      );
+  }
+
   handleDrop(event: CdkDragDrop<DocumentModel[]>) {
     let sortOrder = this.documentList.map((document) => document.id);
     moveItemInArray(sortOrder, event.previousIndex, event.currentIndex);
     this.sort.emit(sortOrder);
+  }
+
+  ngOnDestroy(): void {
+    if (this.dragAndDropEnabledSubscription$) {
+      this.dragAndDropEnabledSubscription$.unsubscribe();
+    }
   }
 }

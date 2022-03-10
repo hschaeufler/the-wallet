@@ -38,6 +38,9 @@ import { FilePickerAcceptTypesConstants } from '../../../modules/file-system/uti
         <ng-container theWalletAppBarStartElements>
           <mat-icon>account_balance_wallet</mat-icon>
         </ng-container>
+        <ng-container theWalletAppBarEndElements>
+          <the-wallet-drag-drop-slider></the-wallet-drag-drop-slider>
+        </ng-container>
       </the-wallet-app-bar>
       <the-wallet-document-list
         [documentList]="documentList | sortDocumentsByArray: sortOrder"

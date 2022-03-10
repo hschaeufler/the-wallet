@@ -1,5 +1,11 @@
-.pkpass-header-logo {
-  display: block;
-  max-height: 3rem;
-  max-width: 3rem;
+.pkpass-card-header {
+  .pkpass-header-logo {
+    display: block;
+    max-height: 3rem;
+    max-width: 3rem;
+  }
+
+  &-field-list {
+    margin-left: auto;
+  }
 }
