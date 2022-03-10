@@ -4,6 +4,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 //remove padding for camera-dialog
 .camera-dialog {
+  max-width: none !important;
+  max-height: none !important;
+  height: 100%;
+  width: 100%;
   //collored header
   mat-dialog-container {
     padding: 0px !important;
