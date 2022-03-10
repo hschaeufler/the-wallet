@@ -34,11 +34,14 @@ import { FilePickerAcceptTypesConstants } from '../../../modules/file-system/uti
   selector: 'the-wallet-wallet-page',
   template: `
     <the-wallet-page-template>
-      <the-wallet-app-bar title="Wallet" theWalletPageTemplateHeader>
+      <the-wallet-app-bar title="wallet" theWalletPageTemplateHeader>
         <ng-container theWalletAppBarStartElements>
-          <mat-icon>account_balance_wallet</mat-icon>
+          <mat-icon>wallet</mat-icon>
         </ng-container>
         <ng-container theWalletAppBarEndElements>
+          <the-wallet-install-pwabutton
+            class="wallet-page-install-pwa-button"
+          ></the-wallet-install-pwabutton>
           <the-wallet-drag-drop-slider></the-wallet-drag-drop-slider>
         </ng-container>
       </the-wallet-app-bar>

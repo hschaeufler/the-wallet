@@ -10,10 +10,7 @@ import { DocumentModel } from '../../../models/Document.model';
   selector: 'the-wallet-document-page',
   template: `
     <the-wallet-page-template>
-      <the-wallet-app-bar
-        title="Certificate Details"
-        theWalletPageTemplateHeader
-      >
+      <the-wallet-app-bar title="document" theWalletPageTemplateHeader>
         <ng-container theWalletAppBarStartElements>
           <the-wallet-icon-button (click)="goBack($event)"
             >arrow_back_ios

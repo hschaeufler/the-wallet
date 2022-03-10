@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { CovidCertificateService } from '../../../services/covid-certificate.service';
 import { Observable } from 'rxjs';
 import { HealthCertificateModel } from 'covid-certificate-checker/dist/lib/models/HealthCertificate.model';

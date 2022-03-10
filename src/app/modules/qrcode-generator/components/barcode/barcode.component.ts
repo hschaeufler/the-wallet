@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { QRCodeGeneratorService } from '../../services/qrcode-generator.service';
 import { BarcodeTypeEnum } from '../../services/BarcodeType.enum';
 
 @Component({
