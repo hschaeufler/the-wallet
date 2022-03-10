@@ -7,3 +7,15 @@
     }
   }
 }
+.camera-dialog-camera-video {
+  height: 100%;
+  width: 100%;
+}
+.camera-dialog-content {
+  //overwrite Angular-Material Specifics for Dialogs
+  max-height: 89.6vh !important;
+  padding: 0px !important;
+  margin: 0px !important;
+  height: 100%;
+  width: 100%;
+}
