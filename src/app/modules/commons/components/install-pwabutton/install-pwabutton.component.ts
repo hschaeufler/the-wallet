@@ -32,9 +32,7 @@ export class InstallPWAButtonComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.installPromptEventSubscription =
       this.installPromptService.installPromptEvent$.subscribe((event) => {
-        if (event) {
-          this.installPromptEvent = event;
-        }
+        this.installPromptEvent = event;
       });
   }
 

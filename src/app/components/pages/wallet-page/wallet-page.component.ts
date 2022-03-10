@@ -36,7 +36,7 @@ import { FilePickerAcceptTypesConstants } from '../../../modules/file-system/uti
     <the-wallet-page-template>
       <the-wallet-app-bar title="Wallet" theWalletPageTemplateHeader>
         <ng-container theWalletAppBarStartElements>
-          <mat-icon>account_balance_wallet</mat-icon>
+          <mat-icon>wallet</mat-icon>
         </ng-container>
         <ng-container theWalletAppBarEndElements>
           <the-wallet-install-pwabutton

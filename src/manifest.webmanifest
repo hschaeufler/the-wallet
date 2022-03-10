@@ -1,8 +1,8 @@
 {
   "name": "the-wallet",
   "short_name": "the-wallet",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "theme_color": "#37474f",
+  "background_color": "#37474f",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
