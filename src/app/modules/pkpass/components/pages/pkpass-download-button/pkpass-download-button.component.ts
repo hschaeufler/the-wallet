@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractDocumentDownloadButtonComponent } from '../../../../document-module-api/components/pages/abstract-document-download-button/abstract-document-download-button.component';
 import { PkpassWrapperModel } from '../../../PkpassWrapper.model';
 

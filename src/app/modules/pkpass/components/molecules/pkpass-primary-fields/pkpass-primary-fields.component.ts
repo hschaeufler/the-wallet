@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PassTypeEnum } from '../../../PassType.enum';
 import { PassStructure } from '@pkpass/types/src/low-level/structure';
 

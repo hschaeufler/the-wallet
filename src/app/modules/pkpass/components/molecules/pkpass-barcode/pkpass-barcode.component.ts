@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Barcode } from '@pkpass/types/src/low-level';
 
 @Component({

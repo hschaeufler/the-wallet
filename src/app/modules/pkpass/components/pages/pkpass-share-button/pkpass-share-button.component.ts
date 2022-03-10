@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { AbstractDocumentShareButtonComponent } from '../../../../document-module-api/components/pages/abstract-document-share-button/abstract-document-share-button.component';
 import { PkpassWrapperModel } from '../../../PkpassWrapper.model';
 

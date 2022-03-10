@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShortenPipe } from './pipes/shorten.pipe';
 import { InstallPWAButtonComponent } from './components/install-pwabutton/install-pwabutton.component';
