@@ -27,7 +27,6 @@ export class PageTemplateComponent implements OnInit, OnDestroy {
     this.beakpointSubscription$ = this.breakpointObserver
       .observe([Breakpoints.XSmall])
       .subscribe((result) => {
-        console.log(result);
         this.isLargeScreen = !result.matches;
       });
   }

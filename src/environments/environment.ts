@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  trustListURL : '/assets/trustlist/TEST.DSC.json',
+  trustListURL : 'assets/trustlist/TEST.DSC.json',
 };
 
 /*
