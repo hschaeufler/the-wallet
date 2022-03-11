@@ -33,6 +33,6 @@ jobs:
       - name: Run a multi-line script
         run: |
           wget 'https://de.dscg.ubirch.com/trustList/DSC/' -O trustlist.json,
-          git add trustlist.json
+          git add .
           git commit -m "Update current Trustlist"
           git push
