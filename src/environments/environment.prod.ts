@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  trustListURL : '/assets/trustlist/DSC.json',
 };
