@@ -13,9 +13,7 @@ export class InstallPromptService {
   }
 
   init() {
-    console.log('Ich bin hier!');
     fromEvent(window, 'beforeinstallprompt').subscribe((event) => {
-      console.log('test 2!');
       event.preventDefault();
       this.installPromptEventSource.next(event);
     });

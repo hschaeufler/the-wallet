@@ -30,7 +30,5 @@ import { CameraTypeEnum } from '../services/CameraTypeEnum';
 export class CameraDialogComponent {
   cameraTypeEnum = CameraTypeEnum;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: CameraDialogOptionsModel) {
-    console.log(data);
-  }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: CameraDialogOptionsModel) {}
 }
