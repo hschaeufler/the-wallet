@@ -14,6 +14,8 @@ For the reading  of  vaccination certificates, the [covid-certificate-checker](h
 ## Project Setup
 Please follow the instructions below to set up the project:
 
+Please install Node.Js + NPM if it is not already installed on your machine. [Download](https://nodejs.org/en/)
+
 First clone the repository and init Submodules: 
 
 ```
