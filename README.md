@@ -44,9 +44,9 @@ If you want to test service workers, you can run ``http-server -p 8080 -c-1 dist
 ## Prettier + Husky
 To obtain beautiful code, the Prettier library was used.  This is activated via a husky commit hook and embellishes the checked-in files.
 
-##Trustlist
+## Trustlist
 The DSC trust list (List of certificate signing keys) is queried daily via a Github action. These are stored in the folder docs/assets/trustlist and checked in.
 
-##Github Pages
+## Github Pages
 To build the page for Github pages, please run the following command:
 ```npm run build:pages```
