@@ -1,27 +1,40 @@
-# TheWallet
+# The Wallet
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
+The Wallet is a progressive web app for managing European Vaccination-, Testing- and Convalescent-Certificates (EU DCC) and also for the managing of PKPASS files. The management of the individual certificates takes place completely offline. No documents leave the user's device. 
 
-## Development server
+The app was developed as part of a lecture in my Master's degree programme. You are welcome to use the app, test the app or support its further development.
+
+The app can be accessed via the following URL: [https://the-wallet.dev](https://the-wallet.dev)
+
+## Technology
+The PWA was developed on the basis of Angular. Initially, the app project was generated with the Angular CLI. 
+
+For the reading  of  vaccination certificates, the [covid-certificate-checker](https://www.npmjs.com/package/covid-certificate-checker) is used.
+
+## Project Setup
+Please follow the instructions below to set up the project:
+
+First clone the repository: `git clone https://github.com/hschaeufler/the-wallet.git`
+
+Then install it's dependencies: `npm install`
+
+### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+### Test Service Worker
+If you want to test service workers, you must first build the application.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
+#### Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+#### Test Build
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Then you can run If you want to test service workers, you can run ``http-server -p 8080 -c-1 dist/the-wallet``
 
-## Running end-to-end tests
+## Prettier
+To obtain beautiful code, the Prettier library was used.  This is activated via a commit hook and embellishes the checked-in files.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+##Trustlist
+Täglich erfolgt über eine Github-Action das Abfragen der DSC-Trust-List. Diese werden im Ordner docs/assets/trustlist abgelegt und eingecheckt.
