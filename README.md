@@ -14,7 +14,13 @@ For the reading  of  vaccination certificates, the [covid-certificate-checker](h
 ## Project Setup
 Please follow the instructions below to set up the project:
 
-First clone the repository: `git clone https://github.com/hschaeufler/the-wallet.git`
+First clone the repository and init Submodules: 
+
+```
+git clone https://github.com/hschaeufler/the-wallet.git
+git submodule init
+git submodule update
+```
 
 Then install it's dependencies: `npm install`
 
