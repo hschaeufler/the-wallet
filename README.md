@@ -33,8 +33,8 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 If you want to test service workers, you can run ``http-server -p 8080 -c-1 dist/the-wallet`` or easier: `npm run start:http`
 
-## Prettier
-To obtain beautiful code, the Prettier library was used.  This is activated via a commit hook and embellishes the checked-in files.
+## Prettier + Husky
+To obtain beautiful code, the Prettier library was used.  This is activated via a husky commit hook and embellishes the checked-in files.
 
 ##Trustlist
 Täglich erfolgt über eine Github-Action das Abfragen der DSC-Trust-List. Diese werden im Ordner docs/assets/trustlist abgelegt und eingecheckt.
